@@ -1,4 +1,4 @@
-<div class="flex h-screen bg-white">
+<div class="flex h-screen bg-white overflow-hidden">
     <!-- Sidebar -->
     <div class="w-64 bg-gray-600 border-r-gray-400 relative {{menu ? 'hidden' : 'block' }}  ">
       <!-- Logo y Nombre -->
@@ -115,7 +115,7 @@
               </div>
               
         </div>
-       <div class="px-4 pt-10">
+       <div class="px-4 max-lg:pt-10 pt-5">
         <router-outlet></router-outlet>
        </div>
     </div>
