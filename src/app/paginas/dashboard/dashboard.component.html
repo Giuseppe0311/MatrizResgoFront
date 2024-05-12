@@ -1,5 +1,394 @@
 <div class="h-screen overflow-auto">
-    <div class="flex justify-end max-lg:justify-center">
+    <div class="flex justify-between px-5 mb-8 max-lg:justify-center">
         <app-crearevento></app-crearevento>
+        <app-tablaseventos></app-tablaseventos>
+    </div>
+ 
+    <div class="grid grid-cols-12">
+
+        <div class="col-span-2 max-lg:hidden">
+
+        </div>
+
+        <div class="col-span-6 max-lg:col-span-12">
+            <div class="text-center bg-slate-800 text-white font-bold text-xl p-2">
+                IMPACTO
+            </div>
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                MINIMA
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                MENOR
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                MODERADA
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                MAYOR
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                MAXIMA
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">
+                                <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+
+                            </td>
+                            <td class="px-6 py-4">
+                                <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+
+                            </td>
+                            <td class="px-6 py-4">
+                                <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+
+                            </td>
+                            <td class="px-6 py-4">
+                                <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+
+                            </td>
+                            <td class="px-6 py-4">
+                                <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-span-4 max-lg:hidden">
+
+        </div>
+
+    </div>
+    <div class="grid grid-cols-12 mb-32">
+
+        <div class="col-span-2 max-lg:col-span-12">
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">    
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Muy Alta
+                        </th>
+                        <td class="px-4 py-4 flex justify-center">
+                            <input type="number" id="first_product"
+                                class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="1" required />
+
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Alta
+                        </th>
+                        <td class="px-4 py-4 flex justify-center    ">
+                            <input type="number" id="first_product"
+                                class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="1" required />
+
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Media
+                        </th>
+                        <td class="px-4 py-4 flex justify-center    ">
+                            <input type="number" id="first_product"
+                                class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="1" required />
+
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Baja
+                        </th>
+                        <td class="px-4 py-4 flex justify-center    ">
+                            <input type="number" id="first_product"
+                                class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="1" required />
+
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Muy Baja
+                        </th>
+                        <td class="px-4 py-4 flex justify-center    ">
+                            <input type="number" id="first_product"
+                                class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="1" required />
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="text-center bg-slate-800 text-white font-bold  p-2">
+                PROBABILIDAD
+            </div>
+
+        </div>
+
+        <div class="col-span-6 max-lg:col-span-12">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">    
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white">
+                       1
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-2 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-2 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-2 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                    
+                </tr>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                       1
+
+                    </td>
+                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                    
+                </tr>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                       1
+
+                    </td>
+                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                    
+                </tr>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                       1
+
+                    </td>
+                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                    
+                </tr>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                       1
+
+                    </td>
+                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
+                        1
+ 
+                     </td>
+                    
+                </tr>
+               
+            </table>
+        </div>
+
+        <div class="col-span-4 px-2 max-lg:col-span-12">
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="pl-1">
+                                <!-- Espacio reservado -->
+                            </th>
+                            <th scope="col" class="pl-1">
+                                <!-- Espacio reservado -->
+                            </th>
+                            <th scope="col" class="pl-1 text-center">
+                                Rango
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="pl-1">
+                                COLOR
+                            </th>
+                            <th scope="col" class="pl-1">
+                                NIVEL DE RIESGO
+                            </th>
+                            <td scope="col" class="flex justify-between ">
+                                <div class="ml-4">
+                                    DE
+                                </div>
+                                <div class="mr-8">
+                                    A
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="col" class="bg-green-500">
+                                
+                            </th>
+                            <th scope="col" class="pl-1">
+                                RIESGO ACEPTABLE
+                            </th>
+                            <td scope="col" class="flex justify-between ">
+                                <div>
+                                    <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+                                </div>
+                                <div>
+                                    <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="bg-yellow-200">
+                                
+                            </th>
+                            <th scope="col" class="pl-1">
+                                RIESGO TOLERABLE
+                            </th>
+                            <td scope="col" class="flex justify-between ">
+                                <div>
+                                    <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+                                </div>
+                                <div>
+                                    <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="bg-yellow-500">
+                                
+                            </th>
+                            <th scope="col" class="pl-1">
+                                RIESGO ALTO
+                            </th>
+                            <td scope="col" class="flex justify-between ">
+                                <div>
+                                    <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+                                </div>
+                                <div>
+                                    <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="bg-red-500">
+                                
+                            </th>
+                            <th scope="col" class="pl-1">
+                                RIESGO EXTREMO
+                            </th>
+                            <td scope="col" class="flex justify-between ">
+                                <div>
+                                    <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+                                </div>
+                                <div>
+                                    <input type="number" id="first_product"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="1" required />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            
+        </div>
+
     </div>
 </div>
