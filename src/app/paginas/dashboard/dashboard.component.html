@@ -3,12 +3,10 @@
         <app-crearevento></app-crearevento>
         <app-tablaseventos></app-tablaseventos>
     </div>
- 
+
     <div class="grid grid-cols-12">
 
-        <div class="col-span-2 max-lg:hidden">
-
-        </div>
+        <div class="col-span-2 max-lg:hidden"></div>
 
         <div class="col-span-6 max-lg:col-span-12">
             <div class="text-center bg-slate-800 text-white font-bold text-xl p-2">
@@ -39,33 +37,34 @@
                     <tbody>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-4">
-                                <input type="number" id="first_product"
+                                <input type="number" id="minima"
                                     class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    placeholder="0" required (input)="datosRecolectadoyResultados($event, 'minima')" />
 
                             </td>
                             <td class="px-6 py-4">
-                                <input type="number" id="first_product"
+                                <input type="number" id="menor"
                                     class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    placeholder="0" required (input)="datosRecolectadoyResultados($event, 'menor')" />
 
                             </td>
                             <td class="px-6 py-4">
-                                <input type="number" id="first_product"
+                                <input type="number" id="moderada"
                                     class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    placeholder="0" required placeholder="0" required
+                                    (input)="datosRecolectadoyResultados($event, 'moderada')" />
 
                             </td>
                             <td class="px-6 py-4">
-                                <input type="number" id="first_product"
+                                <input type="number" id="mayor"
                                     class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    placeholder="0" required (input)="datosRecolectadoyResultados($event, 'mayor')" />
 
                             </td>
                             <td class="px-6 py-4">
-                                <input type="number" id="first_product"
+                                <input type="number" id="maxima"
                                     class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    placeholder="0" required (input)="datosRecolectadoyResultados($event, 'maxima')" />
 
                             </td>
                         </tr>
@@ -75,46 +74,46 @@
             </div>
         </div>
 
-        <div class="col-span-4 max-lg:hidden">
-
-        </div>
+        <div class="col-span-4 max-lg:hidden"></div>
 
     </div>
     <div class="grid grid-cols-12 mb-32">
 
         <div class="col-span-2 max-lg:col-span-12">
             <div class="relative overflow-x-auto">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">    
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             Muy Alta
                         </th>
                         <td class="px-4 py-4 flex justify-center">
-                            <input type="number" id="first_product"
+                            <input type="number" id="muy_alta"
                                 class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="0" required />
+                                placeholder="0" required (input)="datosRecolectadoyResultados($event, 'muy_alta')" />
 
                         </td>
                     </tr>
+
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             Alta
                         </th>
                         <td class="px-4 py-4 flex justify-center    ">
-                            <input type="number" id="first_product"
+                            <input type="number" id="alta"
                                 class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="0" required />
+                                placeholder="0" required (input)="datosRecolectadoyResultados($event, 'alta')" />
 
                         </td>
                     </tr>
+
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             Media
                         </th>
                         <td class="px-4 py-4 flex justify-center    ">
-                            <input type="number" id="first_product"
+                            <input type="number" id="media"
                                 class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="0" required />
+                                placeholder="0" required (input)="datosRecolectadoyResultados($event, 'media')" />
 
                         </td>
                     </tr>
@@ -123,9 +122,9 @@
                             Baja
                         </th>
                         <td class="px-4 py-4 flex justify-center    ">
-                            <input type="number" id="first_product"
+                            <input type="number" id="baja"
                                 class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="0" required />
+                                placeholder="0" required (input)="datosRecolectadoyResultados($event, 'baja')" />
 
                         </td>
                     </tr>
@@ -134,12 +133,13 @@
                             Muy Baja
                         </th>
                         <td class="px-4 py-4 flex justify-center    ">
-                            <input type="number" id="first_product"
+                            <input type="number" id="muy_baja"
                                 class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="0" required />
+                                placeholder="0" required (input)="datosRecolectadoyResultados($event, 'muy_baja')" />
 
                         </td>
                     </tr>
+
                 </table>
             </div>
             <div class="text-center bg-slate-800 text-white font-bold  p-2">
@@ -149,129 +149,308 @@
         </div>
 
         <div class="col-span-6 max-lg:col-span-12">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">    
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-2 py-5 bg-slate-400 text-center text-white">
-                       0
+                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(restuladoMinimayMuyAlta),
+                        'bg-amarillo': calcularIntervaloAmarrillo(restuladoMinimayMuyAlta),
+                        'bg-naranja': calcularIntervaloNaranja(restuladoMinimayMuyAlta),
+                        'bg-rojo': calcularIntervaloRojo(restuladoMinimayMuyAlta)
+                    }">
+                        {{ restuladoMinimayMuyAlta || (restuladoMinimayMuyAlta === 0 ? restuladoMinimayMuyAlta : '0') }}
+                    </td>
+
+                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                            'bg-verde': calcularIntervaloVerde(restuladoMenoryMuyAlta),
+                            'bg-amarillo': calcularIntervaloAmarrillo(restuladoMenoryMuyAlta),
+                            'bg-naranja': calcularIntervaloNaranja(restuladoMenoryMuyAlta),
+                            'bg-rojo': calcularIntervaloRojo(restuladoMenoryMuyAlta)
+                        }">
+
+                        {{ restuladoMenoryMuyAlta || (restuladoMenoryMuyAlta === 0 ? restuladoMenoryMuyAlta : '0') }}
+
 
                     </td>
-                    <td class="px-2 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-2 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-2 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-2 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                    
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                       0
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(restuladoModeradayMuyAlta),
+                        'bg-amarillo': calcularIntervaloAmarrillo(restuladoModeradayMuyAlta),
+                        'bg-naranja': calcularIntervaloNaranja(restuladoModeradayMuyAlta),
+                        'bg-rojo': calcularIntervaloRojo(restuladoModeradayMuyAlta)
+                    }">
+                        {{ restuladoModeradayMuyAlta || (restuladoModeradayMuyAlta === 0 ? restuladoModeradayMuyAlta :
+                        '0') }}
 
                     </td>
-                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                    
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                       0
-                    </td>
-                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                    
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                       0
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMayoryMuyAlta),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMayoryMuyAlta),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMayoryMuyAlta),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMayoryMuyAlta)
+                    }">
+
+                        {{ resultadoMayoryMuyAlta || (resultadoMayoryMuyAlta === 0 ? resultadoMayoryMuyAlta :
+                        '0') }}
+
 
                     </td>
-                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                    
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                       0
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMaximayMuyAlta),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMaximayMuyAlta),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMaximayMuyAlta),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMaximayMuyAlta)
+                    }">
+                        {{ resultadoMaximayMuyAlta || (resultadoMaximayMuyAlta === 0 ? resultadoMaximayMuyAlta :
+                        '0') }}
+
+
 
                     </td>
-                    <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                     <td class="px-6 py-5 bg-slate-400 text-center text-white">
-                        0
- 
-                     </td>
-                    
+
                 </tr>
-               
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMinimayAlta),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMinimayAlta),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMinimayAlta),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMinimayAlta)
+                    }">
+                        {{ resultadoMinimayAlta || (resultadoMinimayAlta === 0 ? resultadoMinimayAlta : '0') }}
+                    </td>
+
+                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                            'bg-verde': calcularIntervaloVerde(resultadoMenoryAlta),
+                            'bg-amarillo': calcularIntervaloAmarrillo(resultadoMenoryAlta),
+                            'bg-naranja': calcularIntervaloNaranja(resultadoMenoryAlta),
+                            'bg-rojo': calcularIntervaloRojo(resultadoMenoryAlta)
+                        }">
+
+                        {{ resultadoMenoryAlta || (resultadoMenoryAlta === 0 ? resultadoMenoryAlta : '0') }}
+
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoModeradayAlta),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoModeradayAlta),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoModeradayAlta),
+                        'bg-rojo': calcularIntervaloRojo(resultadoModeradayAlta)
+                    }">
+                        {{ resultadoModeradayAlta || (resultadoModeradayAlta === 0 ? restuladoModeradayMuyAlta :
+                        '0') }}
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMayoryAlta),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMayoryAlta),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMayoryAlta),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMayoryAlta)
+                    }">
+
+                        {{ resultadoMayoryAlta || (resultadoMayoryAlta === 0 ? resultadoMayoryAlta :
+                        '0') }}
+
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMaximayAlta),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMaximayAlta),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMaximayAlta),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMaximayAlta)
+                    }">
+                        {{ resultadoMaximayAlta || (resultadoMaximayAlta === 0 ? resultadoMaximayAlta :
+                        '0') }}
+
+
+
+                    </td>
+
+                </tr>
+
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMinimayMedia),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMinimayMedia),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMinimayMedia),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMinimayMedia)
+                    }">
+                        {{ resultadoMinimayMedia || (resultadoMinimayMedia === 0 ? resultadoMinimayMedia : '0') }}
+                    </td>
+
+                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                            'bg-verde': calcularIntervaloVerde(resultadoMenoryMedia),
+                            'bg-amarillo': calcularIntervaloAmarrillo(resultadoMenoryMedia),
+                            'bg-naranja': calcularIntervaloNaranja(resultadoMenoryMedia),
+                            'bg-rojo': calcularIntervaloRojo(resultadoMenoryMedia)
+                        }">
+
+                        {{ resultadoMenoryMedia || (resultadoMenoryMedia === 0 ? resultadoMenoryMedia : '0') }}
+
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoModeradayMedia),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoModeradayMedia),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoModeradayMedia),
+                        'bg-rojo': calcularIntervaloRojo(resultadoModeradayMedia)
+                    }">
+                        {{ resultadoModeradayMedia || (resultadoModeradayMedia === 0 ? resultadoModeradayMedia :
+                        '0') }}
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMayoryMedia),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMayoryMedia),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMayoryMedia),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMayoryMedia)
+                    }">
+
+                        {{ resultadoMayoryMedia || (resultadoMayoryMedia === 0 ? resultadoMayoryMedia :
+                        '0') }}
+
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMaximayMedia),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMaximayMedia),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMaximayMedia),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMaximayMedia)
+                    }">
+                        {{ resultadoMaximayMedia || (resultadoMaximayMedia === 0 ? resultadoMaximayMedia :
+                        '0') }}
+
+
+
+                    </td>
+
+                </tr>
+
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMinimayBaja),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMinimayBaja),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMinimayBaja),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMinimayBaja)
+                    }">
+                        {{ resultadoMinimayBaja || (resultadoMinimayBaja === 0 ? resultadoMinimayBaja : '0') }}
+                    </td>
+
+                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                            'bg-verde': calcularIntervaloVerde(resultadoMenoryBaja),
+                            'bg-amarillo': calcularIntervaloAmarrillo(resultadoMenoryBaja),
+                            'bg-naranja': calcularIntervaloNaranja(resultadoMenoryBaja),
+                            'bg-rojo': calcularIntervaloRojo(resultadoMenoryBaja)
+                        }">
+
+                        {{ resultadoMenoryBaja || (resultadoMenoryBaja === 0 ? resultadoMenoryBaja : '0') }}
+
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoModeradayBaja),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoModeradayBaja),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoModeradayBaja),
+                        'bg-rojo': calcularIntervaloRojo(resultadoModeradayBaja)
+                    }">
+                        {{ resultadoModeradayBaja || (resultadoModeradayBaja === 0 ? resultadoModeradayBaja :
+                        '0') }}
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMayoryBaja),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMayoryBaja),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMayoryBaja),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMayoryBaja)
+                    }">
+
+                        {{ resultadoMayoryBaja || (resultadoMayoryBaja === 0 ? resultadoMayoryBaja :
+                        '0') }}
+
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMaximayBaja),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMaximayBaja),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMaximayBaja),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMaximayBaja)
+                    }">
+                        {{ resultadoMaximayBaja || (resultadoMaximayBaja === 0 ? resultadoMaximayBaja :
+                        '0') }}
+
+
+
+                    </td>
+
+                </tr>
+
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(restuladoMinimayMuyBaja),
+                        'bg-amarillo': calcularIntervaloAmarrillo(restuladoMinimayMuyBaja),
+                        'bg-naranja': calcularIntervaloNaranja(restuladoMinimayMuyBaja),
+                        'bg-rojo': calcularIntervaloRojo(restuladoMinimayMuyBaja)
+                    }">
+                        {{ restuladoMinimayMuyBaja || (restuladoMinimayMuyBaja === 0 ? restuladoMinimayMuyBaja : '0') }}
+                    </td>
+
+                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                            'bg-verde': calcularIntervaloVerde(restuladoMenoryMuyBaja),
+                            'bg-amarillo': calcularIntervaloAmarrillo(restuladoMenoryMuyBaja),
+                            'bg-naranja': calcularIntervaloNaranja(restuladoMenoryMuyBaja),
+                            'bg-rojo': calcularIntervaloRojo(restuladoMenoryMuyBaja)
+                        }">
+
+                        {{ restuladoMenoryMuyBaja || (restuladoMenoryMuyBaja === 0 ? restuladoMenoryMuyBaja : '0') }}
+
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(restuladoModeradayMuyBaja),
+                        'bg-amarillo': calcularIntervaloAmarrillo(restuladoModeradayMuyBaja),
+                        'bg-naranja': calcularIntervaloNaranja(restuladoModeradayMuyBaja),
+                        'bg-rojo': calcularIntervaloRojo(restuladoModeradayMuyBaja)
+                    }">
+                        {{ restuladoModeradayMuyBaja || (restuladoModeradayMuyBaja === 0 ? restuladoModeradayMuyBaja :
+                        '0') }}
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMayoryMuyBaja),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMayoryMuyBaja),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMayoryMuyBaja),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMayoryMuyBaja)
+                    }">
+
+                        {{ resultadoMayoryMuyBaja || (resultadoMayoryMuyBaja === 0 ? resultadoMayoryMuyBaja :
+                        '0') }}
+
+
+                    </td>
+                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(resultadoMaximayMuyBaja),
+                        'bg-amarillo': calcularIntervaloAmarrillo(resultadoMaximayMuyBaja),
+                        'bg-naranja': calcularIntervaloNaranja(resultadoMaximayMuyBaja),
+                        'bg-rojo': calcularIntervaloRojo(resultadoMaximayMuyBaja)
+                    }">
+                        {{ resultadoMaximayMuyBaja || (resultadoMaximayMuyBaja === 0 ? resultadoMaximayMuyBaja :
+                        '0') }}
+
+
+
+                    </td>
+
+                </tr>
+              
+              
+
+
+
             </table>
         </div>
 
         <div class="col-span-4 px-2 max-lg:col-span-12">
 
             <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 divide-y divide-gray-200 dark:divide-gray-700">
+                <table
+                    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="pl-1">
@@ -304,89 +483,96 @@
                     <tbody>
                         <tr>
                             <th scope="col" class="bg-green-500">
-                                
+
                             </th>
                             <th scope="col" class="pl-1">
                                 RIESGO ACEPTABLE
                             </th>
                             <td scope="col" class="flex justify-between ">
                                 <div>
-                                    <input type="number" id="first_product"
-                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    <input type="number" id="aceptable_de"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required
+                                        (input)="datosRecolectadosColores($event, 'aceptable_de')" />
                                 </div>
                                 <div>
-                                    <input type="number" id="first_product"
-                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    <input type="number" id="aceptable_a"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required
+                                        (input)="datosRecolectadosColores($event, 'aceptable_a')" />
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th scope="col" class="bg-yellow-200">
-                                
+
                             </th>
                             <th scope="col" class="pl-1">
                                 RIESGO TOLERABLE
                             </th>
                             <td scope="col" class="flex justify-between ">
                                 <div>
-                                    <input type="number" id="first_product"
-                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    <input type="number" id="tolerable_de"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required
+                                        (input)="datosRecolectadosColores($event, 'tolerable_de')" />
                                 </div>
                                 <div>
-                                    <input type="number" id="first_product"
-                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    <input type="number" id="tolerable_a"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required
+                                        (input)="datosRecolectadosColores($event, 'tolerable_a')" />
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th scope="col" class="bg-yellow-500">
-                                
+
                             </th>
                             <th scope="col" class="pl-1">
                                 RIESGO ALTO
                             </th>
                             <td scope="col" class="flex justify-between ">
                                 <div>
-                                    <input type="number" id="first_product"
-                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    <input type="number" id="alto_de"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required
+                                        (input)="datosRecolectadosColores($event, 'alto_de')" />
                                 </div>
                                 <div>
-                                    <input type="number" id="first_product"
-                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    <input type="number" id="alto_a"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required (input)="datosRecolectadosColores($event, 'alto_a')" />
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th scope="col" class="bg-red-500">
-                                
+
                             </th>
                             <th scope="col" class="pl-1">
                                 RIESGO EXTREMO
                             </th>
                             <td scope="col" class="flex justify-between ">
                                 <div>
-                                    <input type="number" id="first_product"
-                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    <input type="number" id="extremo_de"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required
+                                        (input)="datosRecolectadosColores($event, 'extremo_de')" />
                                 </div>
                                 <div>
-                                    <input type="number" id="first_product"
-                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="0" required />
+                                    <input type="number" id="extremo_a"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required
+                                        (input)="datosRecolectadosColores($event, 'extremo_a')" />
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            
-            
+
+
         </div>
 
     </div>
