@@ -406,7 +406,41 @@ enviarDatos(e: any) {
       probabilidad: formdata.get("probabilidad"),
       impacto: formdata.get("impacto"),
       valor: this.valor,
-      nivel_riesgo: this.nivel_de_riesgo
+      nivel_riesgo: this.nivel_de_riesgo,
+      matriz_valores_impacto:{
+        minima: this.valor_minima,
+        menor: this.valor_menor,
+        moderada: this.valor_moderada,
+        mayor: this.valor_mayor,
+        maxima: this.valor_maxima
+      },
+      matriz_valores_probabilidad:{
+        muy_alta: this.valor_muy_alta,
+        alta: this.valor_alta,
+        media: this.valor_media,
+        baja: this.valor_baja,
+        muy_baja: this.valor_muy_baja
+      },
+      intervalos_colores:{
+        verde: {
+          de : this.intervalor_color_verde[0],
+          a : this.intervalor_color_verde[1]
+        },
+        amarillo:{
+          de : this.intervalor_color_amarillo[0],
+          a : this.intervalor_color_amarillo[1]
+        },
+        naranja:{
+          de : this.intervalor_color_naranja[0],
+          a : this.intervalor_color_naranja[1]
+        },
+        rojo: {
+          de : this.intervalor_color_rojo[0],
+          a : this.intervalor_color_rojo[1]
+        }
+      },
+      
+      
     };
     console.log(datos);
   }
