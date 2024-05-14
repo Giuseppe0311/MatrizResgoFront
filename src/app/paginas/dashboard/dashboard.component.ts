@@ -298,6 +298,8 @@ this.impacto = e.target.value;
 valor: number = 0;
 nivel_de_riesgo: string = "";
 
+
+
 enviarDatos(e: any) {
   e.preventDefault();
 
