@@ -1,6 +1,7 @@
+<form action="" (submit)="enviarDatos($event)">
 <div class="h-screen overflow-auto">
     <div class="flex justify-between px-5 mb-8 max-lg:justify-center">
-        <app-crearevento></app-crearevento>
+        <!-- <app-crearevento></app-crearevento> -->
         <app-tablaseventos></app-tablaseventos>
     </div>
 
@@ -74,7 +75,54 @@
             </div>
         </div>
 
-        <div class="col-span-4 max-lg:hidden"></div>
+        <div class="col-span-4 max-lg:col-span-12">
+            <div class="grid grid-cols-6 " >
+                <!-- Modal body -->
+                <div class="col-span-6 grid grid-cols-3 gap-2 px-2">
+                    <div class="col-span-3">
+                        <label for="nombre_evento"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Registrar Evento</label>
+                        <input type="text" id="nombre_evento"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Escribe" required name="nombre_evento" />
+                    </div>
+                    <div class="col-span-1 max-lg:col-span-3">
+                        <label for="probabilidad"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Probabilidad</label>
+                        <select id="probabilidad" required name="probabilidad" (input)="agarrarValorProbabilidad($event)"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected value="" disabled>Selecciona</option>
+                            <option value="muy_alta">Muy Alta</option>
+                            <option value="alta">Alta</option>
+                            <option value="media">Media</option>
+                            <option value="baja">Baja</option>
+                            <option value="muy_baja">Muy Baja</option>
+                        </select>
+                    </div>
+                    <div class="col-span-1 max-lg:col-span-3">
+                        <label for="impacto"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Impacto</label>
+                        <select id="impacto" required name="impacto"  (input)="agarrarValorImpacto($event)"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected value="" disabled>Selecciona</option>
+                            <option value="minima">Minima</option>
+                            <option value="menor">Menor</option>
+                            <option value="moderada">Moderada</option>
+                            <option value="mayor">Mayor</option>
+                            <option value="maxima">Maxima</option>
+                        </select>
+                    </div>
+                    <div class="col-span-1 flex justify-center items-end mb-1 max-lg:col-span-3">
+                        <button type="submit"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Crear Evento</button>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+               
+            </div>
+        </div>
 
     </div>
     <div class="grid grid-cols-12 mb-32">
@@ -446,7 +494,7 @@
             </table>
         </div>
 
-        <div class="col-span-4 px-2 max-lg:col-span-12">
+        <div class="col-span-4 px-2 max-lg:col-span-12 mt-10 max-lg:mt-0">
 
             <div class="overflow-x-auto">
                 <table
@@ -577,3 +625,4 @@
 
     </div>
 </div>
+</form>
