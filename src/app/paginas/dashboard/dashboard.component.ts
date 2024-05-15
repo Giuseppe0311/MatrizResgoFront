@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
-import { CreareventoComponent } from './crearevento/crearevento.component';
 import { TablaseventosComponent } from './tablaseventos/tablaseventos.component';
 import { CommonModule } from '@angular/common';
+import { PeticionesapiService } from '../../services/peticionesapi.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CreareventoComponent, TablaseventosComponent, CommonModule],
+  imports: [ TablaseventosComponent, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
+
+  constructor(private api: PeticionesapiService) { }
 
   /* VALORES DE IMPACTO */
   valor_minima: number = 0;
@@ -442,7 +444,18 @@ enviarDatos(e: any) {
       
       
     };
-    console.log(datos);
+    const url = import.meta.env.NG_APP_API + "/eventos";
+    this.api.postApi(url, datos).subscribe(
+      {
+        next: (data) => {
+          console.log(data);
+        },
+        error: (error) => {
+          console.log(error);
+          alert("Error al enviar los datos");
+        }
+      }
+    )
   }
 }
 }
