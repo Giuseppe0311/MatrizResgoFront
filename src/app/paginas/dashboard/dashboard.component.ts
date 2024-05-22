@@ -445,18 +445,20 @@ enviarDatos(e: any) {
       
     };
 
-    const url = import.meta.env.NG_APP_API + "/eventos";
-    this.api.postApi(url, datos).subscribe(
-      {
-        next: (data) => {
-          console.log(data);
-        },
-        error: (error) => {
-          console.log(error);
-          alert("Error al enviar los datos");
-        }
-      }
-    )
+    console.log(datos);
+
+    // const url = import.meta.env.NG_APP_API + "/eventos";
+    // this.api.postApi(url, datos).subscribe(
+    //   {
+    //     next: (data) => {
+    //       console.log(data);
+    //     },
+    //     error: (error) => {
+    //       console.log(error);
+    //       alert("Error al enviar los datos");
+    //     }
+    //   }
+    // )
   }
 }
 }
