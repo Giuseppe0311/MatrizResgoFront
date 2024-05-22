@@ -1,0 +1,55 @@
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-900 dark:text-gray-400">
+        <thead class="text-xs text-gray-900 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    NOMBRE EVENTO
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    PROBABILIDAD
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    IMPACTO 
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    VALOR 
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    NIVEL DE RIESGO 
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    EMPRESA
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (data of datos; track $index) {
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-3 font-bold"> {{data.nombre_evento}} </td>
+                <td class="px-6 py-3 font-bold"> {{data.probabilidad}} </td>
+                <td class="px-6 py-3 font-bold"> {{data.impacto}} </td>
+                <td class="px-6 py-3 font-bold"> {{data.valor}} </td>
+                <td class="px-6 py-4">
+                    <div 
+                      class="text-base font-semibold text-center text-white rounded-lg"
+                      [ngClass]="{
+                        'bg-green-600 ': data.nivel_riesgo === 'Riesgo Aceptable',
+                        'bg-yellow-200  ': data.nivel_riesgo === 'Riesgo Tolerable',
+                        'bg-yellow-600 ': data.nivel_riesgo === 'Riesgo Alto',
+                        'bg-red-500 ': data.nivel_riesgo === 'Riesgo Extremo'
+                      }"
+                    >
+                      {{data.nivel_riesgo}}
+                    </div>
+                  </td>
+                <td class="px-6 py-3 font-bold"> {{data.usuario.sucursales.nombre_sucursal}} -{{data.usuario.sucursales.empresas.nombre_empresa}}  </td>
+
+                <td class="px-6 py-3 font-bold"> ACCIONES PROCESO </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

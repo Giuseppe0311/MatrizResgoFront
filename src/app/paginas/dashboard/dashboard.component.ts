@@ -1,18 +1,32 @@
 import { Component } from '@angular/core';
-import { TablaseventosComponent } from './tablaseventos/tablaseventos.component';
 import { CommonModule } from '@angular/common';
 import { PeticionesapiService } from '../../services/peticionesapi.service';
-
+import Swal from 'sweetalert2';
+import * as jwt from 'jwt-decode';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ TablaseventosComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
 
   constructor(private api: PeticionesapiService) { }
+
+  idusuario: number = 0;
+
+  ngOnInit(): void {
+
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwt.jwtDecode(token) as any
+      this.idusuario = decodedToken.sub;
+    }
+    else{
+      window.location.href = "/";
+    }
+  }
 
   /* VALORES DE IMPACTO */
   valor_minima: number = 0;
@@ -29,7 +43,7 @@ export class DashboardComponent {
   valor_baja: number = 0;
   valor_muy_baja: number = 0;
   /*  */
-  
+
 
   /* resultados de la primera columna */
   restuladoMinimayMuyAlta: number = 0;
@@ -70,7 +84,7 @@ export class DashboardComponent {
   resultadoMaximayMedia: number = 0;
   resultadoMaximayBaja: number = 0;
   resultadoMaximayMuyBaja: number = 0;
- 
+
   datosRecolectadoyResultados(e: any, input: string) {
     if (input === 'minima') {
       this.valor_minima = parseFloat(e.target.value);
@@ -90,7 +104,7 @@ export class DashboardComponent {
     else if (input === 'maxima') {
       this.valor_maxima = parseFloat(e.target.value);
     }
-    
+
     else if (input === 'muy_alta') {
       this.valor_muy_alta = parseFloat(e.target.value);
     }
@@ -147,58 +161,58 @@ export class DashboardComponent {
 
   }
 
-/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+  /* -------------------------------------------------------------------------------------------------------------------------------------------- */
 
-/* ACA SE HACE LA LOGICA DEL COLOR CON TODO :V  */
+  /* ACA SE HACE LA LOGICA DEL COLOR CON TODO :V  */
 
-   /* COLOR ACEPTABLE */
-      
-   valor_aceptable_de : number = 0;
-   valor_aceptable_a : number = 0;
+  /* COLOR ACEPTABLE */
 
-   /* COLOR TOLERABLE */
-   valor_tolerable_de : number = 0;
-   valor_tolerable_a : number = 0;
+  valor_aceptable_de: number = 0;
+  valor_aceptable_a: number = 0;
 
-   /* COLOR ALTO */
+  /* COLOR TOLERABLE */
+  valor_tolerable_de: number = 0;
+  valor_tolerable_a: number = 0;
 
-    valor_alto_de : number = 0;
-    valor_alto_a : number = 0;
+  /* COLOR ALTO */
 
-    /* COLOR EXTREMO */
+  valor_alto_de: number = 0;
+  valor_alto_a: number = 0;
 
-    valor_extremo_de : number = 0;
-    valor_extremo_a : number = 0;
+  /* COLOR EXTREMO */
 
-   /*  */
+  valor_extremo_de: number = 0;
+  valor_extremo_a: number = 0;
+
+  /*  */
 
 
-   /* intervalos */
-   
-   intervalor_color_verde : any[] = []; 
-    intervalor_color_amarillo : any[] = [];
-    intervalor_color_naranja : any[] = [];
-    intervalor_color_rojo : any[] = []; 
-   /*  */
+  /* intervalos */
 
-   datosRecolectadosColores(e: any, input: string) {
+  intervalor_color_verde: any[] = [];
+  intervalor_color_amarillo: any[] = [];
+  intervalor_color_naranja: any[] = [];
+  intervalor_color_rojo: any[] = [];
+  /*  */
+
+  datosRecolectadosColores(e: any, input: string) {
     const valor = parseFloat(e.target.value);
-   /*  // Verificar si el valor ya está presente en algún intervalo
-    const valorExiste = this.verificarValorEnIntervalo(valor);
+    /*  // Verificar si el valor ya está presente en algún intervalo
+     const valorExiste = this.verificarValorEnIntervalo(valor);
+ 
+     if (valorExiste) {
+       alert('Este número ya está en un intervalo.');
+       e.target.value = ''; // Limpiar el valor de la celda
+       return; // Detener la ejecución si el valor ya está en un intervalo
+     } */
 
-    if (valorExiste) {
-      alert('Este número ya está en un intervalo.');
-      e.target.value = ''; // Limpiar el valor de la celda
-      return; // Detener la ejecución si el valor ya está en un intervalo
-    } */
-
-    if (input === 'aceptable_de'  ) {
+    if (input === 'aceptable_de') {
       this.valor_aceptable_de = valor;
-    } else if (input === 'aceptable_a' ) {
+    } else if (input === 'aceptable_a') {
       this.valor_aceptable_a = valor;
-    } else if (input === 'tolerable_de' ) {
+    } else if (input === 'tolerable_de') {
       this.valor_tolerable_de = valor;
-    } else if (input === 'tolerable_a' ) {
+    } else if (input === 'tolerable_a') {
       this.valor_tolerable_a = valor;
     } else if (input === 'alto_de') {
       this.valor_alto_de = valor;
@@ -238,227 +252,224 @@ export class DashboardComponent {
     // console.log(this.intervalor_color_rojo);
   }
 
-/* 
-  verificarValorEnIntervalo(valor: number): boolean {
-    // Verificar si el valor está dentro de algún intervalo existente
-    const intervalos = [
-      this.intervalor_color_verde,
-      this.intervalor_color_amarillo,
-      this.intervalor_color_naranja,
-      this.intervalor_color_rojo,
-    ];
-  
-    for (const intervalo of intervalos) {
-      const inicio = intervalo[0];
-      const fin = intervalo[1];
-  
-      if (valor > inicio && valor < fin) { // Excluir los casos donde valor es igual al inicio o al final
-        return true; // El valor está dentro de un intervalo existente
+  /* 
+    verificarValorEnIntervalo(valor: number): boolean {
+      // Verificar si el valor está dentro de algún intervalo existente
+      const intervalos = [
+        this.intervalor_color_verde,
+        this.intervalor_color_amarillo,
+        this.intervalor_color_naranja,
+        this.intervalor_color_rojo,
+      ];
+    
+      for (const intervalo of intervalos) {
+        const inicio = intervalo[0];
+        const fin = intervalo[1];
+    
+        if (valor > inicio && valor < fin) { // Excluir los casos donde valor es igual al inicio o al final
+          return true; // El valor está dentro de un intervalo existente
+        }
       }
-    }
-  
-    return false; // El valor no está dentro de ningún intervalo existente
-  } 
- */
+    
+      return false; // El valor no está dentro de ningún intervalo existente
+    } 
+   */
 
 
-calcularIntervaloVerde(valor: number): boolean {
+  calcularIntervaloVerde(valor: number): boolean {
     return valor >= this.intervalor_color_verde[0] && valor <= this.intervalor_color_verde[1];
-}
-
-calcularIntervaloAmarrillo(valor: number): boolean {
-    return valor >= this.intervalor_color_amarillo[0] && valor <= this.intervalor_color_amarillo[1];
-}
-
-calcularIntervaloNaranja(valor: number): boolean {
-    return valor >= this.intervalor_color_naranja[0] && valor <= this.intervalor_color_naranja[1];
-}
-
-calcularIntervaloRojo(valor: number): boolean {
-    return valor >= this.intervalor_color_rojo[0] && valor <= this.intervalor_color_rojo[1];
-}
-
-/* -------------------------------------------------------------------------------------------------------------------------------------------- */
-
-probabilidad : string = "";
-impacto : string = "";
-
-
-agarrarValorProbabilidad(e: any){
-this.probabilidad = e.target.value;
-// console.log(this.probabilidad);
-
-}
-agarrarValorImpacto(e: any){
-
-this.impacto = e.target.value;
-// console.log(this.impacto);
-
-}
-  
-  
-valor: number = 0;
-nivel_de_riesgo: string = "";
-
-
-
-enviarDatos(e: any) {
-  e.preventDefault();
-
-  let enviar = true; // Variable para controlar si se deben enviar los datos
-
-  if (this.probabilidad && this.impacto) {
-    if(this.probabilidad === "muy_alta" && this.impacto === "minima"){
-      this.valor = this.valor_muy_alta * this.valor_minima;
-    }
-    else if(this.probabilidad === "alta" && this.impacto === "minima"){
-      this.valor = this.valor_alta * this.valor_minima;
-    }
-    else if(this.probabilidad === "media" && this.impacto === "minima"){
-      this.valor = this.valor_media * this.valor_minima;
-    }
-    else if(this.probabilidad === "baja" && this.impacto === "minima"){
-      this.valor = this.valor_baja * this.valor_minima;
-    }
-    else if(this.probabilidad === "muy_baja" && this.impacto === "minima"){
-      this.valor = this.valor_muy_baja * this.valor_minima;
-    }
-    else if(this.probabilidad === "muy_alta" && this.impacto === "menor"){
-      this.valor = this.valor_muy_alta * this.valor_menor;
-    }
-    else if(this.probabilidad === "alta" && this.impacto === "menor"){
-      this.valor = this.valor_alta * this.valor_menor;
-    }
-    else if(this.probabilidad === "media" && this.impacto === "menor"){
-      this.valor = this.valor_media * this.valor_menor;
-    }
-    else if(this.probabilidad === "baja" && this.impacto === "menor"){
-      this.valor = this.valor_baja * this.valor_menor;
-    }
-    else if(this.probabilidad === "muy_baja" && this.impacto === "menor"){
-      this.valor = this.valor_muy_baja * this.valor_menor;
-    }
-    else if(this.probabilidad === "muy_alta" && this.impacto === "moderada"){
-      this.valor = this.valor_muy_alta * this.valor_moderada;
-    }
-    else if(this.probabilidad === "alta" && this.impacto === "moderada"){
-      this.valor = this.valor_alta * this.valor_moderada;
-    }
-    else if(this.probabilidad === "media" && this.impacto === "moderada"){
-      this.valor = this.valor_media * this.valor_moderada;
-    }
-    else if(this.probabilidad === "baja" && this.impacto === "moderada"){
-      this.valor = this.valor_baja * this.valor_moderada;
-    }
-    else if(this.probabilidad === "muy_baja" && this.impacto === "moderada"){
-      this.valor = this.valor_muy_baja * this.valor_moderada;
-    }
-    else if(this.probabilidad === "muy_alta" && this.impacto === "mayor"){
-      this.valor = this.valor_muy_alta * this.valor_mayor;
-    }
-    else if(this.probabilidad === "alta" && this.impacto === "mayor"){
-      this.valor = this.valor_alta * this.valor_mayor;
-    }
-    else if(this.probabilidad === "media" && this.impacto === "mayor"){
-      this.valor = this.valor_media * this.valor_mayor;
-    }
-    else if(this.probabilidad === "baja" && this.impacto === "mayor"){
-      this.valor = this.valor_baja * this.valor_mayor;
-    }
-    else if(this.probabilidad === "muy_baja" && this.impacto === "mayor"){
-      this.valor = this.valor_muy_baja * this.valor_mayor;
-    }
-    else if(this.probabilidad === "muy_alta" && this.impacto === "maxima"){
-      this.valor = this.valor_muy_alta * this.valor_maxima;
-    }
-    else if(this.probabilidad === "alta" && this.impacto === "maxima"){
-      this.valor = this.valor_alta * this.valor_maxima;}
-    else if(this.probabilidad === "media" && this.impacto === "maxima"){
-      this.valor = this.valor_media * this.valor_maxima;
-    }
-    else if(this.probabilidad === "baja" && this.impacto === "maxima"){
-      this.valor = this.valor_baja * this.valor_maxima;
-    }
-    else if(this.probabilidad === "muy_baja" && this.impacto === "maxima"){
-      this.valor = this.valor_muy_baja * this.valor_maxima;
-    }
-
-    // Determinación del nivel de riesgo
-    if (this.calcularIntervaloVerde(this.valor)) {
-      this.nivel_de_riesgo = "Riesgo Aceptable";
-    } else if (this.calcularIntervaloAmarrillo(this.valor)) {
-      this.nivel_de_riesgo = "Riesgo Tolerable";
-    } else if (this.calcularIntervaloNaranja(this.valor)) {
-      this.nivel_de_riesgo = "Riesgo Alto";
-    } else if (this.calcularIntervaloRojo(this.valor)) {
-      this.nivel_de_riesgo = "Riesgo Extremo";
-    } else {
-      enviar = false; // Si no se puede determinar el nivel de riesgo, no enviar los datos
-      alert("UPS, EL CALCULO NO SE PUDO REALIZAR, porque el nivel de riesgo no se puede determinar.");
-    }
-  } else {
-    enviar = false; // Si no se han seleccionado la probabilidad y el impacto, no enviar los datos
-    alert("Debe seleccionar la probabilidad y el impacto");
   }
 
-  if (enviar) {
-    const formdata = new FormData(e.target);
-    const datos = {
-      nombre_evento: formdata.get("nombre_evento"),
-      probabilidad: formdata.get("probabilidad"),
-      impacto: formdata.get("impacto"),
-      valor: this.valor,
-      nivel_riesgo: this.nivel_de_riesgo,
-      matriz_valores_impacto:{
+  calcularIntervaloAmarrillo(valor: number): boolean {
+    return valor >= this.intervalor_color_amarillo[0] && valor <= this.intervalor_color_amarillo[1];
+  }
+
+  calcularIntervaloNaranja(valor: number): boolean {
+    return valor >= this.intervalor_color_naranja[0] && valor <= this.intervalor_color_naranja[1];
+  }
+
+  calcularIntervaloRojo(valor: number): boolean {
+    return valor >= this.intervalor_color_rojo[0] && valor <= this.intervalor_color_rojo[1];
+  }
+
+  /* -------------------------------------------------------------------------------------------------------------------------------------------- */
+
+  probabilidad: string = "";
+  impacto: string = "";
+
+
+  agarrarValorProbabilidad(e: any) {
+    this.probabilidad = e.target.value;
+    // console.log(this.probabilidad);
+
+  }
+  agarrarValorImpacto(e: any) {
+
+    this.impacto = e.target.value;
+    // console.log(this.impacto);
+
+  }
+
+
+  valor: number = 0;
+  nivel_de_riesgo: string = "";
+
+
+
+  enviarDatos(e: any) {
+    e.preventDefault();
+
+    let enviar = true; // Variable para controlar si se deben enviar los datos
+
+    if (this.probabilidad && this.impacto) {
+      if (this.probabilidad === "muy_alta" && this.impacto === "minima") {
+        this.valor = this.valor_muy_alta * this.valor_minima;
+      }
+      else if (this.probabilidad === "alta" && this.impacto === "minima") {
+        this.valor = this.valor_alta * this.valor_minima;
+      }
+      else if (this.probabilidad === "media" && this.impacto === "minima") {
+        this.valor = this.valor_media * this.valor_minima;
+      }
+      else if (this.probabilidad === "baja" && this.impacto === "minima") {
+        this.valor = this.valor_baja * this.valor_minima;
+      }
+      else if (this.probabilidad === "muy_baja" && this.impacto === "minima") {
+        this.valor = this.valor_muy_baja * this.valor_minima;
+      }
+      else if (this.probabilidad === "muy_alta" && this.impacto === "menor") {
+        this.valor = this.valor_muy_alta * this.valor_menor;
+      }
+      else if (this.probabilidad === "alta" && this.impacto === "menor") {
+        this.valor = this.valor_alta * this.valor_menor;
+      }
+      else if (this.probabilidad === "media" && this.impacto === "menor") {
+        this.valor = this.valor_media * this.valor_menor;
+      }
+      else if (this.probabilidad === "baja" && this.impacto === "menor") {
+        this.valor = this.valor_baja * this.valor_menor;
+      }
+      else if (this.probabilidad === "muy_baja" && this.impacto === "menor") {
+        this.valor = this.valor_muy_baja * this.valor_menor;
+      }
+      else if (this.probabilidad === "muy_alta" && this.impacto === "moderada") {
+        this.valor = this.valor_muy_alta * this.valor_moderada;
+      }
+      else if (this.probabilidad === "alta" && this.impacto === "moderada") {
+        this.valor = this.valor_alta * this.valor_moderada;
+      }
+      else if (this.probabilidad === "media" && this.impacto === "moderada") {
+        this.valor = this.valor_media * this.valor_moderada;
+      }
+      else if (this.probabilidad === "baja" && this.impacto === "moderada") {
+        this.valor = this.valor_baja * this.valor_moderada;
+      }
+      else if (this.probabilidad === "muy_baja" && this.impacto === "moderada") {
+        this.valor = this.valor_muy_baja * this.valor_moderada;
+      }
+      else if (this.probabilidad === "muy_alta" && this.impacto === "mayor") {
+        this.valor = this.valor_muy_alta * this.valor_mayor;
+      }
+      else if (this.probabilidad === "alta" && this.impacto === "mayor") {
+        this.valor = this.valor_alta * this.valor_mayor;
+      }
+      else if (this.probabilidad === "media" && this.impacto === "mayor") {
+        this.valor = this.valor_media * this.valor_mayor;
+      }
+      else if (this.probabilidad === "baja" && this.impacto === "mayor") {
+        this.valor = this.valor_baja * this.valor_mayor;
+      }
+      else if (this.probabilidad === "muy_baja" && this.impacto === "mayor") {
+        this.valor = this.valor_muy_baja * this.valor_mayor;
+      }
+      else if (this.probabilidad === "muy_alta" && this.impacto === "maxima") {
+        this.valor = this.valor_muy_alta * this.valor_maxima;
+      }
+      else if (this.probabilidad === "alta" && this.impacto === "maxima") {
+        this.valor = this.valor_alta * this.valor_maxima;
+      }
+      else if (this.probabilidad === "media" && this.impacto === "maxima") {
+        this.valor = this.valor_media * this.valor_maxima;
+      }
+      else if (this.probabilidad === "baja" && this.impacto === "maxima") {
+        this.valor = this.valor_baja * this.valor_maxima;
+      }
+      else if (this.probabilidad === "muy_baja" && this.impacto === "maxima") {
+        this.valor = this.valor_muy_baja * this.valor_maxima;
+      }
+
+      // Determinación del nivel de riesgo
+      if (this.calcularIntervaloVerde(this.valor)) {
+        this.nivel_de_riesgo = "Riesgo Aceptable";
+      } else if (this.calcularIntervaloAmarrillo(this.valor)) {
+        this.nivel_de_riesgo = "Riesgo Tolerable";
+      } else if (this.calcularIntervaloNaranja(this.valor)) {
+        this.nivel_de_riesgo = "Riesgo Alto";
+      } else if (this.calcularIntervaloRojo(this.valor)) {
+        this.nivel_de_riesgo = "Riesgo Extremo";
+      } else {
+        enviar = false; // Si no se puede determinar el nivel de riesgo, no enviar los datos
+        alert("UPS, EL CALCULO NO SE PUDO REALIZAR, porque el nivel de riesgo no se puede determinar.");
+      }
+    } else {
+      enviar = false; // Si no se han seleccionado la probabilidad y el impacto, no enviar los datos
+      alert("Debe seleccionar la probabilidad y el impacto");
+    }
+
+    if (enviar) {
+      const formdata = new FormData(e.target);
+      const datos = {
+        nombre_evento: formdata.get("nombre_evento"),
+        probabilidad: formdata.get("probabilidad"),
+        impacto: formdata.get("impacto"),
+        valor: this.valor,
+        nivel_riesgo: this.nivel_de_riesgo,
         minima: this.valor_minima,
         menor: this.valor_menor,
         moderada: this.valor_moderada,
         mayor: this.valor_mayor,
-        maxima: this.valor_maxima
-      },
-      matriz_valores_probabilidad:{
+        maxima: this.valor_maxima,
         muy_alta: this.valor_muy_alta,
         alta: this.valor_alta,
         media: this.valor_media,
         baja: this.valor_baja,
-        muy_baja: this.valor_muy_baja
-      },
-      intervalos_colores:{
-        verde: {
-          de : this.intervalor_color_verde[0],
-          a : this.intervalor_color_verde[1]
+        muy_baja: this.valor_muy_baja,
+        de_verde: this.intervalor_color_verde[0],
+        a_verde: this.intervalor_color_verde[1],
+        de_amarillo: this.intervalor_color_amarillo[0],
+        a_amarillo: this.intervalor_color_amarillo[1],
+        de_naranja: this.intervalor_color_naranja[0],
+        a_naranja: this.intervalor_color_naranja[1],
+        de_rojo: this.intervalor_color_rojo[0],
+        a_rojo: this.intervalor_color_rojo[1],
+        id_usuario: this.idusuario
+
+      }
+      console.log(datos);
+    
+
+
+    const url = import.meta.env.NG_APP_API + "/eventos";
+    this.api.postApi(url, datos).subscribe(
+      {
+        next: (data) => {
+          Swal.fire(
+          {
+            icon: "success",
+            title: "Exito",
+            text: "Se ha guardado los datos correctamente",
+          }
+          
+          ).then(() => {
+            window.location.reload();
+          });
         },
-        amarillo:{
-          de : this.intervalor_color_amarillo[0],
-          a : this.intervalor_color_amarillo[1]
-        },
-        naranja:{
-          de : this.intervalor_color_naranja[0],
-          a : this.intervalor_color_naranja[1]
-        },
-        rojo: {
-          de : this.intervalor_color_rojo[0],
-          a : this.intervalor_color_rojo[1]
+        error: (error) => {
+          console.log(error);
+          alert("Error al enviar los datos");
         }
-      },
-      
-      
-    };
-
-    console.log(datos);
-
-    // const url = import.meta.env.NG_APP_API + "/eventos";
-    // this.api.postApi(url, datos).subscribe(
-    //   {
-    //     next: (data) => {
-    //       console.log(data);
-    //     },
-    //     error: (error) => {
-    //       console.log(error);
-    //       alert("Error al enviar los datos");
-    //     }
-    //   }
-    // )
+      }
+    )
   }
 }
 }

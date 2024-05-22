@@ -1,9 +1,9 @@
 <div class="flex h-screen bg-white overflow-hidden">
     <!-- Sidebar -->
-    <div class="w-64 bg-gray-600 border-r-gray-400 relative {{menu ? 'hidden' : 'block' }}  ">
+    <div class="w-64 bg-green-600 border-r-green-400 relative {{menu ? 'hidden' : 'block' }}  ">
       <!-- Logo y Nombre -->
       <div class="px-2 py-6">
-        <span class="grid h-10 font-bold  place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
+        <span class="grid h-10 font-bold  place-content-center rounded-lg text-xs text-white">
           DASHBOARD MATRIZ DE RIESGOS
         </span>
       </div>
@@ -17,36 +17,67 @@
         </li>
 
                
+      @if (perfil === "SUPERADMIN") {
         <li>
-            <details class="group [&_summary::-webkit-details-marker]:hidden">
-              <summary class="flex cursor-pointer items-center justify-between px-4 py-2 text-white hover:text-black hover:bg-white">
-                <span class="text-sm font-medium"> Seguridad </span>
-                <span class="shrink-0 transition duration-300 group-open:-rotate-180">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                  </svg>
-                </span>
-              </summary>
-    
-              <ul class="mt-2 space-y-1 px-4">
-                <li>
-                  <a href="#" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
-                    Usuarios
-                  </a>
-                </li>
-    
-                <li>
-                  <a href="#" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
-                    Permisos
-                  </a>
-                </li>
-              </ul>
-            </details>
-          </li>
+          <details class="group [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between px-4 py-2 text-white hover:text-black hover:bg-white">
+              <span class="text-sm font-medium"> Seguridad </span>
+              <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+              </span>
+            </summary>
+  
+            <ul class="mt-2 space-y-1 px-4">
+              <li>
+                <a href="/dashboard/usuarios" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
+                  Usuarios
+                </a>
+              </li>
+  
+              <li>
+                <a href="#" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
+                  Permisos
+                </a>
+              </li>
+            </ul>
+          </details>
+        </li>
 
         <li>
-            <a href="/dashboard" class="block px-4 py-2 text-sm font-mediumtext-white font-bold text-white hover:text-black hover:bg-white">
-              Sucursales
+          <details class="group [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between px-4 py-2 text-white hover:text-black hover:bg-white">
+              <span class="text-sm font-medium"> Entidades Sucursales </span>
+              <span class="shrink-0 transition duration-300 group-open:-rotate-180">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+              </span>
+            </summary>
+  
+            <ul class="mt-2 space-y-1 px-4">
+              <li>
+                <a href="/dashboard/empresas" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
+                  Empresas
+                </a>
+              </li>
+  
+              <li>
+                <a href="/dashboard/sucursales" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
+                  Sucursales
+                </a>
+              </li>
+            </ul>
+          </details>
+        </li>
+      }
+
+      
+
+        <li>
+            <a href="/dashboard/eventos" class="block px-4 py-2 text-sm font-mediumtext-white font-bold text-white hover:text-black hover:bg-white">
+              Eventos Creados
             </a>
           </li>
   
@@ -55,18 +86,18 @@
 
       </ul>
       <div class="absolute inset-x-0 bottom-0 border-t border-gray-500 overflow-hidden">
-        <span href="#" class="flex items-center gap-2 bg-gray-600 p-4 ">
+        <span href="#" class="flex items-center gap-2 bg-green-600 p-4 ">
           <img
             alt=""
-            src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            src="{{imagen}}"
             class="size-10 rounded-full object-cover"
           />
     
           <div>
             <p class="text-xs">
-              <strong class="block font-medium text-white">Marco Calderon</strong>
+              <strong class="block font-medium text-white"> {{usuario}} </strong>
     
-              <span class="text-white">EMAPA SAN MARTIN</span>
+              <span class="text-white"> {{sucrusal}}-{{empresa}} </span>
             </p>
           </div>
 
@@ -83,7 +114,7 @@
     <!-- Contenido principal -->
     <div class="flex-1">
         <div class="bg-gray-50 h-10 ">
-            <div class="flex items-center justify-between gap-4 bg-gray-600 px-4 py-3 text-white">
+            <div class="flex items-center justify-between gap-4 bg-green-600 px-4 py-3 text-white">
                 <p class="text-sm font-medium">
                   UNIVERSIDAD NACIONAL 
                   <a href="https://unsm.edu.pe/" target="_blank" class="inline-block underline">SAN MARTIN - TARAPOTO</a>
