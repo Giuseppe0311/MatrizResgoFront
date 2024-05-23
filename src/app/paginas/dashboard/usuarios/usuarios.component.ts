@@ -79,8 +79,8 @@ export class UsuariosComponent {
     this.api.postApi(url, formdata).subscribe({
       next: data => {
         Swal.fire({
-          title: 'Empresa creada',
-          text: 'La empresa se ha creado correctamente',
+          title: 'Usuario creada',
+          text: 'El usuario se ha creado correctamente',
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
