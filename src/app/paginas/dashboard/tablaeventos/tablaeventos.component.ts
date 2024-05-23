@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { PeticionesapiService } from '../../../services/peticionesapi.service';
 import * as jwt from 'jwt-decode';
 import { CommonModule } from '@angular/common';
+import { EventosServicio } from './eventos.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-tablaeventos',
   standalone: true,
@@ -11,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TablaeventosComponent {
 
-  constructor(private api:PeticionesapiService) { }
+  constructor(private api:PeticionesapiService, private eventoservicio: EventosServicio, private router: Router) { }
   id_empresa: any
   perfil : any
   ngOnInit(): void {
@@ -46,6 +48,10 @@ export class TablaeventosComponent {
     })
   }
 
+  clickLugar(data:any){
+    this.eventoservicio.setData(data);
+    this.router.navigate(['/dashboard']);
+  }
   
 
 }
