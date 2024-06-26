@@ -1,1 +1,354 @@
-<!--  -->
+<form action="" >
+    <div class="h-screen overflow-auto">
+        <div class="flex justify-between px-5 mb-8 max-lg:justify-center">
+          <a href="/dashboard/eventos" class="px-4 py-2 cursor-pointer bg-blue-700 hover:bg-blue-400 text-white">EVENTOS CREADOS</a>
+        </div>
+    
+        <div class="grid grid-cols-12">
+    
+            <div class="col-span-2 max-lg:hidden"></div>
+    
+            <div class="col-span-6 max-lg:col-span-12">
+                <div class="text-center bg-slate-800 text-white font-bold text-xl p-2">
+                    IMPACTO
+                </div>
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                    MINIMA
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                    MENOR
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                    MODERADA
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                    MAYOR
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                    MAXIMA
+                                </th>
+    
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td class="px-6 py-4">
+                                    <input type="number" id="minima"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required   value="{{valor_minima}}" />
+    
+                                </td>
+                                <td class="px-6 py-4">
+                                    <input type="number" id="menor"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                         value="{{valor_menor}}" placeholder="0" required  />
+    
+                                </td>
+                                <td class="px-6 py-4">
+                                    <input type="number" id="moderada"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required placeholder="0" required value="{{valor_moderada}}"
+                                         />
+    
+                                </td>
+                                <td class="px-6 py-4">
+                                    <input type="number" id="mayor"
+                                    value="{{valor_mayor}}"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required  />
+    
+                                </td>
+                                <td class="px-6 py-4">
+                                    <input type="number" id="maxima"
+                                    value="{{valor_maxima}}"
+                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="0" required />
+    
+                                </td>
+                            </tr>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+            <div class="col-span-4 max-lg:col-span-12">
+                <div class="grid grid-cols-6 " >
+                    <!-- Modal body -->
+                    <div class="col-span-6 grid grid-cols-3 gap-2 px-2">
+                        <div class="col-span-3">
+                            <label for="nombre_evento"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Registrar Evento</label>
+                            <input type="text" id="nombre_evento"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Escribe" required name="nombre_evento" />
+                        </div>
+                        <div class="col-span-1 max-lg:col-span-3">
+                            <label for="probabilidad"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Probabilidad</label>
+                            <select id="probabilidad" required name="probabilidad" 
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected value="" disabled>Selecciona</option>
+                                <option value="muy_alta">Muy Alta</option>
+                                <option value="alta">Alta</option>
+                                <option value="media">Media</option>
+                                <option value="baja">Baja</option>
+                                <option value="muy_baja">Muy Baja</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1 max-lg:col-span-3">
+                            <label for="impacto"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Impacto</label>
+                            <select id="impacto" required name="impacto"  
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected value="" disabled>Selecciona</option>
+                                <option value="minima">Minima</option>
+                                <option value="menor">Menor</option>
+                                <option value="moderada">Moderada</option>
+                                <option value="mayor">Mayor</option>
+                                <option value="maxima">Maxima</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1 flex justify-center items-end mb-1 max-lg:col-span-3">
+                            <button type="submit"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Crear Evento</button>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                   
+                </div>
+            </div>
+    
+        </div>
+        <div class="grid grid-cols-12 mb-32">
+    
+            <div class="col-span-2 max-lg:col-span-12">
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Muy Alta
+                            </th>
+                            <td class="px-4 py-4 flex justify-center">
+                                <input type="number" id="muy_alta"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="0" required  value="{{valor_muy_alta}}" />
+    
+                            </td>
+                        </tr>
+    
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Alta
+                            </th>
+                            <td class="px-4 py-4 flex justify-center    ">
+                                <input type="number" id="alta" value="{{valor_alta}}"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="0" required  />
+    
+                            </td>
+                        </tr>
+    
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Media
+                            </th>
+                            <td class="px-4 py-4 flex justify-center    ">
+                                <input type="number" id="media" value="{{valor_media}}"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="0" required />
+    
+                            </td>
+                        </tr>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Baja
+                            </th>
+                            <td class="px-4 py-4 flex justify-center    ">
+                                <input type="number" id="baja" value="{{valor_baja}}"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="0" required  />
+    
+                            </td>
+                        </tr>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                Muy Baja
+                            </th>
+                            <td class="px-4 py-4 flex justify-center    ">
+                                <input type="number" id="muy_baja" value="{{valor_muy_baja}}"
+                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="0" required  />
+    
+                            </td>
+                        </tr>
+    
+                    </table>
+                </div>
+                <div class="text-center bg-slate-800 text-white font-bold  p-2">
+                    PROBABILIDAD
+                </div>
+    
+            </div>
+    
+            <div class="col-span-6 max-lg:col-span-12">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <!-- Ejemplo de una fila, adaptar para todas las filas según tu necesidad -->
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <!-- Ejemplo de una celda, adaptar para todas las celdas según tu necesidad -->
+                    <td
+                      class="px-2 py-5 text-center text-white bg-slate-400"
+                      [ngClass]="{
+                        'bg-verde': calcularIntervaloVerde(restuladoMinimayMuyAlta),
+                        'bg-amarillo': calcularIntervaloVerde(restuladoMinimayMuyAlta),
+                        'bg-naranja': calcularIntervaloVerde(restuladoMinimayMuyAlta),
+                        'bg-rojo': calcularIntervaloVerde(restuladoMinimayMuyAlta)
+                      }"
+                    >
+                      {{ restuladoMinimayMuyAlta || (restuladoMinimayMuyAlta === 0 ? restuladoMinimayMuyAlta : '0') }}
+                    </td>
+                    <!-- Continuar con las demás celdas de la fila -->
+                  </tr>
+                  <!-- Repetir para todas las filas -->
+                </table>
+              </div>
+              
+    
+            <div class="col-span-4 px-2 max-lg:col-span-12 mt-10 max-lg:mt-0">
+    
+                <div class="overflow-x-auto">
+                    <table
+                        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="pl-1">
+                                    <!-- Espacio reservado -->
+                                </th>
+                                <th scope="col" class="pl-1">
+                                    <!-- Espacio reservado -->
+                                </th>
+                                <th scope="col" class="pl-1 text-center">
+                                    Rango
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="col" class="pl-1">
+                                    COLOR
+                                </th>
+                                <th scope="col" class="pl-1">
+                                    NIVEL DE RIESGO
+                                </th>
+                                <td scope="col" class="flex justify-between ">
+                                    <div class="ml-4">
+                                        DE
+                                    </div>
+                                    <div class="mr-8">
+                                        A
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="col" class="bg-green-500">
+    
+                                </th>
+                                <th scope="col" class="pl-1">
+                                    RIESGO ACEPTABLE
+                                </th>
+                                <td scope="col" class="flex justify-between ">
+                                    <div>
+                                        <input type="number" id="aceptable_de"
+                                            class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{valor_aceptable_de}}"
+                                            />
+                                    </div>
+                                    <div>
+                                        <input type="number" id="aceptable_a"
+                                            class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="0" required value="{{valor_aceptable_a}}"
+                                           />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col" class="bg-yellow-200">
+    
+                                </th>
+                                <th scope="col" class="pl-1">
+                                    RIESGO TOLERABLE
+                                </th>
+                                <td scope="col" class="flex justify-between ">
+                                    <div>
+                                        <input type="number" id="tolerable_de"
+                                            class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="0" required value="{{valor_tolerable_de}}"
+                                             />
+                                    </div>
+                                    <div>
+                                        <input type="number" id="tolerable_a"
+                                            class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="0" required value="{{valor_tolerable_a}}"
+                                            />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col" class="bg-yellow-500">
+    
+                                </th>
+                                <th scope="col" class="pl-1">
+                                    RIESGO ALTO
+                                </th>
+                                <td scope="col" class="flex justify-between ">
+                                    <div>
+                                        <input type="number" id="alto_de"
+                                            class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="0" required value="{{valor_alto_de}}"
+                                          />
+                                    </div>
+                                    <div>
+                                        <input type="number" id="alto_a"
+                                            class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{valor_alto_a}}"
+                                            placeholder="0" required />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col" class="bg-red-500">
+    
+                                </th>
+                                <th scope="col" class="pl-1">
+                                    RIESGO EXTREMO
+                                </th>
+                                <td scope="col" class="flex justify-between ">
+                                    <div>
+                                        <input type="number" id="extremo_de"
+                                            class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="0" required value="{{valor_extremo_de}}"
+                                             />
+                                    </div>
+                                    <div>
+                                        <input type="number" id="extremo_a"
+                                            class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="0" required value="{{valor_extremo_a}}"
+                                          />
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+    
+            </div>
+    
+        </div>
+    </div>
+    </form>
+    

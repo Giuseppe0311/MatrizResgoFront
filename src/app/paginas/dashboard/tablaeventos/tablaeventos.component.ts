@@ -4,16 +4,18 @@ import * as jwt from 'jwt-decode';
 import { CommonModule } from '@angular/common';
 import { EventosServicio } from './eventos.service';
 import { Router } from '@angular/router';
+import { MatrizServicio } from '../matrices/matriz.servicio';
+import { PosteventosComponent } from './posteventos/posteventos.component';
 @Component({
   selector: 'app-tablaeventos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PosteventosComponent],
   templateUrl: './tablaeventos.component.html',
   styleUrl: './tablaeventos.component.css'
 })
 export class TablaeventosComponent {
 
-  constructor(private api:PeticionesapiService, private eventoservicio: EventosServicio, private router: Router) { }
+  constructor(private api:PeticionesapiService, private eventoservicio: EventosServicio, private router: Router, private matrizServicio: MatrizServicio) { }
   id_empresa: any
   perfil : any
   ngOnInit(): void {
@@ -32,12 +34,15 @@ export class TablaeventosComponent {
   datos : any
   getDatos() {
     let url
-    if(this.perfil == "SUPERADMIN"){
-      url = import.meta.env.NG_APP_API + '/eventos' ;
-    }
-    else{
-      url = import.meta.env.NG_APP_API + '/eventos/' + this.id_empresa ;
-    }
+    // if(this.perfil == "SUPERADMIN"){
+    //   url = import.meta.env.NG_APP_API + '/eventos' ;
+    // }
+    // else{
+    //   url = import.meta.env.NG_APP_API + '/eventos/' + this.id_empresa ;
+    // }
+
+    url = import.meta.env.NG_APP_API + '/eventos/' + this.matrizServicio.getData().id + '?' + 'id_empresa=' + this.id_empresa;
+
     this.api.getApi(url).subscribe({
       next: data => {
         this.datos  = data;
@@ -48,9 +53,15 @@ export class TablaeventosComponent {
     })
   }
 
-  clickLugar(data:any){
+  recibirLaRepuestaDelPostHiJOParaActualizar(event: boolean) {
+    if (event) {
+      this.getDatos(); // Actualizar la tabla después de la solicitud POST
+    }
+  }
+
+  clickVerMatriz(data:any){
     this.eventoservicio.setData(data);
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard/matrices/eventos/vermatriz']);
   }
   
 

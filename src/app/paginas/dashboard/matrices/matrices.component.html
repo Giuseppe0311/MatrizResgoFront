@@ -1,0 +1,49 @@
+
+<div class="mb-5">
+    <app-postmatriz (Completado)="recibirLaRepuestaDelPostHiJOParaActualizar($event)" ></app-postmatriz>
+</div>
+
+
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Nombre Matriz
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Crear Eventos
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Usuario
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (item of datosArreglo; track $index) {
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{item.nombre_matriz}}
+                    </th>
+                    <td class="px-6 py-4">
+                        <svg (click)="cambiarPagina(item)" class="w-10 h-10 text-gray-800 dark:text-white cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 8H4m8 3.5v5M9.5 14h5M4 6v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1h-5.032a1 1 0 0 1-.768-.36l-1.9-2.28a1 1 0 0 0-.768-.36H5a1 1 0 0 0-1 1Z"/>
+                          </svg>
+                          
+                    </td>
+                    <td class="px-6 py-4">
+                        {{item.usuarios.usuario}}
+                    </td>
+                    <td class="px-6 py-4">
+                        acciones
+                    </td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>

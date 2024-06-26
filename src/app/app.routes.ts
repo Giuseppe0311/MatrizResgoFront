@@ -8,43 +8,47 @@ import { SucursalesComponent } from './paginas/dashboard/sucursales/sucursales.c
 import { UsuariosComponent } from './paginas/dashboard/usuarios/usuarios.component';
 import { TablaeventosComponent } from './paginas/dashboard/tablaeventos/tablaeventos.component';
 import { PuteventosComponent } from './paginas/dashboard/puteventos/puteventos.component';
+import { MatricesComponent } from './paginas/dashboard/matrices/matrices.component';
 
 export const routes: Routes = [
-
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
   },
 
   {
     path: 'dashboard',
     component: LayoutComponent,
     children: [
-        {
-            path: '',
-            component: DashboardComponent
-        },
-        {
-            path: 'empresas',
-            component: EmpresasComponent
-        },
-        {
-            path: 'sucursales',
-            component: SucursalesComponent
-        },
-        {
-            path: 'usuarios',
-            component: UsuariosComponent
-        },
-        {
-            path: 'eventos',
-            component: TablaeventosComponent
-        },
-        {
-          path: 'put-eventos',
-          component: PuteventosComponent
-      }
-    ]
+      {
+        path: '',
+        component: DashboardComponent,
+      },
+      {
+        path: 'empresas',
+        component: EmpresasComponent,
+      },
+      {
+        path: 'sucursales',
+        component: SucursalesComponent,
+      },
+      {
+        path: 'usuarios',
+        component: UsuariosComponent,
+      },
+      {
+        path: 'matrices',
+        component: MatricesComponent,
+      },
+      {
+        path: 'matrices/eventos',
+        component: TablaeventosComponent,
+      },
+      {
+        path: 'matrices/eventos/vermatriz',
+        component: PuteventosComponent,
+      },
+    ],
   },
   { path: '**', component: NotfoundComponent },
 ];
