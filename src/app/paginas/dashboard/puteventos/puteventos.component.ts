@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { PeticionesapiService } from '../../../services/peticionesapi.service';
 import Swal from 'sweetalert2';
 import * as jwt from 'jwt-decode';
-import { CommonModule } from '@angular/common';
+
 import { EventosServicio } from '../tablaeventos/eventos.service';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-puteventos',
   standalone: true,
@@ -112,8 +114,20 @@ export class PuteventosComponent {
   resultadoMaximayBaja: number = 0;
   resultadoMaximayMuyBaja: number = 0;
 
+  nombre_matriz : string = '';
+
+  nombre_evento: string = '';
+  que_probabilidad_eligio = '';
+  que_impacto_eligio = '';
+
   ngOnInit(): void {
     this.datos = this.datosRecolectados.getData();
+    this.nombre_matriz = this.datos.matriz.nombre_matriz;
+    
+    this.nombre_evento = this.datos.nombre_evento;
+    this.que_probabilidad_eligio = this.datos.probabilidad;
+    this.que_impacto_eligio = this.datos.impacto;
+
     this.matriz_impacto = this.datos.matriz_impacto;
     this.matriz_probabilidad = this.datos.matriz_probabilidad;
 
@@ -219,13 +233,14 @@ export class PuteventosComponent {
   /* -------------------------------------------------------------------------------------------------------------------------------------------- */
 
   calcularIntervaloVerde(valor: number): boolean {
+    console.log(valor);
     return (
       valor >= this.intervalor_color_verde[0] &&
       valor <= this.intervalor_color_verde[1]
     );
   }
 
-  calcularIntervaloAmarrillo(valor: number): boolean {
+  calcularIntervaloAmarillo(valor: number): boolean {
     return (
       valor >= this.intervalor_color_amarillo[0] &&
       valor <= this.intervalor_color_amarillo[1]
@@ -245,6 +260,30 @@ export class PuteventosComponent {
       valor <= this.intervalor_color_rojo[1]
     );
   }
+
+
+  calcularYRegistrar(color: string, valor: number): boolean {
+    let resultado: boolean;
+    switch (color) {
+        case 'verde':
+            resultado = this.calcularIntervaloVerde(valor);
+            break;
+        case 'amarillo':
+            resultado = this.calcularIntervaloAmarillo(valor);
+            break;
+        case 'naranja':
+            resultado = this.calcularIntervaloNaranja(valor);
+            break;
+        case 'rojo':
+            resultado = this.calcularIntervaloRojo(valor);
+            break;
+        default:
+            resultado = false;
+    }
+    console.log(`Color: ${color}, Valor: ${valor}, Resultado: ${resultado}`);
+    return resultado;
+}
+
 
   /* -------------------------------------------------------------------------------------------------------------------------------------------- */
 
