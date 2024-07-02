@@ -64,6 +64,7 @@ export class MatricesComponent {
     this.api.getApi(url).subscribe({
       next: (data) => {
          this.datosArreglo = data;
+         console.log(this.datosArreglo)
       },
       error: (error) => {
         console.log(error);
