@@ -41,12 +41,7 @@ export class MatricesComponent {
 
     
   cambiarPagina(valor : any){
-    console.log(valor)
-    const dato = {
-      id: valor.id_matriz,
-      nombre_matriz : valor.nombre_matriz,
-    }
-    this.guardarMatriz.setData(dato)
+    this.guardarMatriz.setData(valor)
     this.router.navigate(['/dashboard/matrices/eventos'])
   }
 
@@ -54,12 +49,14 @@ export class MatricesComponent {
 
   getData() {
     let url
-    if(this.perfil == "SUPERADMIN"){
-      url = import.meta.env.NG_APP_API + '/matriz' ;
-    }
-    else{
-      url = import.meta.env.NG_APP_API + '/matriz/' + this.id_empresa ;
-    }   
+    // if(this.perfil == "SUPERADMIN"){
+    //   url = import.meta.env.NG_APP_API + '/matriz' ;
+    // }
+    // else{
+    //   url = import.meta.env.NG_APP_API + '/matriz/' + this.id_empresa ;
+    // }  
+    
+    url = import.meta.env.NG_APP_API + '/matriz' ;
 
     this.api.getApi(url).subscribe({
       next: (data) => {

@@ -1,0 +1,726 @@
+<!-- Modal toggle -->
+<button data-modal-target="static-modal" data-modal-toggle="static-modal"
+    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    type="button">
+    Crear Evento
+</button>
+
+<!-- Main modal -->
+<div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-8xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <form action="" (submit)="enviarDatos($event)">
+                <div class="h-screen overflow-auto">
+                    <div class="flex justify-between px-5 mb-8 max-lg:justify-center">
+                        <span>Nombre Perteneciente a la matriz : <strong> {{nombre_matriz}}</strong> </span>
+                    </div>
+
+                    <div class="flex justify-end pr-10 -mt-10">
+                        <span 
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-hide="static-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </span>
+                    </div>
+
+                    <div class="col-span-4 max-lg:col-span-12">
+                        <div class="grid grid-cols-6 ">
+                            <!-- Modal body -->
+                            <div class="col-span-6 grid grid-cols-3 gap-2 px-2">
+                                <div class="col-span-1">
+                                    <label for="nombre_evento"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Registrar Evento</label>
+                                    <input type="text" id="nombre_evento"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Escribe" required name="nombre_evento" />
+                                </div>
+                                <div class="col-span-1 max-lg:col-span-3">
+                                    <label for="probabilidad"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Probabilidad</label>
+                                    <select id="probabilidad" required name="probabilidad"
+                                        (input)="agarrarValorProbabilidad($event)"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected value="" disabled>Selecciona</option>
+                                        <option value="muy_alta">Muy Alta</option>
+                                        <option value="alta">Alta</option>
+                                        <option value="media">Media</option>
+                                        <option value="baja">Baja</option>
+                                        <option value="muy_baja">Muy Baja</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-1 max-lg:col-span-3">
+                                    <label for="impacto"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Impacto</label>
+                                    <select id="impacto" required name="impacto" (input)="agarrarValorImpacto($event)"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected value="" disabled>Selecciona</option>
+                                        <option value="minima">Minima</option>
+                                        <option value="menor">Menor</option>
+                                        <option value="moderada">Moderada</option>
+                                        <option value="mayor">Mayor</option>
+                                        <option value="maxima">Maxima</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-span-1">
+                                    <label for="countries"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+                                        option</label>
+                                    <select id="countries"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected>Choose a country</option>
+                                        <option value="US">United States</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="FR">France</option>
+                                        <option value="DE">Germany</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-1">
+                                    <label for="countries"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+                                        option</label>
+                                    <select id="countries"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected>Choose a country</option>
+                                        <option value="US">United States</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="FR">France</option>
+                                        <option value="DE">Germany</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-1">
+                                    <label for="countries"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+                                        option</label>
+                                    <select id="countries"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected>Choose a country</option>
+                                        <option value="US">United States</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="FR">France</option>
+                                        <option value="DE">Germany</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-span-3 p-4 flex justify-end items-end mb-1 max-lg:col-span-3">
+                                    <button type="submit"
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Crear
+                                        Evento</button>
+                                </div>
+                            </div>
+                            <!-- Modal footer -->
+
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-12">
+
+                        <div class="col-span-2 max-lg:hidden"></div>
+
+                        <div class="col-span-6 max-lg:col-span-12">
+                            <div class="text-center bg-slate-800 text-white font-bold text-xl p-2">
+                                IMPACTO
+                            </div>
+                            <div class="relative overflow-x-auto">
+                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <thead
+                                        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                                MINIMA
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                                MENOR
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                                MODERADA
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                                MAYOR
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-white text-center bg-purple-600">
+                                                MAXIMA
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <td class="px-6 py-4">
+                                                <input type="number" id="minima"
+                                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    placeholder="0" required value="{{valor_minima}}" readonly />
+
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <input type="number" id="menor"
+                                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    value="{{valor_menor}}" placeholder="0" required readonly />
+
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <input type="number" id="moderada"
+                                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    placeholder="0" required placeholder="0" required
+                                                    value="{{valor_moderada}}" readonly />
+
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <input type="number" id="mayor" value="{{valor_mayor}}"
+                                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    placeholder="0" required readonly />
+
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <input type="number" id="maxima" value="{{valor_maxima}}"
+                                                    class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    placeholder="0" required readonly />
+
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="grid grid-cols-12 mb-32">
+
+                        <div class="col-span-2 max-lg:col-span-12">
+                            <div class="relative overflow-x-auto">
+                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            Muy Alta
+                                        </th>
+                                        <td class="px-4 py-4 flex justify-center">
+                                            <input type="number" id="muy_alta"
+                                                class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="0" required value="{{valor_muy_alta}}" readonly />
+
+                                        </td>
+                                    </tr>
+
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            Alta
+                                        </th>
+                                        <td class="px-4 py-4 flex justify-center    ">
+                                            <input type="number" id="alta" value="{{valor_alta}}"
+                                                class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="0" required readonly />
+
+                                        </td>
+                                    </tr>
+
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            Media
+                                        </th>
+                                        <td class="px-4 py-4 flex justify-center    ">
+                                            <input type="number" id="media" value="{{valor_media}}"
+                                                class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="0" required readonly />
+
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            Baja
+                                        </th>
+                                        <td class="px-4 py-4 flex justify-center    ">
+                                            <input type="number" id="baja" value="{{valor_baja}}"
+                                                class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="0" required readonly />
+
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            Muy Baja
+                                        </th>
+                                        <td class="px-4 py-4 flex justify-center    ">
+                                            <input type="number" id="muy_baja" value="{{valor_muy_baja}}"
+                                                class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="0" required readonly />
+
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <div class="text-center bg-slate-800 text-white font-bold  p-2">
+                                PROBABILIDAD
+                            </div>
+
+                        </div>
+
+                        <div class="col-span-6 max-lg:col-span-12">
+                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(restuladoMinimayMuyAlta),
+                                        'bg-amarillo': calcularIntervaloAmarillo(restuladoMinimayMuyAlta),
+                                        'bg-naranja': calcularIntervaloNaranja(restuladoMinimayMuyAlta),
+                                        'bg-rojo': calcularIntervaloRojo(restuladoMinimayMuyAlta)
+                                    }">
+                                        {{ restuladoMinimayMuyAlta || (restuladoMinimayMuyAlta === 0 ?
+                                        restuladoMinimayMuyAlta : '0') }}
+                                    </td>
+
+                                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                                            'bg-verde': calcularIntervaloVerde(restuladoMenoryMuyAlta),
+                                            'bg-amarillo': calcularIntervaloAmarillo(restuladoMenoryMuyAlta),
+                                            'bg-naranja': calcularIntervaloNaranja(restuladoMenoryMuyAlta),
+                                            'bg-rojo': calcularIntervaloRojo(restuladoMenoryMuyAlta)
+                                        }">
+
+                                        {{ restuladoMenoryMuyAlta || (restuladoMenoryMuyAlta === 0 ?
+                                        restuladoMenoryMuyAlta : '0') }}
+
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(restuladoModeradayMuyAlta),
+                                        'bg-amarillo': calcularIntervaloAmarillo(restuladoModeradayMuyAlta),
+                                        'bg-naranja': calcularIntervaloNaranja(restuladoModeradayMuyAlta),
+                                        'bg-rojo': calcularIntervaloRojo(restuladoModeradayMuyAlta)
+                                    }">
+                                        {{ restuladoModeradayMuyAlta || (restuladoModeradayMuyAlta === 0 ?
+                                        restuladoModeradayMuyAlta :
+                                        '0') }}
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMayoryMuyAlta),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMayoryMuyAlta),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMayoryMuyAlta),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMayoryMuyAlta)
+                                    }">
+
+                                        {{ resultadoMayoryMuyAlta || (resultadoMayoryMuyAlta === 0 ?
+                                        resultadoMayoryMuyAlta :
+                                        '0') }}
+
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMaximayMuyAlta),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMaximayMuyAlta),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMaximayMuyAlta),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMaximayMuyAlta)
+                                    }">
+                                        {{ resultadoMaximayMuyAlta || (resultadoMaximayMuyAlta === 0 ?
+                                        resultadoMaximayMuyAlta :
+                                        '0') }}
+
+
+
+                                    </td>
+
+                                </tr>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMinimayAlta),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMinimayAlta),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMinimayAlta),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMinimayAlta)
+                                    }">
+                                        {{ resultadoMinimayAlta || (resultadoMinimayAlta === 0 ? resultadoMinimayAlta :
+                                        '0') }}
+                                    </td>
+
+                                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                                            'bg-verde': calcularIntervaloVerde(resultadoMenoryAlta),
+                                            'bg-amarillo': calcularIntervaloAmarillo(resultadoMenoryAlta),
+                                            'bg-naranja': calcularIntervaloNaranja(resultadoMenoryAlta),
+                                            'bg-rojo': calcularIntervaloRojo(resultadoMenoryAlta)
+                                        }">
+
+                                        {{ resultadoMenoryAlta || (resultadoMenoryAlta === 0 ? resultadoMenoryAlta :
+                                        '0') }}
+
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoModeradayAlta),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoModeradayAlta),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoModeradayAlta),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoModeradayAlta)
+                                    }">
+                                        {{ resultadoModeradayAlta || (resultadoModeradayAlta === 0 ?
+                                        restuladoModeradayMuyAlta :
+                                        '0') }}
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMayoryAlta),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMayoryAlta),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMayoryAlta),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMayoryAlta)
+                                    }">
+
+                                        {{ resultadoMayoryAlta || (resultadoMayoryAlta === 0 ? resultadoMayoryAlta :
+                                        '0') }}
+
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMaximayAlta),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMaximayAlta),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMaximayAlta),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMaximayAlta)
+                                    }">
+                                        {{ resultadoMaximayAlta || (resultadoMaximayAlta === 0 ? resultadoMaximayAlta :
+                                        '0') }}
+
+
+
+                                    </td>
+
+                                </tr>
+
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMinimayMedia),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMinimayMedia),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMinimayMedia),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMinimayMedia)
+                                    }">
+                                        {{ resultadoMinimayMedia || (resultadoMinimayMedia === 0 ? resultadoMinimayMedia
+                                        : '0') }}
+                                    </td>
+
+                                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                                            'bg-verde': calcularIntervaloVerde(resultadoMenoryMedia),
+                                            'bg-amarillo': calcularIntervaloAmarillo(resultadoMenoryMedia),
+                                            'bg-naranja': calcularIntervaloNaranja(resultadoMenoryMedia),
+                                            'bg-rojo': calcularIntervaloRojo(resultadoMenoryMedia)
+                                        }">
+
+                                        {{ resultadoMenoryMedia || (resultadoMenoryMedia === 0 ? resultadoMenoryMedia :
+                                        '0') }}
+
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoModeradayMedia),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoModeradayMedia),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoModeradayMedia),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoModeradayMedia)
+                                    }">
+                                        {{ resultadoModeradayMedia || (resultadoModeradayMedia === 0 ?
+                                        resultadoModeradayMedia :
+                                        '0') }}
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMayoryMedia),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMayoryMedia),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMayoryMedia),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMayoryMedia)
+                                    }">
+
+                                        {{ resultadoMayoryMedia || (resultadoMayoryMedia === 0 ? resultadoMayoryMedia :
+                                        '0') }}
+
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMaximayMedia),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMaximayMedia),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMaximayMedia),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMaximayMedia)
+                                    }">
+                                        {{ resultadoMaximayMedia || (resultadoMaximayMedia === 0 ? resultadoMaximayMedia
+                                        :
+                                        '0') }}
+
+
+
+                                    </td>
+
+                                </tr>
+
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMinimayBaja),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMinimayBaja),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMinimayBaja),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMinimayBaja)
+                                    }">
+                                        {{ resultadoMinimayBaja || (resultadoMinimayBaja === 0 ? resultadoMinimayBaja :
+                                        '0') }}
+                                    </td>
+
+                                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                                            'bg-verde': calcularIntervaloVerde(resultadoMenoryBaja),
+                                            'bg-amarillo': calcularIntervaloAmarillo(resultadoMenoryBaja),
+                                            'bg-naranja': calcularIntervaloNaranja(resultadoMenoryBaja),
+                                            'bg-rojo': calcularIntervaloRojo(resultadoMenoryBaja)
+                                        }">
+
+                                        {{ resultadoMenoryBaja || (resultadoMenoryBaja === 0 ? resultadoMenoryBaja :
+                                        '0') }}
+
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoModeradayBaja),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoModeradayBaja),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoModeradayBaja),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoModeradayBaja)
+                                    }">
+                                        {{ resultadoModeradayBaja || (resultadoModeradayBaja === 0 ?
+                                        resultadoModeradayBaja :
+                                        '0') }}
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMayoryBaja),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMayoryBaja),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMayoryBaja),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMayoryBaja)
+                                    }">
+
+                                        {{ resultadoMayoryBaja || (resultadoMayoryBaja === 0 ? resultadoMayoryBaja :
+                                        '0') }}
+
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMaximayBaja),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMaximayBaja),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMaximayBaja),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMaximayBaja)
+                                    }">
+                                        {{ resultadoMaximayBaja || (resultadoMaximayBaja === 0 ? resultadoMaximayBaja :
+                                        '0') }}
+
+
+
+                                    </td>
+
+                                </tr>
+
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(restuladoMinimayMuyBaja),
+                                        'bg-amarillo': calcularIntervaloAmarillo(restuladoMinimayMuyBaja),
+                                        'bg-naranja': calcularIntervaloNaranja(restuladoMinimayMuyBaja),
+                                        'bg-rojo': calcularIntervaloRojo(restuladoMinimayMuyBaja)
+                                    }">
+                                        {{ restuladoMinimayMuyBaja || (restuladoMinimayMuyBaja === 0 ?
+                                        restuladoMinimayMuyBaja : '0') }}
+                                    </td>
+
+                                    <td class="px-2 py-5 text-center text-white bg-slate-400" [ngClass]="{
+                                            'bg-verde': calcularIntervaloVerde(restuladoMenoryMuyBaja),
+                                            'bg-amarillo': calcularIntervaloAmarillo(restuladoMenoryMuyBaja),
+                                            'bg-naranja': calcularIntervaloNaranja(restuladoMenoryMuyBaja),
+                                            'bg-rojo': calcularIntervaloRojo(restuladoMenoryMuyBaja)
+                                        }">
+
+                                        {{ restuladoMenoryMuyBaja || (restuladoMenoryMuyBaja === 0 ?
+                                        restuladoMenoryMuyBaja : '0') }}
+
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(restuladoModeradayMuyBaja),
+                                        'bg-amarillo': calcularIntervaloAmarillo(restuladoModeradayMuyBaja),
+                                        'bg-naranja': calcularIntervaloNaranja(restuladoModeradayMuyBaja),
+                                        'bg-rojo': calcularIntervaloRojo(restuladoModeradayMuyBaja)
+                                    }">
+                                        {{ restuladoModeradayMuyBaja || (restuladoModeradayMuyBaja === 0 ?
+                                        restuladoModeradayMuyBaja :
+                                        '0') }}
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMayoryMuyBaja),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMayoryMuyBaja),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMayoryMuyBaja),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMayoryMuyBaja)
+                                    }">
+
+                                        {{ resultadoMayoryMuyBaja || (resultadoMayoryMuyBaja === 0 ?
+                                        resultadoMayoryMuyBaja :
+                                        '0') }}
+
+
+                                    </td>
+                                    <td class="px-2 py-5 bg-slate-400 text-center text-white" [ngClass]="{
+                                        'bg-verde': calcularIntervaloVerde(resultadoMaximayMuyBaja),
+                                        'bg-amarillo': calcularIntervaloAmarillo(resultadoMaximayMuyBaja),
+                                        'bg-naranja': calcularIntervaloNaranja(resultadoMaximayMuyBaja),
+                                        'bg-rojo': calcularIntervaloRojo(resultadoMaximayMuyBaja)
+                                    }">
+                                        {{ resultadoMaximayMuyBaja || (resultadoMaximayMuyBaja === 0 ?
+                                        resultadoMaximayMuyBaja :
+                                        '0') }}
+
+
+
+                                    </td>
+
+                                </tr>
+
+
+
+
+
+                            </table>
+                        </div>
+
+
+                        <div class="col-span-4 px-2 max-lg:col-span-12 mt-10 max-lg:mt-0">
+
+                            <div class="overflow-x-auto">
+                                <table
+                                    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 divide-y divide-gray-200 dark:divide-gray-700">
+                                    <thead
+                                        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="pl-1">
+                                                <!-- Espacio reservado -->
+                                            </th>
+                                            <th scope="col" class="pl-1">
+                                                <!-- Espacio reservado -->
+                                            </th>
+                                            <th scope="col" class="pl-1 text-center">
+                                                Rango
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" class="pl-1">
+                                                COLOR
+                                            </th>
+                                            <th scope="col" class="pl-1">
+                                                NIVEL DE RIESGO
+                                            </th>
+                                            <td scope="col" class="flex justify-between ">
+                                                <div class="ml-4">
+                                                    DE
+                                                </div>
+                                                <div class="mr-8">
+                                                    A
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col" class="bg-green-500">
+
+                                            </th>
+                                            <th scope="col" class="pl-1">
+                                                RIESGO ACEPTABLE
+                                            </th>
+                                            <td scope="col" class="flex justify-between ">
+                                                <div>
+                                                    <input type="number" id="aceptable_de"
+                                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        value="{{valor_aceptable_de}}" placeholder="0" readonly />
+                                                </div>
+                                                <div>
+                                                    <input type="number" id="aceptable_a"
+                                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        placeholder="0" required value="{{valor_aceptable_a}}"
+                                                        readonly />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" class="bg-yellow-200">
+
+                                            </th>
+                                            <th scope="col" class="pl-1">
+                                                RIESGO TOLERABLE
+                                            </th>
+                                            <td scope="col" class="flex justify-between ">
+                                                <div>
+                                                    <input type="number" id="tolerable_de"
+                                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        placeholder="0" required value="{{valor_tolerable_de}}"
+                                                        readonly />
+                                                </div>
+                                                <div>
+                                                    <input type="number" id="tolerable_a"
+                                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        placeholder="0" required value="{{valor_tolerable_a}}"
+                                                        readonly />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" class="bg-yellow-500">
+
+                                            </th>
+                                            <th scope="col" class="pl-1">
+                                                RIESGO ALTO
+                                            </th>
+                                            <td scope="col" class="flex justify-between ">
+                                                <div>
+                                                    <input type="number" id="alto_de"
+                                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        placeholder="0" required value="{{valor_alto_de}}" readonly />
+                                                </div>
+                                                <div>
+                                                    <input type="number" id="alto_a"
+                                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        value="{{valor_alto_a}}" placeholder="0" required readonly />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col" class="bg-red-500">
+
+                                            </th>
+                                            <th scope="col" class="pl-1">
+                                                RIESGO EXTREMO
+                                            </th>
+                                            <td scope="col" class="flex justify-between ">
+                                                <div>
+                                                    <input type="number" id="extremo_de"
+                                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        placeholder="0" required value="{{valor_extremo_de}}"
+                                                        readonly />
+                                                </div>
+                                                <div>
+                                                    <input type="number" id="extremo_a"
+                                                        class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        placeholder="0" required value="{{valor_extremo_a}}" readonly />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

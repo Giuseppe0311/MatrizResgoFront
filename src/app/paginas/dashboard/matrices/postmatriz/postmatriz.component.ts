@@ -21,6 +21,8 @@ export class PostmatrizComponent {
 
   ngOnInit(): void {
 
+    initFlowbite()
+
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = jwt.jwtDecode(token) as any
