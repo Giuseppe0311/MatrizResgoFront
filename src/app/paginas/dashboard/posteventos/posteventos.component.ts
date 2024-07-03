@@ -532,6 +532,7 @@ enviarDatos(e: any) {
       dominio: dominio,
       objetivo: objetivo,
       control: control,
+      id_usuario : this.idusuario
 
     }
     console.log("datos ", datos);

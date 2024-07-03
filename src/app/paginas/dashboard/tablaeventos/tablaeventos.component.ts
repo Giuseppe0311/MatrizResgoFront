@@ -20,11 +20,14 @@ export class TablaeventosComponent {
   id_empresa: any
   perfil : any
   datos_matriz : any
+  id_usuario: any
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = jwt.jwtDecode(token) as any
+      console.log(decodedToken)
       this.id_empresa = decodedToken.id_empresa;
+      this.id_usuario = decodedToken.sub;
       this.perfil = decodedToken.role;
       this.datos_matriz = this.matrizServicio.getData()
       console.log(this.datos_matriz)
@@ -39,15 +42,13 @@ export class TablaeventosComponent {
   datos : any
   getDatos() {
     let url
-    // if(this.perfil == "SUPERADMIN"){
-    //   url = import.meta.env.NG_APP_API + '/eventos' ;
-    // }
-    // else{
-    //   url = import.meta.env.NG_APP_API + '/eventos/' + this.id_empresa ;
-    // }
-
-    // url = import.meta.env.NG_APP_API + '/eventos/' + this.matrizServicio.getData().id + '?' + 'id_empresa=' + this.id_empresa;
-    url = import.meta.env.NG_APP_API + '/eventos' ;
+    console.log(this.perfil)
+    if(this.perfil === "SUPERADMIN"){
+      url = import.meta.env.NG_APP_API + '/eventos' ;
+    }
+    else{
+      url = import.meta.env.NG_APP_API + '/eventos/usuarios/' + this.id_usuario ;
+    }
     this.api.getApi(url).subscribe({
       next: data => {
         this.datos  = data;
@@ -67,6 +68,11 @@ export class TablaeventosComponent {
   clickVerMatriz(data:any){
     this.eventoservicio.setData(data);
     this.router.navigate(['/dashboard/matrices/eventos/vereventos']);
+  }
+
+  clickVerMatriz2(data:any){
+    this.eventoservicio.setData(data);
+    this.router.navigate(['/dashboard/matrices/eventos/compartirusuario']);
   }
   
 
