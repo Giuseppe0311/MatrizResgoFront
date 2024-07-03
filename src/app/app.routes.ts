@@ -9,6 +9,7 @@ import { UsuariosComponent } from './paginas/dashboard/usuarios/usuarios.compone
 import { TablaeventosComponent } from './paginas/dashboard/tablaeventos/tablaeventos.component';
 import { PuteventosComponent } from './paginas/dashboard/puteventos/puteventos.component';
 import { MatricesComponent } from './paginas/dashboard/matrices/matrices.component';
+import { VereventosComponent } from './paginas/dashboard/vereventos/vereventos.component';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,10 @@ export const routes: Routes = [
         path: 'matrices/eventos/vermatriz',
         component: PuteventosComponent,
       },
+      {
+        path: 'matrices/eventos/vereventos',
+        component: VereventosComponent
+      }
     ],
   },
   { path: '**', component: NotfoundComponent },

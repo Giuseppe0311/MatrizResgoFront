@@ -1,17 +1,6 @@
-<!-- Modal toggle -->
-<button data-modal-target="static-modal" data-modal-toggle="static-modal"
-    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    type="button">
-    Crear Evento
-</button>
 
-<!-- Main modal -->
-<div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-8xl max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <form action="" (submit)="enviarDatos($event)">
+
+            <form action="" >
                 <div class="h-screen overflow-auto">
                     <div class="flex justify-between px-5 mb-8 max-lg:justify-center">
                         <span>Nombre Perteneciente a la matriz : <strong> {{nombre_matriz}}</strong> </span>
@@ -40,79 +29,58 @@
                                         Registrar Evento</label>
                                     <input type="text" id="nombre_evento"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Escribe" required name="nombre_evento" />
+                                        placeholder="Escribe" required name="nombre_evento" value="{{nombre_evento_seleccionado}}" readonly />
                                 </div>
 
 
                                 <div class="col-span-1 max-lg:col-span-3">
-                                    <label for="probabilidad"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        Probabilidad</label>
-                                    <select id="probabilidad" required name="probabilidad"
-                                        (input)="agarrarValorProbabilidad($event)"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected value="" disabled>Selecciona</option>
-                                        <option value="muy_alta">Muy Alta</option>
-                                        <option value="alta">Alta</option>
-                                        <option value="media">Media</option>
-                                        <option value="baja">Baja</option>
-                                        <option value="muy_baja">Muy Baja</option>
-                                    </select>
+                                    <label for="nombre_evento"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    PROBABLIDAD</label>
+                                <input type="text" id="nombre_evento"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Escribe" required name="PROBABLIDAD" readonly value="{{probalidad_seleccionada}}" />
                                 </div>
 
 
 
                                 <div class="col-span-1 max-lg:col-span-3">
-                                    <label for="impacto"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Impacto</label>
-                                    <select id="impacto" required name="impacto" (input)="agarrarValorImpacto($event)"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected value="" disabled>Selecciona</option>
-                                        <option value="minima">Minima</option>
-                                        <option value="menor">Menor</option>
-                                        <option value="moderada">Moderada</option>
-                                        <option value="mayor">Mayor</option>
-                                        <option value="maxima">Maxima</option>
-                                    </select>
+                                    <label for="nombre_evento"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    IMPACTO</label>
+                                <input type="text" id="nombre_evento"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Escribe" required name="IMPACTO" readonly value="{{impacto_seleccionado}}" />
                                 </div>
 
                                 <!-- DOMINIO -->
                                 <div class="col-span-1">
-                                    <label for="countries"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccionar
-                                        un dominio</label>
-                                    <select id="countries" name="dominio" required (change)="onDominioChange($event)"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected value="">Seleccionar</option>
-                                        <option *ngFor="let iso of dominios" [value]="iso.dominio">{{ iso.dominio }}
-                                        </option>
-                                    </select>
+                                    <label for="nombre_evento"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    DOMINIO</label>
+                                <input type="text" id="nombre_evento"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Escribe" required name="nombre_evento" value="{{dominio_seleccionado}}" readonly />
                                 </div>
 
                                 <!-- OBJETIVO -->
                                 <div class="col-span-1">
-                                    <label for="objetivos"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccionar
-                                        un objetivo</label>
-                                    <select id="objetivos" name="objetivo" required (change)="onObjetivoChange($event)"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected value="">Seleccionar</option>
-                                        <option *ngFor="let objetivo of selectedDominioObjetivos"
-                                            [value]="objetivo.objetivo">{{ objetivo.objetivo }}</option>
-                                    </select>
+                                    <label for="nombre_evento"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        OBJETIVO</label>
+                                    <input type="text" id="nombre_evento"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Escribe" required name="nombre_evento" value="{{objetivo_seleccionado}}" readonly />
                                 </div>
 
                                 <!-- CONTROL (Mostrar datos filtrados por objetivo seleccionado) -->
                                 <div class="col-span-1">
-                                    <label for="controles"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccionar
-                                        un control</label>
-                                    <select id="controles" required name="control"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected>Seleccionar</option>
-                                        <option *ngFor="let control of selectedObjetivoControles"
-                                            [value]="control.control">{{ control.control }}</option>
-                                    </select>
+                                    <label for="nombre_evento"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        CONTROL</label>
+                                    <input type="text" id="nombre_evento"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Escribe" required name="nombre_evento" value="{{control_seleccionado}}" readonly />
                                 </div>
 
                                 <div class="col-span-3 p-4 flex justify-end items-end mb-1 max-lg:col-span-3">
@@ -725,6 +693,3 @@
                 </div>
             </form>
 
-        </div>
-    </div>
-</div>

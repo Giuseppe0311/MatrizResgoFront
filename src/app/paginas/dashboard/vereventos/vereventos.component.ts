@@ -1,23 +1,18 @@
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import Swal from 'sweetalert2';
 import { PeticionesapiService } from '../../../services/peticionesapi.service';
 import { EventosServicio } from '../tablaeventos/eventos.service';
-import Swal from 'sweetalert2';
-import * as jwt from 'jwt-decode';
+import { CommonModule } from '@angular/common';
 import { initFlowbite } from 'flowbite';
+import * as jwt from 'jwt-decode';
 @Component({
-  selector: 'app-posteventos',
+  selector: 'app-vereventos',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './posteventos.component.html',
-  styleUrl: './posteventos.component.css'
+  templateUrl: './vereventos.component.html',
+  styleUrl: './vereventos.component.css'
 })
-export class PosteventosComponent {
-
-  @Input() datosMatriz: any; 
-  @Output() Completado = new EventEmitter<boolean>();
-  @ViewChild('cerrarBotonRef') cerrarBotonRef!: ElementRef;
-
+export class VereventosComponent {
 
 
   idusuario: number = 0;
@@ -128,30 +123,63 @@ export class PosteventosComponent {
   que_probabilidad_eligio = '';
   que_impacto_eligio = '';
 
-  ngOnInit(): void {
-    initFlowbite()
+  impacto_seleccionado: string = '';
+  probalidad_seleccionada: string = '';
+  nombre_evento_seleccionado: string = '';
+  dominio_seleccionado: string = '';
+  objetivo_seleccionado: string = '';
+  control_seleccionado: string = '';
 
-    this.jalarIso();
+  getJalarEvento() {
+    let url = import.meta.env.NG_APP_API + '/eventos';
+    this.api.getApi(url).subscribe({
+      next: (data) => {
+        console.log('Datos de la matriz:', data);
+        if (data && data.length > 0) {
+          this.datos = data[0]; // Asigna el primer objeto del arreglo a this.datos
 
-    this.datos = this.datosMatriz;
-    this.nombre_matriz = this.datos.nombre_matriz;
+          this.nombre_evento_seleccionado = this.datos.nombre_evento;
+          this.probalidad_seleccionada = this.datos.probabilidad;
+          this.impacto_seleccionado = this.datos.impacto;
+          this.dominio_seleccionado = this.datos.dominio;
+          this.objetivo_seleccionado = this.datos.objetivo;
+          this.control_seleccionado = this.datos.control;
 
-    
-
-
-    this.matriz_impacto = this.datos.matriz_impacto;
-    this.matriz_probabilidad = this.datos.matriz_probabilidad;
-
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = jwt.jwtDecode(token) as any;
-      this.idusuario = decodedToken.sub;
-    } else {
-      window.location.href = '/';
-    }
-
-    this.initializeValues();
+  
+          // Lógica que depende de this.datos
+          if (this.datos.matriz) {
+            this.nombre_matriz = this.datos.matriz.nombre_matriz;
+            this.matriz_impacto = this.datos.matriz.matriz_impacto;
+            this.matriz_probabilidad = this.datos.matriz.matriz_probabilidad;
+          }
+  
+          const token = localStorage.getItem('token');
+          if (token) {
+            const decodedToken = jwt.jwtDecode(token) as any;
+            this.idusuario = decodedToken.sub;
+          } else {
+            window.location.href = '/';
+          }
+  
+          this.initializeValues();
+        } else {
+          console.error('La respuesta de la API no contiene datos.');
+        }
+      },
+      error: (error) => {
+        console.log('Error cargando los datos de la matriz:', error);
+      }
+    });
   }
+  
+  ngOnInit(): void {
+    initFlowbite();
+    this.jalarIso();
+    this.getJalarEvento();
+  }
+  
+
+
 
   initializeValues(): void {
     this.valor_minima = this.matriz_impacto.minima;
@@ -166,17 +194,17 @@ export class PosteventosComponent {
     this.valor_baja = this.matriz_probabilidad.baja;
     this.valor_muy_baja = this.matriz_probabilidad.muy_baja;
 
-    this.valor_aceptable_de = this.datos.intervalo_verde[0].de_verde;
-    this.valor_aceptable_a = this.datos.intervalo_verde[0].a_verde;
+    this.valor_aceptable_de = this.datos.matriz.intervalo_verde[0].de_verde;
+    this.valor_aceptable_a = this.datos.matriz.intervalo_verde[0].a_verde;
 
-    this.valor_tolerable_de = this.datos.intervalo_amarillo[0].de_amarillo;
-    this.valor_tolerable_a = this.datos.intervalo_amarillo[0].a_amarillo;
+    this.valor_tolerable_de = this.datos.matriz.intervalo_amarillo[0].de_amarillo;
+    this.valor_tolerable_a = this.datos.matriz.intervalo_amarillo[0].a_amarillo;
 
-    this.valor_alto_de = this.datos.intervalo_naranja[0].de_naranja;
-    this.valor_alto_a = this.datos.intervalo_naranja[0].a_naranja;
+    this.valor_alto_de = this.datos.matriz.intervalo_naranja[0].de_naranja;
+    this.valor_alto_a = this.datos.matriz.intervalo_naranja[0].a_naranja;
 
-    this.valor_extremo_de = this.datos.intervalo_rojo[0].de_rojo;
-    this.valor_extremo_a = this.datos.intervalo_rojo[0].a_rojo;
+    this.valor_extremo_de = this.datos.matriz.intervalo_rojo[0].de_rojo;
+    this.valor_extremo_a = this.datos.matriz.intervalo_rojo[0].a_rojo;
 
     this.updateIntervalos();
     this.calculateResultados();
@@ -415,154 +443,154 @@ onObjetivoChange(event: any): void {
 
 
 
-enviarDatos(e: any) {
-  e.preventDefault();
+// enviarDatos(e: any) {
+//   e.preventDefault();
 
-  let enviar = true; // Variable para controlar si se deben enviar los datos
+//   let enviar = true; // Variable para controlar si se deben enviar los datos
 
-  if (this.probabilidad && this.impacto) {
-    if (this.probabilidad === "muy_alta" && this.impacto === "minima") {
-      this.valor = this.valor_muy_alta * this.valor_minima;
-    }
-    else if (this.probabilidad === "alta" && this.impacto === "minima") {
-      this.valor = this.valor_alta * this.valor_minima;
-    }
-    else if (this.probabilidad === "media" && this.impacto === "minima") {
-      this.valor = this.valor_media * this.valor_minima;
-    }
-    else if (this.probabilidad === "baja" && this.impacto === "minima") {
-      this.valor = this.valor_baja * this.valor_minima;
-    }
-    else if (this.probabilidad === "muy_baja" && this.impacto === "minima") {
-      this.valor = this.valor_muy_baja * this.valor_minima;
-    }
-    else if (this.probabilidad === "muy_alta" && this.impacto === "menor") {
-      this.valor = this.valor_muy_alta * this.valor_menor;
-    }
-    else if (this.probabilidad === "alta" && this.impacto === "menor") {
-      this.valor = this.valor_alta * this.valor_menor;
-    }
-    else if (this.probabilidad === "media" && this.impacto === "menor") {
-      this.valor = this.valor_media * this.valor_menor;
-    }
-    else if (this.probabilidad === "baja" && this.impacto === "menor") {
-      this.valor = this.valor_baja * this.valor_menor;
-    }
-    else if (this.probabilidad === "muy_baja" && this.impacto === "menor") {
-      this.valor = this.valor_muy_baja * this.valor_menor;
-    }
-    else if (this.probabilidad === "muy_alta" && this.impacto === "moderada") {
-      this.valor = this.valor_muy_alta * this.valor_moderada;
-    }
-    else if (this.probabilidad === "alta" && this.impacto === "moderada") {
-      this.valor = this.valor_alta * this.valor_moderada;
-    }
-    else if (this.probabilidad === "media" && this.impacto === "moderada") {
-      this.valor = this.valor_media * this.valor_moderada;
-    }
-    else if (this.probabilidad === "baja" && this.impacto === "moderada") {
-      this.valor = this.valor_baja * this.valor_moderada;
-    }
-    else if (this.probabilidad === "muy_baja" && this.impacto === "moderada") {
-      this.valor = this.valor_muy_baja * this.valor_moderada;
-    }
-    else if (this.probabilidad === "muy_alta" && this.impacto === "mayor") {
-      this.valor = this.valor_muy_alta * this.valor_mayor;
-    }
-    else if (this.probabilidad === "alta" && this.impacto === "mayor") {
-      this.valor = this.valor_alta * this.valor_mayor;
-    }
-    else if (this.probabilidad === "media" && this.impacto === "mayor") {
-      this.valor = this.valor_media * this.valor_mayor;
-    }
-    else if (this.probabilidad === "baja" && this.impacto === "mayor") {
-      this.valor = this.valor_baja * this.valor_mayor;
-    }
-    else if (this.probabilidad === "muy_baja" && this.impacto === "mayor") {
-      this.valor = this.valor_muy_baja * this.valor_mayor;
-    }
-    else if (this.probabilidad === "muy_alta" && this.impacto === "maxima") {
-      this.valor = this.valor_muy_alta * this.valor_maxima;
-    }
-    else if (this.probabilidad === "alta" && this.impacto === "maxima") {
-      this.valor = this.valor_alta * this.valor_maxima;
-    }
-    else if (this.probabilidad === "media" && this.impacto === "maxima") {
-      this.valor = this.valor_media * this.valor_maxima;
-    }
-    else if (this.probabilidad === "baja" && this.impacto === "maxima") {
-      this.valor = this.valor_baja * this.valor_maxima;
-    }
-    else if (this.probabilidad === "muy_baja" && this.impacto === "maxima") {
-      this.valor = this.valor_muy_baja * this.valor_maxima;
-    }
+//   if (this.probabilidad && this.impacto) {
+//     if (this.probabilidad === "muy_alta" && this.impacto === "minima") {
+//       this.valor = this.valor_muy_alta * this.valor_minima;
+//     }
+//     else if (this.probabilidad === "alta" && this.impacto === "minima") {
+//       this.valor = this.valor_alta * this.valor_minima;
+//     }
+//     else if (this.probabilidad === "media" && this.impacto === "minima") {
+//       this.valor = this.valor_media * this.valor_minima;
+//     }
+//     else if (this.probabilidad === "baja" && this.impacto === "minima") {
+//       this.valor = this.valor_baja * this.valor_minima;
+//     }
+//     else if (this.probabilidad === "muy_baja" && this.impacto === "minima") {
+//       this.valor = this.valor_muy_baja * this.valor_minima;
+//     }
+//     else if (this.probabilidad === "muy_alta" && this.impacto === "menor") {
+//       this.valor = this.valor_muy_alta * this.valor_menor;
+//     }
+//     else if (this.probabilidad === "alta" && this.impacto === "menor") {
+//       this.valor = this.valor_alta * this.valor_menor;
+//     }
+//     else if (this.probabilidad === "media" && this.impacto === "menor") {
+//       this.valor = this.valor_media * this.valor_menor;
+//     }
+//     else if (this.probabilidad === "baja" && this.impacto === "menor") {
+//       this.valor = this.valor_baja * this.valor_menor;
+//     }
+//     else if (this.probabilidad === "muy_baja" && this.impacto === "menor") {
+//       this.valor = this.valor_muy_baja * this.valor_menor;
+//     }
+//     else if (this.probabilidad === "muy_alta" && this.impacto === "moderada") {
+//       this.valor = this.valor_muy_alta * this.valor_moderada;
+//     }
+//     else if (this.probabilidad === "alta" && this.impacto === "moderada") {
+//       this.valor = this.valor_alta * this.valor_moderada;
+//     }
+//     else if (this.probabilidad === "media" && this.impacto === "moderada") {
+//       this.valor = this.valor_media * this.valor_moderada;
+//     }
+//     else if (this.probabilidad === "baja" && this.impacto === "moderada") {
+//       this.valor = this.valor_baja * this.valor_moderada;
+//     }
+//     else if (this.probabilidad === "muy_baja" && this.impacto === "moderada") {
+//       this.valor = this.valor_muy_baja * this.valor_moderada;
+//     }
+//     else if (this.probabilidad === "muy_alta" && this.impacto === "mayor") {
+//       this.valor = this.valor_muy_alta * this.valor_mayor;
+//     }
+//     else if (this.probabilidad === "alta" && this.impacto === "mayor") {
+//       this.valor = this.valor_alta * this.valor_mayor;
+//     }
+//     else if (this.probabilidad === "media" && this.impacto === "mayor") {
+//       this.valor = this.valor_media * this.valor_mayor;
+//     }
+//     else if (this.probabilidad === "baja" && this.impacto === "mayor") {
+//       this.valor = this.valor_baja * this.valor_mayor;
+//     }
+//     else if (this.probabilidad === "muy_baja" && this.impacto === "mayor") {
+//       this.valor = this.valor_muy_baja * this.valor_mayor;
+//     }
+//     else if (this.probabilidad === "muy_alta" && this.impacto === "maxima") {
+//       this.valor = this.valor_muy_alta * this.valor_maxima;
+//     }
+//     else if (this.probabilidad === "alta" && this.impacto === "maxima") {
+//       this.valor = this.valor_alta * this.valor_maxima;
+//     }
+//     else if (this.probabilidad === "media" && this.impacto === "maxima") {
+//       this.valor = this.valor_media * this.valor_maxima;
+//     }
+//     else if (this.probabilidad === "baja" && this.impacto === "maxima") {
+//       this.valor = this.valor_baja * this.valor_maxima;
+//     }
+//     else if (this.probabilidad === "muy_baja" && this.impacto === "maxima") {
+//       this.valor = this.valor_muy_baja * this.valor_maxima;
+//     }
 
-    // Determinación del nivel de riesgo
-    if (this.calcularIntervaloVerde(this.valor)) {
-      this.nivel_de_riesgo = "Riesgo Aceptable";
-    } else if (this.calcularIntervaloAmarillo(this.valor)) {
-      this.nivel_de_riesgo = "Riesgo Tolerable";
-    } else if (this.calcularIntervaloNaranja(this.valor)) {
-      this.nivel_de_riesgo = "Riesgo Alto";
-    } else if (this.calcularIntervaloRojo(this.valor)) {
-      this.nivel_de_riesgo = "Riesgo Extremo";
-    } else {
-      enviar = false; // Si no se puede determinar el nivel de riesgo, no enviar los datos
-      alert("UPS, EL CALCULO NO SE PUDO REALIZAR, porque el nivel de riesgo no se puede determinar.");
-    }
-  } else {
-    enviar = false; // Si no se han seleccionado la probabilidad y el impacto, no enviar los datos
-    alert("Debe seleccionar la probabilidad y el impacto");
-  }
+//     // Determinación del nivel de riesgo
+//     if (this.calcularIntervaloVerde(this.valor)) {
+//       this.nivel_de_riesgo = "Riesgo Aceptable";
+//     } else if (this.calcularIntervaloAmarillo(this.valor)) {
+//       this.nivel_de_riesgo = "Riesgo Tolerable";
+//     } else if (this.calcularIntervaloNaranja(this.valor)) {
+//       this.nivel_de_riesgo = "Riesgo Alto";
+//     } else if (this.calcularIntervaloRojo(this.valor)) {
+//       this.nivel_de_riesgo = "Riesgo Extremo";
+//     } else {
+//       enviar = false; // Si no se puede determinar el nivel de riesgo, no enviar los datos
+//       alert("UPS, EL CALCULO NO SE PUDO REALIZAR, porque el nivel de riesgo no se puede determinar.");
+//     }
+//   } else {
+//     enviar = false; // Si no se han seleccionado la probabilidad y el impacto, no enviar los datos
+//     alert("Debe seleccionar la probabilidad y el impacto");
+//   }
 
-  if (enviar) {
-    const formdata = new FormData(e.target);
+//   if (enviar) {
+//     const formdata = new FormData(e.target);
 
-    const dominio = formdata.get("dominio");
-    const objetivo = formdata.get("objetivo");
-    const control = formdata.get("control");
+//     const dominio = formdata.get("dominio");
+//     const objetivo = formdata.get("objetivo");
+//     const control = formdata.get("control");
 
-    const datos = {
-      nombre_evento: formdata.get("nombre_evento"),
-      probabilidad: formdata.get("probabilidad"),
-      impacto: formdata.get("impacto"),
-      valor: this.valor,
-      nivel_riesgo: this.nivel_de_riesgo,
-      id_matriz : this.datosMatriz.id_matriz,
-      dominio: dominio,
-      objetivo: objetivo,
-      control: control,
+//     const datos = {
+//       nombre_evento: formdata.get("nombre_evento"),
+//       probabilidad: formdata.get("probabilidad"),
+//       impacto: formdata.get("impacto"),
+//       valor: this.valor,
+//       nivel_riesgo: this.nivel_de_riesgo,
+//       id_matriz : this.datosMatriz.id_matriz,
+//       dominio: dominio,
+//       objetivo: objetivo,
+//       control: control,
 
-    }
-    console.log("datos ", datos);
+//     }
+//     console.log("datos ", datos);
   
 
 
-  const url = import.meta.env.NG_APP_API + "/eventos";
-  this.api.postApi(url, datos).subscribe(
-    {
-      next: (data) => {
-        Swal.fire(
-        {
-          icon: "success",
-          title: "Exito",
-          text: "Se ha guardado los datos correctamente",
-        }
+//   const url = import.meta.env.NG_APP_API + "/eventos";
+//   this.api.postApi(url, datos).subscribe(
+//     {
+//       next: (data) => {
+//         Swal.fire(
+//         {
+//           icon: "success",
+//           title: "Exito",
+//           text: "Se ha guardado los datos correctamente",
+//         }
         
-        ).then(() => {
-          this.Completado.emit(true);
-          this.cerrarBotonRef.nativeElement.click();
-          e.target.reset(); 
-        });
-      },
-      error: (error) => {
-        console.log(error);
-        alert("Error al enviar los datos");
-      }
-    }
-  )
-}
-}
+//         ).then(() => {
+//           this.Completado.emit(true);
+//           this.cerrarBotonRef.nativeElement.click();
+//           e.target.reset(); 
+//         });
+//       },
+//       error: (error) => {
+//         console.log(error);
+//         alert("Error al enviar los datos");
+//       }
+//     }
+//   )
+// }
+// }
 
 
 
@@ -576,7 +604,5 @@ enviarDatos(e: any) {
 
 
   /* -------------------------------------------------------------------------------------------------------------------------------------------- */
-
-
 
 

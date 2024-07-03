@@ -367,7 +367,7 @@ export class PostmatrizComponent {
     if (!this.validarIntervalos()) {
       Swal.fire({
         icon: 'warning',
-        title: 'Validación fallida',
+        title: 'Alerta Validacion',
         text: 'No debe dejar espacios grises'
       });
       return;

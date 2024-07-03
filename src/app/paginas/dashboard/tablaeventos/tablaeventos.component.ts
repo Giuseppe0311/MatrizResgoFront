@@ -66,7 +66,7 @@ export class TablaeventosComponent {
 
   clickVerMatriz(data:any){
     this.eventoservicio.setData(data);
-    this.router.navigate(['/dashboard/matrices/eventos/vermatriz']);
+    this.router.navigate(['/dashboard/matrices/eventos/vereventos']);
   }
   
 
