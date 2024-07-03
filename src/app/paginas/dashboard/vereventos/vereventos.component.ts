@@ -130,8 +130,11 @@ export class VereventosComponent {
   objetivo_seleccionado: string = '';
   control_seleccionado: string = '';
 
+  idevento : any
   getJalarEvento() {
-    let url = import.meta.env.NG_APP_API + '/eventos';
+ this.idevento = this.datosRecolectados.getData().id_evento;
+
+    let url = import.meta.env.NG_APP_API + '/eventos/' + this.idevento
     this.api.getApi(url).subscribe({
       next: (data) => {
         console.log('Datos de la matriz:', data);
@@ -148,6 +151,9 @@ export class VereventosComponent {
   
           // Lógica que depende de this.datos
           if (this.datos.matriz) {
+
+            console.log(this.datos.matriz);
+
             this.nombre_matriz = this.datos.matriz.nombre_matriz;
             this.matriz_impacto = this.datos.matriz.matriz_impacto;
             this.matriz_probabilidad = this.datos.matriz.matriz_probabilidad;
