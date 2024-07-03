@@ -42,6 +42,8 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="Escribe" required name="nombre_evento" />
                                 </div>
+
+                                
                                 <div class="col-span-1 max-lg:col-span-3">
                                     <label for="probabilidad"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -57,6 +59,9 @@
                                         <option value="muy_baja">Muy Baja</option>
                                     </select>
                                 </div>
+                                
+                                
+                                
                                 <div class="col-span-1 max-lg:col-span-3">
                                     <label for="impacto"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Impacto</label>
@@ -70,18 +75,18 @@
                                         <option value="maxima">Maxima</option>
                                     </select>
                                 </div>
-
+                                
+                                <!-- DOMINIO -->
                                 <div class="col-span-1">
                                     <label for="countries"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
                                         option</label>
-                                    <select id="countries"
+                                    <select id="countries" required
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected>Choose a country</option>
-                                        <option value="US">United States</option>
-                                        <option value="CA">Canada</option>
-                                        <option value="FR">France</option>
-                                        <option value="DE">Germany</option>
+                                        <option selected value="">Seleccionar</option>
+                                        @for (iso of isos; track $index) {
+                                            <option value="{{iso.id}}">{{iso.dominio}}</option>
+                                        }
                                     </select>
                                 </div>
                                 <div class="col-span-1">

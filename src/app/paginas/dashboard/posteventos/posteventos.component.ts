@@ -130,6 +130,9 @@ export class PosteventosComponent {
 
   ngOnInit(): void {
     initFlowbite()
+
+    this.jalarIso();
+
     this.datos = this.datosMatriz;
     this.nombre_matriz = this.datos.nombre_matriz;
 
@@ -456,6 +459,26 @@ enviarDatos(e: any) {
   )
 }
 }
+
+isos: any[] = [];
+
+uniqueDominios: any[] = [];
+
+
+jalarIso(){
+  this.api.getApi(import.meta.env.NG_APP_API + '/iso').subscribe({
+    next: (data) => {
+      console.log('ISOS:', data);
+      this.isos = data;
+    },
+    error: (error) => {
+      console.log('Error cargando los ISOS:', error);
+    },
+  });
+  }
+  
+
+ 
 
 
   /* -------------------------------------------------------------------------------------------------------------------------------------------- */
