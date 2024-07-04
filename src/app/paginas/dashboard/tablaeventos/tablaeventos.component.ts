@@ -44,7 +44,7 @@ export class TablaeventosComponent {
     let url
     console.log(this.perfil)
     if(this.perfil === "SUPERADMIN"){
-      url = import.meta.env.NG_APP_API + '/eventos' ;
+      url = import.meta.env.NG_APP_API + '/eventos/matriz/' + this.datos_matriz.id_matriz ;
     }
     else{
       url = import.meta.env.NG_APP_API + '/eventos/usuarios/' + this.id_usuario ;
