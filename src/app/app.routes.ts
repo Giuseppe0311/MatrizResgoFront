@@ -11,6 +11,7 @@ import { PuteventosComponent } from './paginas/dashboard/puteventos/puteventos.c
 import { MatricesComponent } from './paginas/dashboard/matrices/matrices.component';
 import { VereventosComponent } from './paginas/dashboard/vereventos/vereventos.component';
 import { CompartirusuarioComponent } from './paginas/dashboard/tablaeventos/compartirusuario/compartirusuario.component';
+import { IsosComponent } from './paginas/dashboard/isos/isos.component';
 
 export const routes: Routes = [
   {
@@ -57,6 +58,10 @@ export const routes: Routes = [
       {
         path: 'matrices/eventos/compartirusuario',
         component: CompartirusuarioComponent
+      },
+      {
+        path: 'isos',
+        component: IsosComponent
       }
     ],
   },
