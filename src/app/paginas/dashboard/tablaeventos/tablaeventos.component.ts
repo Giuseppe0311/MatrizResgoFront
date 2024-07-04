@@ -52,6 +52,7 @@ export class TablaeventosComponent {
     this.api.getApi(url).subscribe({
       next: data => {
         this.datos  = data;
+        console.log(this.datos)
       },
       error: error => {
         console.error('There was an error!', error);

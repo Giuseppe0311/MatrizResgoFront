@@ -9,20 +9,21 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './compartirusuario.component.html',
-  styleUrl: './compartirusuario.component.css'
+  styleUrl: './compartirusuario.component.css',
 })
 export class CompartirusuarioComponent {
-
   datos: any;
   id_usuario: any;
 
-  constructor(private api: PeticionesapiService, private datosRecolectados: EventosServicio) { }
+  constructor(
+    private api: PeticionesapiService,
+    private datosRecolectados: EventosServicio
+  ) {}
 
-  datos2: any
+  datos2: any;
 
   ngOnInit(): void {
-
-    this.datos2 = this.datosRecolectados.getData()
+    this.datos2 = this.datosRecolectados.getData();
 
     this.getUsuarios();
   }
@@ -36,7 +37,7 @@ export class CompartirusuarioComponent {
       },
       error: (error: any) => {
         console.error('¡Hubo un error al obtener los usuarios!', error);
-      }
+      },
     });
   }
 
@@ -59,22 +60,26 @@ export class CompartirusuarioComponent {
     // Construir la URL para la solicitud GET
     const url = `${import.meta.env.NG_APP_API}/eventos/cambiar/${id_evento}`;
 
-    const datos ={
-      id_usuario : idusuario
-    }
+    const datos = {
+      id_usuario: idusuario,
+    };
 
     // Realizar la solicitud GET utilizando HttpClient de Angular
     this.api.putApi(url, datos).subscribe({
       next: (data: any) => {
+        // Mostrar alerta de éxito
         Swal.fire({
           icon: 'success',
           title: '¡Evento compartido!',
-          showConfirmButton: true
+          showConfirmButton: true,
+        }).then(() => {
+          // Recargar la página después de cerrar la alerta
+          window.location.reload();
         });
       },
       error: (error: any) => {
         console.error('¡Hubo un error al compartir el evento!', error);
-      }
+      },
     });
   }
 }

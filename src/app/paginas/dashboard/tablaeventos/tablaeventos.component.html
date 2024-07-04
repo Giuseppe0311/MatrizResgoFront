@@ -25,8 +25,13 @@
                 <th scope="col" class="px-6 py-3">
                     NIVEL DE RIESGO
                 </th>
+                
                 <th scope="col" class="px-6 py-3">
                     MATRIZ
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    ISO
                 </th>
                 <th scope="col" class="px-6 py-3">
                     COMPARTIR
@@ -56,6 +61,14 @@
                     <span (click)="clickVerMatriz(data)" class="text-blue-500 underline cursor-pointer">Ver
                         Matriz</span>
                 </td>
+
+                <td class="px-6 py-3 flex flex-col">
+                    <span class="mr-2"> <strong>Dominio: </strong> {{ datos[0].dominio }} </span>
+                    <span class="mr-2"><strong> Objetivo:  </strong> {{ datos[0].objetivo }} </span>
+                    <span><strong>Control:  </strong> {{ datos[0].control}} </span>
+                </td>
+                
+
 
                 <td class="px-6 py-3 font-bold">
                    @if (perfil === 'SUPERADMIN') {
