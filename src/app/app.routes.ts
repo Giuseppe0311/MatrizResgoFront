@@ -12,11 +12,17 @@ import { MatricesComponent } from './paginas/dashboard/matrices/matrices.compone
 import { VereventosComponent } from './paginas/dashboard/vereventos/vereventos.component';
 import { CompartirusuarioComponent } from './paginas/dashboard/tablaeventos/compartirusuario/compartirusuario.component';
 import { IsosComponent } from './paginas/dashboard/isos/isos.component';
+import { PdfmakeComponent } from './pdfmake/pdfmake.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
+  },
+
+  {
+    path: 'pdf',
+    component: PdfmakeComponent,
   },
 
   {
