@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PdfmakeComponent } from './pdfmake.component';
+import { PruebaComponent } from './prueba.component';
 
-describe('PdfmakeComponent', () => {
-  let component: PdfmakeComponent;
-  let fixture: ComponentFixture<PdfmakeComponent>;
+describe('PruebaComponent', () => {
+  let component: PruebaComponent;
+  let fixture: ComponentFixture<PruebaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PdfmakeComponent]
+      imports: [PruebaComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(PdfmakeComponent);
+    fixture = TestBed.createComponent(PruebaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

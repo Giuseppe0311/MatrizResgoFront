@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -9,22 +10,26 @@ import { PeticionesapiService } from '../../../../services/peticionesapi.service
 import Swal from 'sweetalert2';
 import * as jwt from 'jwt-decode';
 import { initFlowbite } from 'flowbite';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 @Component({
-  selector: 'app-postmatriz',
+  selector: 'app-updatematriz',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './postmatriz.component.html',
-  styleUrl: './postmatriz.component.css',
+  imports: [CommonModule, NgClass, FormsModule],
+  templateUrl: './updatematriz.component.html',
+  styleUrl: './updatematriz.component.css',
 })
-export class PostmatrizComponent {
-  @Output() Completado = new EventEmitter<boolean>();
-  @ViewChild('cerrarBoton') cerrarBotonRef!: ElementRef;
+export class UpdatematrizComponent {
+  @Output() Finalizado = new EventEmitter<boolean>();
+  @Input() idMatriz: number = 0;
   constructor(private api: PeticionesapiService) {}
 
   idusuario: number = 0;
   showModalCreateEvent: boolean = false;
+  showModalUpdateEvent: boolean = false;
   idMatrizCreada: number = 0;
+  dataMatriz: any[] = [];
   datosEvento: any[] = [];
   ngOnInit(): void {
     // const token = localStorage.getItem('token');
@@ -35,7 +40,55 @@ export class PostmatrizComponent {
     // else{
     //   window.location.href = "/";
     // }
+
+    this.getDataApi();
   }
+
+  getDataApi() {
+    const url = import.meta.env.NG_APP_API + '/matrices/' + this.idMatriz;
+    this.api.getApi(url).subscribe({
+      next: (data) => {
+        this.dataMatriz = data;
+        this.datosEvento = data.eventos;
+        this.nombreMatriz = data.nombre;
+        this.valor_muy_alta = data.muyAlta;
+        this.valor_alta = data.alta;
+        this.valor_media = data.media;
+        this.valor_baja = data.baja;
+        this.valor_muy_baja = data.muyBaja;
+        this.valor_minima = data.minima;
+        this.valor_menor = data.menor;
+        this.valor_moderada = data.moderada;
+        this.valor_mayor = data.mayor;
+        this.valor_maxima = data.maxima;
+
+        this.valor_aceptable_a = data.aVerde;
+        this.valor_aceptable_de = data.deVerde;
+        this.valor_tolerable_a = data.aAmarillo;
+        this.valor_tolerable_de = data.deAmarillo;
+        this.valor_alto_a = data.aNaranja;
+        this.valor_alto_de = data.deNaranja;
+        this.valor_extremo_a = data.aRojo;
+        this.valor_extremo_de = data.deRojo;
+
+        this.datosRecolectadoyResultados();
+        this.datosRecolectadosColores(this.valor_aceptable_de, 'aceptable_de');
+        this.datosRecolectadosColores(this.valor_aceptable_a, 'aceptable_a');
+        this.datosRecolectadosColores(this.valor_tolerable_de, 'tolerable_de');
+        this.datosRecolectadosColores(this.valor_tolerable_a, 'tolerable_a');
+        this.datosRecolectadosColores(this.valor_alto_de, 'alto_de');
+        this.datosRecolectadosColores(this.valor_alto_a, 'alto_a');
+        this.datosRecolectadosColores(this.valor_extremo_de, 'extremo_de');
+        this.datosRecolectadosColores(this.valor_extremo_a, 'extremo_a');
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  /*DATOS ACTUALIZAR */
+  nombreMatriz: string = '';
 
   /* VALORES DE RIESGO */
   nombreEvento: string = '';
@@ -99,35 +152,37 @@ export class PostmatrizComponent {
   resultadoMaximayMedia: number = 0;
   resultadoMaximayBaja: number = 0;
   resultadoMaximayMuyBaja: number = 0;
-  cerrarModal() {
-    this.showModalCreateEvent = false;
-  }
-  datosRecolectadoyResultados(e: any, input: string) {
+
+  actualizarValor(value: number, input: string) {
     if (input === 'minima') {
-      this.valor_minima = parseFloat(e.target.value);
+      this.valor_minima = value;
     } else if (input === 'menor') {
-      this.valor_menor = parseFloat(e.target.value);
+      this.valor_menor = value;
     } else if (input === 'moderada') {
-      this.valor_moderada = parseFloat(e.target.value);
+      this.valor_moderada = value;
     } else if (input === 'mayor') {
-      this.valor_mayor = parseFloat(e.target.value);
+      this.valor_mayor = value;
     } else if (input === 'maxima') {
-      this.valor_maxima = parseFloat(e.target.value);
+      this.valor_maxima = value;
     } else if (input === 'muy_alta') {
-      this.valor_muy_alta = parseFloat(e.target.value);
+      this.valor_muy_alta = value;
     } else if (input === 'alta') {
-      this.valor_alta = parseFloat(e.target.value);
+      this.valor_alta = value;
     } else if (input === 'media') {
-      this.valor_media = parseFloat(e.target.value);
+      this.valor_media = value;
     } else if (input === 'baja') {
-      this.valor_baja = parseFloat(e.target.value);
+      this.valor_baja = value;
     } else if (input === 'muy_baja') {
-      this.valor_muy_baja = parseFloat(e.target.value);
+      this.valor_muy_baja = value;
     }
 
+    // Actualiza los cálculos, dependiendo del valor modificado
+    this.datosRecolectadoyResultados();
+  }
+
+  datosRecolectadoyResultados() {
     /* resultadosminima */
     this.restuladoMinimayMuyAlta = this.valor_minima * this.valor_muy_alta;
-    console.log('Resultado Minima y muy alta', this.restuladoMinimayMuyAlta);
     this.resultadoMinimayAlta = this.valor_minima * this.valor_alta;
     this.resultadoMinimayMedia = this.valor_minima * this.valor_media;
     this.resultadoMinimayBaja = this.valor_minima * this.valor_baja;
@@ -197,17 +252,7 @@ export class PostmatrizComponent {
   intervalor_color_rojo: any[] = [];
   /*  */
 
-  datosRecolectadosColores(e: any, input: string) {
-    const valor = parseFloat(e.target.value);
-    /*  // Verificar si el valor ya está presente en algún intervalo
-     const valorExiste = this.verificarValorEnIntervalo(valor);
- 
-     if (valorExiste) {
-       alert('Este número ya está en un intervalo.');
-       e.target.value = ''; // Limpiar el valor de la celda
-       return; // Detener la ejecución si el valor ya está en un intervalo
-     } */
-
+  datosRecolectadosColores(valor: number, input: string) {
     if (input === 'aceptable_de') {
       this.valor_aceptable_de = valor;
     } else if (input === 'aceptable_a') {
@@ -232,7 +277,6 @@ export class PostmatrizComponent {
         this.valor_aceptable_de,
         this.valor_aceptable_a,
       ];
-      console.log('Intervalo COlor Verde', this.intervalor_color_verde);
     } else {
       this.intervalor_color_verde = []; // Limpiar el intervalo si falta algún valor
     }
@@ -241,13 +285,11 @@ export class PostmatrizComponent {
         this.valor_tolerable_de,
         this.valor_tolerable_a,
       ];
-      console.log('Intervalor Color amarillo', this.intervalor_color_amarillo);
     } else {
       this.intervalor_color_amarillo = []; // Limpiar el intervalo si falta algún valor
     }
     if (this.valor_alto_de && this.valor_alto_a) {
       this.intervalor_color_naranja = [this.valor_alto_de, this.valor_alto_a];
-      console.log('Intervalor Color Naranja', this.intervalor_color_naranja);
     } else {
       this.intervalor_color_naranja = []; // Limpiar el intervalo si falta algún valor
     }
@@ -256,7 +298,6 @@ export class PostmatrizComponent {
         this.valor_extremo_de,
         this.valor_extremo_a,
       ];
-      console.log('Intervalor Color Rojo', this.intervalor_color_rojo);
     } else {
       this.intervalor_color_rojo = []; // Limpiar el intervalo si falta algún valor
     }
@@ -291,7 +332,6 @@ export class PostmatrizComponent {
    */
 
   calcularIntervaloVerde(valor: number): boolean {
-    console.log('Valorverde', valor);
     return (
       valor >= this.intervalor_color_verde[0] &&
       valor <= this.intervalor_color_verde[1]
@@ -299,7 +339,6 @@ export class PostmatrizComponent {
   }
 
   calcularIntervaloAmarrillo(valor: number): boolean {
-    console.log('ValorAmarillo', valor);
     return (
       valor >= this.intervalor_color_amarillo[0] &&
       valor <= this.intervalor_color_amarillo[1]
@@ -307,7 +346,6 @@ export class PostmatrizComponent {
   }
 
   calcularIntervaloNaranja(valor: number): boolean {
-    console.log('ValorNaranja', valor);
     return (
       valor >= this.intervalor_color_naranja[0] &&
       valor <= this.intervalor_color_naranja[1]
@@ -315,7 +353,6 @@ export class PostmatrizComponent {
   }
 
   calcularIntervaloRojo(valor: number): boolean {
-    console.log('ValorRojo', valor);
     return (
       valor >= this.intervalor_color_rojo[0] &&
       valor <= this.intervalor_color_rojo[1]
@@ -327,14 +364,14 @@ export class PostmatrizComponent {
   probabilidad: string = '';
   impacto: string = '';
 
-  // agarrarValorProbabilidad(e: any) {
-  //   this.probabilidad = e.target.value;
-  //   // console.log(this.probabilidad);
-  // }
-  // agarrarValorImpacto(e: any) {
-  //   this.impacto = e.target.value;
-  //   // console.log(this.impacto);
-  // }
+  agarrarValorProbabilidad(e: any) {
+    this.probabilidad = e.target.value;
+    // console.log(this.probabilidad);
+  }
+  agarrarValorImpacto(e: any) {
+    this.impacto = e.target.value;
+    // console.log(this.impacto);
+  }
 
   valor: number = 0;
   nivel_de_riesgo: string = '';
@@ -386,82 +423,23 @@ export class PostmatrizComponent {
 
   abrirCrearEvento() {
     this.showModalCreateEvent = !this.showModalCreateEvent;
-  }  
+  }
+  abrirUpdateEvento() {
+    this.showModalUpdateEvent = !this.showModalUpdateEvent;
+  }
   enviarDatosEvento(e: any) {
     e.preventDefault();
+
     const formdata = new FormData(e.target);
     this.probabilidad = formdata.get('probabilidad') as string;
     this.impacto = formdata.get('impacto') as string;
-    
+
     if (this.probabilidad && this.impacto) {
-      // Cálculo del valor basado en probabilidad e impacto del evento
-      if (this.probabilidad === "0" && this.impacto === "0") { // Muy alta, Mínima
-          this.valor = this.valor_muy_alta * this.valor_minima;
-      } else if (this.probabilidad === "1" && this.impacto === "0") { // Alta, Mínima
-          this.valor = this.valor_alta * this.valor_minima;
-      } else if (this.probabilidad === "2" && this.impacto === "0") { // Media, Mínima
-          this.valor = this.valor_media * this.valor_minima;
-      } else if (this.probabilidad === "3" && this.impacto === "0") { // Baja, Mínima
-          this.valor = this.valor_baja * this.valor_minima;
-      } else if (this.probabilidad === "4" && this.impacto === "0") { // Muy baja, Mínima
-          this.valor = this.valor_muy_baja * this.valor_minima;
-      } else if (this.probabilidad === "0" && this.impacto === "1") { // Muy alta, Menor
-          this.valor = this.valor_muy_alta * this.valor_menor;
-      } else if (this.probabilidad === "1" && this.impacto === "1") { // Alta, Menor
-          this.valor = this.valor_alta * this.valor_menor;
-      } else if (this.probabilidad === "2" && this.impacto === "1") { // Media, Menor
-          this.valor = this.valor_media * this.valor_menor;
-      } else if (this.probabilidad === "3" && this.impacto === "1") { // Baja, Menor
-          this.valor = this.valor_baja * this.valor_menor;
-      } else if (this.probabilidad === "4" && this.impacto === "1") { // Muy baja, Menor
-          this.valor = this.valor_muy_baja * this.valor_menor;
-      } else if (this.probabilidad === "0" && this.impacto === "2") { // Muy alta, Moderada
-          this.valor = this.valor_muy_alta * this.valor_moderada;
-      } else if (this.probabilidad === "1" && this.impacto === "2") { // Alta, Moderada
-          this.valor = this.valor_alta * this.valor_moderada;
-      } else if (this.probabilidad === "2" && this.impacto === "2") { // Media, Moderada
-          this.valor = this.valor_media * this.valor_moderada;
-      } else if (this.probabilidad === "3" && this.impacto === "2") { // Baja, Moderada
-          this.valor = this.valor_baja * this.valor_moderada;
-      } else if (this.probabilidad === "4" && this.impacto === "2") { // Muy baja, Moderada
-          this.valor = this.valor_muy_baja * this.valor_moderada;
-      } else if (this.probabilidad === "0" && this.impacto === "3") { // Muy alta, Mayor
-          this.valor = this.valor_muy_alta * this.valor_mayor;
-      } else if (this.probabilidad === "1" && this.impacto === "3") { // Alta, Mayor
-          this.valor = this.valor_alta * this.valor_mayor;
-      } else if (this.probabilidad === "2" && this.impacto === "3") { // Media, Mayor
-          this.valor = this.valor_media * this.valor_mayor;
-      } else if (this.probabilidad === "3" && this.impacto === "3") { // Baja, Mayor
-          this.valor = this.valor_baja * this.valor_mayor;
-      } else if (this.probabilidad === "4" && this.impacto === "3") { // Muy baja, Mayor
-          this.valor = this.valor_muy_baja * this.valor_mayor;
-      } else if (this.probabilidad === "0" && this.impacto === "4") { // Muy alta, Máxima
-          this.valor = this.valor_muy_alta * this.valor_maxima;
-      } else if (this.probabilidad === "1" && this.impacto === "4") { // Alta, Máxima
-          this.valor = this.valor_alta * this.valor_maxima;
-      } else if (this.probabilidad === "2" && this.impacto === "4") { // Media, Máxima
-          this.valor = this.valor_media * this.valor_maxima;
-      } else if (this.probabilidad === "3" && this.impacto === "4") { // Baja, Máxima
-          this.valor = this.valor_baja * this.valor_maxima;
-      } else if (this.probabilidad === "4" && this.impacto === "4") { // Muy baja, Máxima
-          this.valor = this.valor_muy_baja * this.valor_maxima;
-      }
-  
-      // Determinación del nivel de riesgo
-      if (this.calcularIntervaloVerde(this.valor)) {
-          this.nivel_de_riesgo = 'Riesgo Aceptable';
-      } else if (this.calcularIntervaloAmarrillo(this.valor)) {
-          this.nivel_de_riesgo = 'Riesgo Tolerable';
-      } else if (this.calcularIntervaloNaranja(this.valor)) {
-          this.nivel_de_riesgo = 'Riesgo Alto';
-      } else if (this.calcularIntervaloRojo(this.valor)) {
-          this.nivel_de_riesgo = 'Riesgo Extremo';
-      } else {
-          alert('UPS, EL CALCULO NO SE PUDO REALIZAR, porque el nivel de riesgo no se puede determinar.');
-      }
-  } else {
+      this.calcularValor(this.probabilidad, this.impacto);
+    } else {
       alert('Debe seleccionar la probabilidad y el impacto');
-  }
+      return;
+    }
 
     if (!this.validarIntervalos()) {
       Swal.fire({
@@ -472,18 +450,212 @@ export class PostmatrizComponent {
       return;
     }
 
+   
     const datos = {
-      evento: formdata.get('evento'),
+      nombre: formdata.get('evento'),
+      probabilidad: this.probabilidad,
+      impacto: this.impacto,
+      valor: this.valor,
+      nivelRiesgo: this.nivel_de_riesgo,
+      idMatriz: this.idMatriz,
+    };
+    //guardar el evento
+    const url = import.meta.env.NG_APP_API + '/eventos';
+    this.api.postApi(url, datos).subscribe({
+      next: (data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Exito',
+          text: 'Se ha guardado los datos correctamente',
+        }).then(() => {
+          this.getDataApi();
+          this.showModalCreateEvent = false;
+        });
+      },
+      error: (error) => {
+        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No Se ha guardado los datos correctamente',
+        });
+      },
+    });
+  }
+  calcularValor(probabilidad: string, impacto: string): void {
+    if (probabilidad === '0' && impacto === '0') {
+      this.valor = this.valor_muy_alta * this.valor_minima;
+    } else if (probabilidad === '1' && impacto === '0') {
+      this.valor = this.valor_alta * this.valor_minima;
+    } else if (probabilidad === '2' && impacto === '0') {
+      this.valor = this.valor_media * this.valor_minima;
+    } else if (probabilidad === '3' && impacto === '0') {
+      this.valor = this.valor_baja * this.valor_minima;
+    } else if (probabilidad === '4' && impacto === '0') {
+      this.valor = this.valor_muy_baja * this.valor_minima;
+    } else if (probabilidad === '0' && impacto === '1') {
+      this.valor = this.valor_muy_alta * this.valor_menor;
+    } else if (probabilidad === '1' && impacto === '1') {
+      this.valor = this.valor_alta * this.valor_menor;
+    } else if (probabilidad === '2' && impacto === '1') {
+      this.valor = this.valor_media * this.valor_menor;
+    } else if (probabilidad === '3' && impacto === '1') {
+      this.valor = this.valor_baja * this.valor_menor;
+    } else if (probabilidad === '4' && impacto === '1') {
+      this.valor = this.valor_muy_baja * this.valor_menor;
+    } else if (probabilidad === '0' && impacto === '2') {
+      this.valor = this.valor_muy_alta * this.valor_moderada;
+    } else if (probabilidad === '1' && impacto === '2') {
+      this.valor = this.valor_alta * this.valor_moderada;
+    } else if (probabilidad === '2' && impacto === '2') {
+      this.valor = this.valor_media * this.valor_moderada;
+    } else if (probabilidad === '3' && impacto === '2') {
+      this.valor = this.valor_baja * this.valor_moderada;
+    } else if (probabilidad === '4' && impacto === '2') {
+      this.valor = this.valor_muy_baja * this.valor_moderada;
+    } else if (probabilidad === '0' && impacto === '3') {
+      this.valor = this.valor_muy_alta * this.valor_mayor;
+    } else if (probabilidad === '1' && impacto === '3') {
+      this.valor = this.valor_alta * this.valor_mayor;
+    } else if (probabilidad === '2' && impacto === '3') {
+      this.valor = this.valor_media * this.valor_mayor;
+    } else if (probabilidad === '3' && impacto === '3') {
+      this.valor = this.valor_baja * this.valor_mayor;
+    } else if (probabilidad === '4' && impacto === '3') {
+      this.valor = this.valor_muy_baja * this.valor_mayor;
+    } else if (probabilidad === '0' && impacto === '4') {
+      this.valor = this.valor_muy_alta * this.valor_maxima;
+    } else if (probabilidad === '1' && impacto === '4') {
+      this.valor = this.valor_alta * this.valor_maxima;
+    } else if (probabilidad === '2' && impacto === '4') {
+      this.valor = this.valor_media * this.valor_maxima;
+    } else if (probabilidad === '3' && impacto === '4') {
+      this.valor = this.valor_baja * this.valor_maxima;
+    } else if (probabilidad === '4' && impacto === '4') {
+      this.valor = this.valor_muy_baja * this.valor_maxima;
+    }
+  
+    // Determinación del nivel de riesgo
+    if (this.calcularIntervaloVerde(this.valor)) {
+      this.nivel_de_riesgo = 'Riesgo Aceptable';
+    } else if (this.calcularIntervaloAmarrillo(this.valor)) {
+      this.nivel_de_riesgo = 'Riesgo Tolerable';
+    } else if (this.calcularIntervaloNaranja(this.valor)) {
+      this.nivel_de_riesgo = 'Riesgo Alto';
+    } else if (this.calcularIntervaloRojo(this.valor)) {
+      this.nivel_de_riesgo = 'Riesgo Extremo';
+    } else {
+      alert('UPS, EL CALCULO NO SE PUDO REALIZAR, porque el nivel de riesgo no se puede determinar.');
+    }
+  }
+  updateDatosEvento(e: any) {
+    e.preventDefault();
+    const formdata = new FormData(e.target);
+    this.probabilidad = formdata.get('probabilidad') as string;
+    this.impacto = formdata.get('impacto') as string;
+    if (this.probabilidad && this.impacto) {
+      this.calcularValor(this.probabilidad, this.impacto);
+    } else {
+      alert('Debe seleccionar la probabilidad y el impacto');
+      return;
+    }
+    if (!this.validarIntervalos()) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Alerta Validacion',
+        text: 'No debe dejar espacios grises en la matriz',
+      });
+      return;
+    }
+
+    const datos = {
+      nombre: formdata.get('evento'),
       probabilidad: this.probabilidad,
       impacto: this.impacto,
       valor: this.valor,
       nivelRiesgo: this.nivel_de_riesgo,
     };
-    this.datosEvento.push(datos);
-    this.showModalCreateEvent = false
+
+    //llamar a la api para actualizar el evento
+    this.api
+      .putApi(
+        import.meta.env.NG_APP_API + '/eventos/' + this.idEventoActualizar,
+        datos
+      )
+      .subscribe({
+        next: (data) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Exito',
+            text: 'Se ha actualizado el evento correctamente',
+          }).then(() => {
+            this.getDataApi();
+            this.showModalUpdateEvent = false;
+          });
+        },
+        error: (error) => {
+          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se ha actualizado el evento correctamente',
+          });
+        },
+      });
+
+    this.showModalUpdateEvent = false;
   }
-  quitarEvento($index) {
-    this.datosEvento.splice($index, 1);
+  quitarEvento(id: number) {
+    // Mostrar confirmación con SweetAlert2
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esta acción',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'No, cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si el usuario confirma, llama a la API para eliminar el evento
+        this.api
+          .deleteApi(import.meta.env.NG_APP_API + '/eventos/' + id)
+          .subscribe({
+            next: (data) => {
+              Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: 'Se ha eliminado el evento correctamente',
+              }).then(() => {
+                this.getDataApi(); // Recargar la lista de eventos
+              });
+            },
+            error: (error) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo eliminar el evento',
+              });
+            },
+          });
+      }
+    });
+  }
+  idEventoActualizar: number = 0;
+  actualizarEvento(id: number) {
+    //lllamar a la api para actualizar el evento
+    this.api.getApi(import.meta.env.NG_APP_API + '/eventos/' + id).subscribe({
+      next: (data) => {
+        this.nombreEvento = data.nombre;
+        this.probabilidadEvento = data.probabilidad;
+        this.idEventoActualizar = data.id;
+        this.impactoEvento = data.impacto;
+      },
+      error: (error) => {
+      },
+    });
+    this.abrirUpdateEvento();
   }
   crearEvento() {
     alert('Evento creado');
@@ -493,6 +665,7 @@ export class PostmatrizComponent {
 
   enviarDatos(e: any) {
     e.preventDefault();
+
     if (!this.validarIntervalos()) {
       Swal.fire({
         icon: 'warning',
@@ -529,51 +702,15 @@ export class PostmatrizComponent {
         idUsuario: this.idusuario,
       };
 
-      console.log(datos);
 
-      const url = import.meta.env.NG_APP_API + '/matrices';
-      this.api.postApi(url, datos).subscribe({
+      const url = import.meta.env.NG_APP_API + '/matrices/'+this.idMatriz;
+      this.api.putApi(url, datos).subscribe({
         next: (data) => {
           Swal.fire({
             icon: 'success',
             title: 'Exito',
             text: 'Se ha guardado los datos correctamente',
           }).then(() => {
-            //cogemos el id de la matriz creada
-            this.idMatrizCreada = data.id;
-            this.datosEvento.forEach((evento) => {
-              const datos = {
-                nombre: evento.evento,
-                probabilidad: evento.probabilidad,
-                impacto: evento.impacto,
-                valor: evento.valor,
-                nivelRiesgo: evento.nivelRiesgo,
-                idMatriz: this.idMatrizCreada,
-                idusuario: this.idusuario,
-              };
-              console.log("datos para el evento",datos);
-              const url = import.meta.env.NG_APP_API + '/eventos';
-              this.api.postApi(url, datos).subscribe({
-                next: (data) => {
-                  Swal.fire({
-                    icon: 'success',
-                    title: 'Exito',
-                    text: 'Se ha guardado los datos correctamente',
-                  });
-                  this.Completado.emit(true);
-                  this.showModalCreateEvent = false;
-                  this.cerrarBotonRef.nativeElement.click();
-                },
-                error: (error) => {
-                  console.log(error);
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'No Se ha guardado los datos correctamente',
-                  });
-                },
-              });
-            });
             window.location.reload();
           });
         },
@@ -587,20 +724,22 @@ export class PostmatrizComponent {
         },
       });
     }
-    
   }
   probabilidadLabels: { [key: string]: string } = {
-    "0": "Muy Alta",
-    "1": "Alta",
-    "2": "Media",
-    "3": "Baja",
-    "4": "Muy Baja"
+    '0': 'Muy Alta',
+    '1': 'Alta',
+    '2': 'Media',
+    '3': 'Baja',
+    '4': 'Muy Baja',
   };
   impactoLabels: { [key: string]: string } = {
-    "0": "Mínima",
-    "1": "Menor",
-    "2": "Moderada",
-    "3": "Mayor",
-    "4": "Máxima"
+    '0': 'Mínima',
+    '1': 'Menor',
+    '2': 'Moderada',
+    '3': 'Mayor',
+    '4': 'Máxima',
   };
+  cerrarModal() {
+    this.Finalizado.emit(false);
+  }
 }

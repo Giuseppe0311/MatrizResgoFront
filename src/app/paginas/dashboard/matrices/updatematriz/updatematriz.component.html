@@ -1,21 +1,8 @@
-<!-- Modal toggle -->
-<button
-  data-modal-target="default-modal"
-  data-modal-toggle="default-modal"
-  class="block mb-7 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-  type="button"
->
-  Crear Matriz
-</button>
 
-<!-- Main modal -->
 <div
-  id="default-modal"
-  tabindex="-1"
-  aria-hidden="true"
-  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+class=" overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-screen bg-black bg-opacity-50"
 >
-<div class="relative p-4 w-full max-w-[100%] mx-auto">
+ <div class="relative p-4 w-full max-w-[100%] mx-auto">
     <form
       class="bg-white rounded-lg shadow dark:bg-gray-700"
       (submit)="enviarDatos($event)"
@@ -24,12 +11,12 @@
         class="flex justify-between items-center p-4 border-b rounded-t dark:border-gray-600"
       >
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-          Crear Matriz
+          Actualizar Matriz
         </h3>
         <button
           type="button"
+          (click)="cerrarModal()"
           class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-        data-modal-toggle="default-modal"
         >
           <svg
             class="w-3 h-3"
@@ -68,6 +55,7 @@
                   placeholder="Matriz"
                   required
                   name="nombre_matriz"
+                  [(ngModel)]="nombreMatriz"
                 />
               </div>
               <div>
@@ -91,10 +79,11 @@
                             id="muy_alta"
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
+                            name="muy_alta"
+                            [(ngModel)]="valor_muy_alta"
                             required
-                            (input)="
-                              datosRecolectadoyResultados($event, 'muy_alta')
-                            "
+                            readonly
+                            (ngModelChange)="actualizarValor(valor_muy_alta, 'muy_alta')"
                           />
                         </td>
                       </tr>
@@ -114,10 +103,11 @@
                             id="alta"
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
+                            name="valor_alta"
+                            [(ngModel)]="valor_alta"
+                            readonly
                             required
-                            (input)="
-                              datosRecolectadoyResultados($event, 'alta')
-                            "
+                            (ngModelChange)="actualizarValor(valor_alta, 'alta')"
                           />
                         </td>
                       </tr>
@@ -138,9 +128,10 @@
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
                             required
-                            (input)="
-                              datosRecolectadoyResultados($event, 'media')
-                            "
+                            readonly
+                            name="media"
+                            [(ngModel)]="valor_media"
+                            (ngModelChange)="actualizarValor(valor_media, 'media')"
                           />
                         </td>
                       </tr>
@@ -160,9 +151,10 @@
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
                             required
-                            (input)="
-                              datosRecolectadoyResultados($event, 'baja')
-                            "
+                            readonly
+                            name="baja"
+                            [(ngModel)]="valor_baja"
+                            (ngModelChange)="actualizarValor(valor_baja, 'baja')"
                           />
                         </td>
                       </tr>
@@ -182,9 +174,10 @@
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
                             required
-                            (input)="
-                              datosRecolectadoyResultados($event, 'muy_baja')
-                            "
+                            readonly
+                            name="muy_baja"
+                            [(ngModel)]="valor_muy_baja"
+                            (ngModelChange)="actualizarValor(valor_muy_baja, 'muy_baja')"
                           />
                         </td>
                       </tr>
@@ -834,9 +827,11 @@
                               class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                               placeholder="0"
                               required
-                              (input)="
-                                datosRecolectadoyResultados($event, 'minima')
-                              "
+                              name="minima"
+                              [(ngModel)]="valor_minima"
+                              required
+                              readonly
+                              (ngModelChange)="actualizarValor(valor_minima, 'minima')"
                             />
                           </td>
                           <td class="px-6 py-4">
@@ -846,9 +841,10 @@
                               class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                               placeholder="0"
                               required
-                              (input)="
-                                datosRecolectadoyResultados($event, 'menor')
-                              "
+                              readonly
+                              name="menor"
+                              [(ngModel)]="valor_menor"
+                              (ngModelChange)="actualizarValor(valor_menor, 'menor')"
                             />
                           </td>
                           <td class="px-6 py-4">
@@ -860,9 +856,10 @@
                               required
                               placeholder="0"
                               required
-                              (input)="
-                                datosRecolectadoyResultados($event, 'moderada')
-                              "
+                              readonly
+                              name="moderada"
+                              [(ngModel)]="valor_moderada"
+                              (ngModelChange)="actualizarValor(valor_moderada, 'moderada')"
                             />
                           </td>
                           <td class="px-6 py-4">
@@ -872,9 +869,10 @@
                               class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                               placeholder="0"
                               required
-                              (input)="
-                                datosRecolectadoyResultados($event, 'mayor')
-                              "
+                              name="mayor"
+                              readonly
+                              [(ngModel)]="valor_mayor"
+                              (ngModelChange)="actualizarValor(valor_mayor, 'mayor')"
                             />
                           </td>
                           <td class="px-6 py-4">
@@ -884,9 +882,10 @@
                               class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                               placeholder="0"
                               required
-                              (input)="
-                                datosRecolectadoyResultados($event, 'maxima')
-                              "
+                              name="maxima"
+                              readonly
+                              [(ngModel)]="valor_maxima"
+                              (ngModelChange)="actualizarValor(valor_maxima, 'maxima')"
                             />
                           </td>
                         </tr>
@@ -939,9 +938,10 @@
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
                             required
-                            (input)="
-                              datosRecolectadosColores($event, 'aceptable_de')
-                            "
+                            name="aceptable_de"
+                            readonly
+                            [(ngModel)]="valor_aceptable_de"
+                            (ngModelChange)="datosRecolectadosColores(valor_aceptable_de, 'aceptable_de')"
                           />
                         </div>
                         <div>
@@ -951,9 +951,11 @@
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
                             required
-                            (input)="
-                              datosRecolectadosColores($event, 'aceptable_a')
-                            "
+                            readonly
+                            name="aceptable_a"
+                            [(ngModel)]="valor_aceptable_a"
+                            (ngModelChange)="datosRecolectadosColores(valor_aceptable_a, 'aceptable_a')"
+
                           />
                         </div>
                       </td>
@@ -969,9 +971,11 @@
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
                             required
-                            (input)="
-                              datosRecolectadosColores($event, 'tolerable_de')
-                            "
+                            readonly
+                            name="tolerable_de"
+                            [(ngModel)]="valor_tolerable_de"
+                            (ngModelChange)="datosRecolectadosColores(valor_tolerable_de, 'tolerable_de')"
+
                           />
                         </div>
                         <div>
@@ -981,9 +985,11 @@
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
                             required
-                            (input)="
-                              datosRecolectadosColores($event, 'tolerable_a')
-                            "
+                            readonly
+                            name="tolerable_a"
+                            [(ngModel)]="valor_tolerable_a"
+                            (ngModelChange)="datosRecolectadosColores(valor_tolerable_a, 'tolerable_a')"
+
                           />
                         </div>
                       </td>
@@ -998,10 +1004,12 @@
                             id="alto_de"
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
+                            name="alto_de"
+                            readonly
+                            [(ngModel)]="valor_alto_de"
                             required
-                            (input)="
-                              datosRecolectadosColores($event, 'alto_de')
-                            "
+                            (ngModelChange)="datosRecolectadosColores(valor_alto_de, 'alto_de')"
+
                           />
                         </div>
                         <div>
@@ -1011,7 +1019,10 @@
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
                             required
-                            (input)="datosRecolectadosColores($event, 'alto_a')"
+                            name="alto_a"
+                            readonly
+                            [(ngModel)]="valor_alto_a"
+                            (ngModelChange)="datosRecolectadosColores(valor_alto_a, 'alto_a')"
                           />
                         </div>
                       </td>
@@ -1026,10 +1037,12 @@
                             id="extremo_de"
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
+                            name="extremo_de"
+                            [(ngModel)]="valor_extremo_de"
                             required
-                            (input)="
-                              datosRecolectadosColores($event, 'extremo_de')
-                            "
+                            readonly
+                            (ngModelChange)="datosRecolectadosColores(valor_extremo_de, 'extremo_de')"
+
                           />
                         </div>
                         <div>
@@ -1038,10 +1051,11 @@
                             id="extremo_a"
                             class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="0"
+                            name="extremo_a"
+                            [(ngModel)]="valor_extremo_a"
                             required
-                            (input)="
-                              datosRecolectadosColores($event, 'extremo_a')
-                            "
+                            readonly
+                            (ngModelChange)="datosRecolectadosColores(valor_extremo_a, 'extremo_a')"
                           />
                         </div>
                       </td>
@@ -1075,25 +1089,34 @@
                       <th class="p-2">Impacto</th>
                       <th class="p-2">Valor</th>
                       <th class="p-2">Nivel de Riesgo</th>
-                      <th class="p-2">Quitar</th>
+                      <th class="p-2">Opciones</th>
                     </tr>
                   </thead>
                   <tbody id="table-eventos" class="divide-y divide-gray-200">
-                    @for (item of datosEvento; track $index) {
+                    @for (item of datosEvento; track item.id) {
                     <tr>
-                      <td class="p-2">{{ item.evento }}</td>
+                      <td class="p-2">{{ item.nombre }}</td>
                       <td class="p-2">{{ probabilidadLabels[item.probabilidad] || "No asignado" }}</td>
                       <td class="p-2">{{ impactoLabels[item.impacto] || "No asignado" }}</td>
                       <td class="p-2">{{ item.valor }}</td>
                       <td class="p-2">{{ item.nivelRiesgo }}</td>
                       <td class="p-2">
+                        <div class="flex flex-row justify-between gap-2">
                         <button
                           type="button"
                           class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded text-sm"
-                          (click)="quitarEvento($index)"
+                          (click)="quitarEvento(item.id)"
                         >
                           Quitar
                         </button>
+                        <button
+                        type="button"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded text-sm"
+                        (click)=" actualizarEvento(item.id)"
+                      >
+                        Actualizar
+                      </button>
+                    </div>
                       </td>
                     </tr>
                     }
@@ -1117,7 +1140,7 @@
       </div>
     </form>
 
-    <!-- MODAL -->
+    <!-- MODAL REGISTRAR -->
     @if (showModalCreateEvent) {
 
     <div
@@ -1218,6 +1241,119 @@
       </div>
     </div>
     }
-  </div>
 
+    <!-- MODAL ACTUALIZAR -->
+    @if (showModalUpdateEvent) {
+      <div
+        class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50"
+      >
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-auto">
+          <div class="border-b p-4">
+            <div class="flex justify-between">
+              <h5 class="text-xl font-semibold">Edita el evento de riesgo</h5>
+              <button
+                (click)="abrirUpdateEvento()"
+                type="button"
+                class="text-gray-500 hover:text-gray-700"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <form (submit)="updateDatosEvento($event)">
+              <div class="mb-4">
+                <!-- input hidden for id -->
+                <input
+                  type="hidden"
+                  id="id"
+                  name="id"
+                  [(ngModel)]="idEventoActualizar"
+                  required
+                  >
+                
+                <label
+                  for="evento"
+                  class="block text-sm font-medium text-gray-700"
+                  >Nombre del evento</label
+                >
+                
+                <input
+                  type="text"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id="evento"
+                  name="evento"
+                  [(ngModel)]="nombreEvento"
+                  required
+                />
+              </div>
+              <div class="mb-4">
+                <label
+                  for="probabilidad"
+                  class="block text-sm font-medium text-gray-700"
+                  >Probabilidad</label
+                >
+                <select
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id="probabilidad"
+                  name="probabilidad"
+                  [(ngModel)]="probabilidadEvento"
+                  required
+                >
+                  <option value="0">Muy alta</option>
+                  <option value="1">Alta</option>
+                  <option value="2">Media</option>
+                  <option value="3">Baja</option>
+                  <option value="4">Muy baja</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <label
+                  for="impacto"
+                  class="block text-sm font-medium text-gray-700"
+                  >Impacto</label
+                >
+                <select
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id="impacto"
+                  name="impacto"
+                  [(ngModel)]="impactoEvento"
+                  required
+                >
+                  <option value="0">Mínima</option>
+                  <option value="1">Menor</option>
+                  <option value="2">Moderada</option>
+                  <option value="3">Mayor</option>
+                  <option value="4">Máxima</option>
+                </select>
+              </div>
+              <div class="border-t p-4 flex justify-end">
+                <button
+                  type="submit"
+                  class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded"
+                >
+                  Actualizar Evento
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      }
+  </div>
 </div>

@@ -19,14 +19,14 @@ export class DashboardComponent {
 
   ngOnInit(): void {
 
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = jwt.jwtDecode(token) as any
-      this.idusuario = decodedToken.sub;
-    }
-    else{
-      window.location.href = "/";
-    }
+    // const token = localStorage.getItem('token');
+    // if (token) {
+    //   const decodedToken = jwt.jwtDecode(token) as any
+    //   this.idusuario = decodedToken.sub;
+    // }
+    // else{
+    //   window.location.href = "/";
+    // }
   }
 
   /* VALORES DE IMPACTO */

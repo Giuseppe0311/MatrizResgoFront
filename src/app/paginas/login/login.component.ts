@@ -97,17 +97,17 @@ export class LoginComponent {
 
           if (decodedToken.role === "SUPERADMIN") {
             this.loading = false;
-            window.location.href = "/dashboard";
+            window.location.href = "/dashboard/matrices";
             this.formulario.reset();
           }
           else if (decodedToken.role === 'ADMIN') {
             this.loading = false;
-            window.location.href = "/dashboard";
+            window.location.href = "/dashboard/matrices";
             this.formulario.reset();
           }
           else if (decodedToken.role === 'USUARIO') {
             this.loading = false;
-            window.location.href = "/dashboard";
+            window.location.href = "/dashboard/matrices";
             this.formulario.reset();
 
           }

@@ -39,18 +39,18 @@ export class LayoutComponent implements OnInit {
       this.menu = false;
     }
 
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = jwt.jwtDecode(token) as any
-     this.usuario = decodedToken['username'];
-      this.sucrusal = decodedToken['sucursal'];
-      this.empresa = decodedToken['empresa'];
-      this.imagen = decodedToken['imagen'];
-      this.perfil = decodedToken['role'];
-    }
-    else{
-      window.location.href = "/";
-    }
+    // const token = localStorage.getItem('token');
+    // if (token) {
+    //   const decodedToken = jwt.jwtDecode(token) as any
+    //  this.usuario = decodedToken['username'];
+    //   this.sucrusal = decodedToken['sucursal'];
+    //   this.empresa = decodedToken['empresa'];
+    //   this.imagen = decodedToken['imagen'];
+    //   this.perfil = decodedToken['role'];
+    // }
+    // else{
+    //   window.location.href = "/";
+    // }
 
   }
   
