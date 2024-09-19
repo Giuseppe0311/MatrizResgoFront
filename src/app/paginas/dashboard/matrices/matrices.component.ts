@@ -5,13 +5,11 @@ import { Router } from '@angular/router';
 import { MatrizServicio } from './matriz.servicio';
 import * as jwt from 'jwt-decode';
 import { UpdatematrizComponent } from "./updatematriz/updatematriz.component";
-import { PruebaComponent } from "./prueba/prueba.component";
-import { PuteventosComponent } from '../puteventos/puteventos.component';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-matrices',
   standalone: true,
-  imports: [UpdatematrizComponent, PostmatrizComponent, PruebaComponent],
+  imports: [UpdatematrizComponent, PostmatrizComponent],
   templateUrl: './matrices.component.html',
   styleUrl: './matrices.component.css',
 })
