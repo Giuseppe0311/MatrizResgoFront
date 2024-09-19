@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import * as jwt from 'jwt-decode';
+import { KeycloakService } from 'keycloak-angular';
 @Component({
   selector: 'app-layout',
   standalone: true,
@@ -11,12 +12,12 @@ import * as jwt from 'jwt-decode';
 export class LayoutComponent implements OnInit {
 
   
-  constructor() { }
+  constructor(private keycloakService: KeycloakService) { }
 
   menu : boolean = false;
 
-  clickSalir(){
-    window.location.href = '/';
+  async  clickSalir(){
+    await this.keycloakService.logout(window.location.origin); // Redirige a la página principal después de salir
   }
 
   usuario : string = "";
