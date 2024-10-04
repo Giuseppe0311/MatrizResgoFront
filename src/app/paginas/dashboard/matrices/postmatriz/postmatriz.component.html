@@ -1085,7 +1085,15 @@
                       <td class="p-2">{{ probabilidadLabels[item.probabilidad] || "No asignado" }}</td>
                       <td class="p-2">{{ impactoLabels[item.impacto] || "No asignado" }}</td>
                       <td class="p-2">{{ item.valor }}</td>
-                      <td class="p-2">{{ item.nivelRiesgo }}</td>
+                      <td class="p-2"
+                          [ngClass]="{
+        'bg-green-500': item.nivelRiesgo === 'Riesgo Aceptable',
+        'bg-yellow-300': item.nivelRiesgo === 'Riesgo Tolerable',
+        'bg-orange-500': item.nivelRiesgo === 'Riesgo Alto',
+        'bg-red-500': item.nivelRiesgo === 'Riesgo Extremo'
+    }">
+                        {{ item.nivelRiesgo }}
+                      </td>
                       <td class="p-2">
                         <button
                           type="button"
