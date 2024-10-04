@@ -1,25 +1,21 @@
-import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
+import {APP_INITIALIZER, ApplicationConfig, importProvidersFrom} from '@angular/core';
 import { provideRouter } from '@angular/router';
-
+import {authInterceptor} from "./interceptor/auth.interceptor";
 import { routes } from './app.routes';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { initializeKeycloak } from './keycloack/keycloack.init.factory';
-import { KeycloakBearerInterceptor, KeycloakService } from 'keycloak-angular';
+import {provideHttpClient,withInterceptors } from '@angular/common/http';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), 
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService]
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: KeycloakBearerInterceptor,
-      multi: true
-    },
-    KeycloakService,
-    provideHttpClient(withInterceptorsFromDi()),
+  providers: [
+    importProvidersFrom(
+      BrowserAnimationsModule,
+      ToastrModule.forRoot({
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: true
+      })
+    ),
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([authInterceptor])),
   ]
 };

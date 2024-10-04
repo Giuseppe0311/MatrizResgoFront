@@ -46,7 +46,6 @@ export class MatricesComponent {
 
   }
   abrirModalActualizar(id:number){
-    console.log(id)
     this.idMatriz = id;
     this.isOpen = true;
   }
@@ -85,12 +84,10 @@ export class MatricesComponent {
   getData() {
     let url  
     url = import.meta.env.NG_APP_API + '/matrices' ;
-    console.log(url)
 
     this.api.getApi(url).subscribe({
       next: (data) => {
          this.datosArreglo = data;
-         console.log(this.datosArreglo)
       },
       error: (error) => {
         console.log(error);

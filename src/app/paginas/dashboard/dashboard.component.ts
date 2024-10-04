@@ -446,7 +446,6 @@ export class DashboardComponent {
         id_usuario: this.idusuario
 
       }
-      console.log(datos);
     
 
 

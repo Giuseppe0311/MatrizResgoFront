@@ -4,37 +4,37 @@ import { DashboardComponent } from './paginas/dashboard/dashboard.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { UsuariosComponent } from './paginas/dashboard/usuarios/usuarios.component';
 import { MatricesComponent } from './paginas/dashboard/matrices/matrices.component';
-import { UpdatematrizComponent } from './paginas/dashboard/matrices/updatematriz/updatematriz.component';
-import { GuardService } from './guard/guard.service';
-
+import {LoginComponent} from "./paginas/login/login.component";
+import {authGuard} from "./guard/auth.guard";
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full' // Redirige la raíz (/) al dashboard
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'dashboard',
     component: LayoutComponent,
-    canActivate: [GuardService], // Asegura que el guard se aplique a todas las rutas hijas
+    canActivate: [authGuard],
     children: [
       {
         path: '',
-        component: DashboardComponent,
-        canActivate: [GuardService] // Asegura que también el dashboard esté protegido
+        component: DashboardComponent
       },
       {
         path: 'usuarios',
-        component: UsuariosComponent,
-        canActivate: [GuardService] // Protege la ruta de usuarios
+        component: UsuariosComponent
       },
       {
         path: 'matrices',
-        component: MatricesComponent,
-        canActivate: [GuardService] // Protege la ruta de matrices
+        component: MatricesComponent
       },
     ],
   },
-  { path: '**', component: NotfoundComponent }, // Ruta para manejar páginas no encontradas
+  { path: '**', component: NotfoundComponent },
 ];
 

@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import * as jwt from 'jwt-decode';
 import { PeticionesapiService } from '../../services/peticionesapi.service';
+import { catchError, of } from "rxjs";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -13,47 +16,18 @@ import { PeticionesapiService } from '../../services/peticionesapi.service';
 export class LoginComponent {
 
   ngOnInit() {
-
     localStorage.removeItem('token');
-
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   const decodedToken = jwt.jwtDecode(token) as any
-
-    //   if (decodedToken) {
-
-    //     if (decodedToken.role === "ADMIN") {
-    //       this.loading = false;
-    //       window.location.href = "/dashboard";
-    //       this.formulario.reset();
-    //     }
-    //     else if (decodedToken.role === 'USUARIO') {
-    //       this.loading = false;
-    //       window.location.href = "/dashboard";
-    //       this.formulario.reset(); 
-    //     }
-    //     else if (decodedToken.role === 'SOPORTE') {
-    //       this.loading = false;
-    //       window.location.href = "/admin";
-    //       this.formulario.reset(); 
-    //     }
-    //     else {
-    //       this.formulario.reset();
-    //       this.loading = false;
-    //       window.location.href = "/admin";
-    //     }
-
-
-    //   }
-
-    // }
+    this.attemptCounter = 0; // Inicia el contador de intentos fallidos
   }
 
-  constructor(private serviceLogin: PeticionesapiService) { }
+  constructor(private serviceLogin: PeticionesapiService, private toastr: ToastrService,
+              private router: Router
+  ) { }
 
   showPassword: boolean = false
-
   loading: boolean = false
+  attemptCounter: number = 0; // Contador de intentos fallidos
+  maxAttempts: number = 3; // Número máximo de intentos permitidos
 
   clickMostrarPassword(): void {
     this.showPassword = !this.showPassword
@@ -80,72 +54,41 @@ export class LoginComponent {
   errorEnSolicitud: any
 
   sendForm() {
-    this.loading = true
-    const datosEnviar: any = this.formulario.getRawValue();
-    const urlApi = import.meta.env.NG_APP_API + '/auth/login';
+    if (this.attemptCounter >= this.maxAttempts) {
+      // Bloquear al usuario si alcanza el número máximo de intentos
+      this.toastr.error('Has sido bloqueado después de demasiados intentos fallidos.');
+      return;
+    }
 
-    this.serviceLogin.postApi(urlApi, datosEnviar).subscribe({
-      next: (respuesta: any) => {
+    console.log(this.formulario.get('usuario')?.value, this.formulario.get('password')?.value);
+    this.serviceLogin.getToken(
+      this.formulario.get('usuario')?.value,
+      this.formulario.get('password')?.value
+    ).pipe(
+      catchError(error => {
+        console.error('Error details:', error);
+        this.toastr.error(error.error.error_description, 'Error');
 
+        // Incrementa el contador de intentos fallidos
+        this.attemptCounter++;
 
+        // Mostrar un mensaje con el intento actual
+        this.toastr.info(`Intento ${this.attemptCounter} de ${this.maxAttempts}`, 'Intento de inicio de sesión fallido');
 
-        // Almacena el token en el localStorage
-        localStorage.setItem('token', respuesta.token);
-
-        const decodedToken = jwt.jwtDecode(respuesta.token) as any
-        if (decodedToken) {
-
-          if (decodedToken.role === "SUPERADMIN") {
-            this.loading = false;
-            window.location.href = "/dashboard/matrices";
-            this.formulario.reset();
-          }
-          else if (decodedToken.role === 'ADMIN') {
-            this.loading = false;
-            window.location.href = "/dashboard/matrices";
-            this.formulario.reset();
-          }
-          else if (decodedToken.role === 'USUARIO') {
-            this.loading = false;
-            window.location.href = "/dashboard/matrices";
-            this.formulario.reset();
-
-          }
-          else {
-            this.formulario.reset();
-            this.loading = false;
-            window.location.href = "/";
-          }
-
-
+        if (this.attemptCounter >= this.maxAttempts) {
+          this.toastr.error('Has sido bloqueado después de 3 intentos fallidos.');
         }
-        else {
-          this.formulario.reset();
-          this.loading = false
-          window.location.href = "/"
-        }
-      },
-      error: (atrapar) => {
 
-        console.log(atrapar)
+        return of (null);
+      })
 
-        if (atrapar.status === 400) {
-          this.errorEnSolicitud = atrapar.error.message[0]
-          this.loading = false
-        }
-        else if (atrapar.status === 401) {
-          this.errorEnSolicitud = atrapar.error.message
-          this.loading = false
-        }
-        else {
-          this.errorEnSolicitud = "Error en el servidor"
-          this.loading = false
-        }
+    ).subscribe((response) => {
+      if (response) {
+        this.toastr.success('Bienvenido');
+        localStorage.setItem("token", response.access_token);
+        console.log(response);
+        this.router.navigate(['/dashboard']);
       }
-    })
-
+    });
   }
-
 }
-
-

@@ -1,24 +1,35 @@
+@import "ngx-toastr/toastr";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Estilo personalizado para el scroll */
-::-webkit-scrollbar {
-    width: 8px; /* Ancho del scrollbar */
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Color de fondo del track */
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888; /* Color del scrollbar */
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Cambia el color del scrollbar al pasar el ratón sobre él */
-  }
-  
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+
+}
+
+.toast {
+  @apply bg-gray-800 text-white p-4 rounded-lg shadow-lg;
+  /* Clases de Tailwind */
+}
+
+/* Títulos de las notificaciones */
+.toast-title {
+  @apply font-bold text-lg;
+}
+
+/* Mensaje del Toastr */
+.toast-message {
+  @apply text-sm;
+}
+
+/* Posiciones personalizadas */
+.toast-top-right {
+  @apply top-4 right-4;
+}
+
+.toast-bottom-right {
+  @apply bottom-4 right-4;
+}

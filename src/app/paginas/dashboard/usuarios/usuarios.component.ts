@@ -13,6 +13,12 @@ import Swal from 'sweetalert2';
 export class UsuariosComponent {
 
   constructor(private api:PeticionesapiService) { }
+  modalupdate: boolean = false;
+  idUsuario:string = "";
+
+  //datos del formulario :
+
+
   showPassword: boolean = false
   clickMostrarPassword(): void {
     this.showPassword = !this.showPassword
@@ -20,63 +26,81 @@ export class UsuariosComponent {
   ngOnInit(): void {
     initFlowbite();
     this.getDatos();
-    this.getDatosSucursales();
-    this.getPerfiles();
   }
 
-  datos : any
+  datos: any[] = [];
   getDatos() {
-    const url = import.meta.env.NG_APP_API + '/usuarios';
+    const url = import.meta.env.NG_APP_API + '/keycloak/user/search';
     this.api.getApi(url).subscribe({
       next: data => {
-        console.log(data);
         this.datos  = data;
+        console.log(data)
       },
       error: error => {
         console.error('There was an error!', error);
       }
     })
   }
+  editarUsuario(id:any){
+    this.modalupdate = true;
 
-  sucursales : any
-  getDatosSucursales() {
-    const url = import.meta.env.NG_APP_API + '/sucursales';
-    this.api.getApi(url).subscribe({
-      next: data => {
-        console.log(data);
-        this.sucursales  = data;
-      },
-      error: error => {
-        console.error('There was an error!', error);
+  }
+  cerrarUpdate(){
+    this.modalupdate = false;
+  }
+  eliminarUsuario(id:any){
+    const url = import.meta.env.NG_APP_API + '/keycloak/user/delete/' + id;
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, bórralo',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.deleteApi(url).subscribe({
+          next: data => {
+            Swal.fire(
+              '¡Eliminado!',
+              'El usuario ha sido eliminado.',
+              'success'
+            ).then((result) => {
+              if (result.isConfirmed) {
+                window.location.reload();
+              }
+            })
+          },
+          error: error => {
+            console.error('There was an error!', error);
+            Swal.fire({
+              title: 'Error',
+              text: 'Ha ocurrido un error',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+        })
       }
     })
   }
-
-  perfiles : any
-  getPerfiles() {
-    const url = import.meta.env.NG_APP_API + '/perfiles';
-    this.api.getApi(url).subscribe({
-      next: data => {
-        console.log(data);
-        this.perfiles  = data;
-      },
-      error: error => {
-        console.error('There was an error!', error);
-      }
-    })
-  }
-
 
   submit(e:any) {
     e.preventDefault();
     const formdata = new FormData(e.target);
 
+    const datos ={
+      username: formdata.get('username')?.toString(),
+      email: formdata.get('email')?.toString(),
+      password: formdata.get('password')?.toString(),
+      firstName: formdata.get('firstName')?.toString(),
+      lastName: formdata.get('lastName')?.toString(),
+      roles: [formdata.get('roles')?.toString()]
+    }
 
+    const url = import.meta.env.NG_APP_API + '/keycloak/user/create';
 
-
-    const url = import.meta.env.NG_APP_API + '/usuarios';
-
-    this.api.postApi(url, formdata).subscribe({
+    this.api.postApi(url, datos).subscribe({
       next: data => {
         Swal.fire({
           title: 'Usuario creada',
@@ -100,9 +124,12 @@ export class UsuariosComponent {
       }
     })
 
+
   }
 
-
+  openmodal(id:String){
+    this.modalupdate = true
+  }
 }
 
 

@@ -30,67 +30,66 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-4 md:p-5 space-y-4">
-                    <div>
-                        <label for="usuario"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuario:</label>
-                        <input type="text" id="usuario"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            name="usuario" placeholder="Escribe " required />
-                    </div>
-                    <div>
-                        <div class="flex items-center justify-between">
-                          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                          <div class="text-sm flex justify-center items-center gap-1">
-                            <span class="font-semibold text-green-600 hover:text-green-500 cursor-pointer"
-                              (click)="clickMostrarPassword()">{{showPassword ? "Ocultar Password" : "Ver Password"}}</span>
-                          </div>
-                        </div>
-                        <div class="mt-2">
-                          <input id="password" name="password" type="{{showPassword ? 'text' : 'password' }}"
-                            autocomplete="current-password" required
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 px-2">
-                        </div>
-                      </div>
-
-                      <div class="">
-                        <label for="Perfiles"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Perfiles</label>
-                        <select id="Perfiles"
-                            name="idperfil"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                            <option selected value=""> Seleccionar</option>
-                            @for (datito of perfiles; track $index) {
-                              @if (datito.nombre_perfil !== 'SUPERADMIN') {
-                                <option value="{{datito.id_perfil}}"> {{datito.nombre_perfil}} </option>
-                              }
-                            }
-                        </select>
-                    </div>
-
-                    <div class="">
-                        <label for="empresas"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Empresas</label>
-                        <select id="empresas"
-                            name="idsucursal"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                            <option selected value=""> Seleccionar</option>
-                            @for (datito of sucursales; track $index) {
-                            <option value="{{datito.id_sucursal}}"> {{datito.nombre_sucursal}}-{{datito.empresas.nombre_empresa}} </option>
-                            }
-                        </select>
-                    </div>
-
-                    <!-- <div>
-                        
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Subir Imagen</label>
-                    <input   class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" accept="image/*" name="imagen">
- 
-                    </div> -->
-
-            
-
+              <div class="p-4 md:p-5 space-y-4">
+                <!-- Campo para el nombre de usuario -->
+                <div>
+                  <label for="username"
+                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuario:</label>
+                  <input type="text" id="username"
+                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                         name="username" placeholder="Escribe el nombre de usuario" required />
                 </div>
+
+                <!-- Campo para el email -->
+                <div>
+                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email:</label>
+                  <input type="email" id="email"
+                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                         name="email" placeholder="Escribe el email" required />
+                </div>
+
+                <!-- Campo para el nombre y apellido -->
+                <div>
+                  <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre:</label>
+                  <input type="text" id="firstName"
+                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                         name="firstName" placeholder="Escribe el nombre" required />
+                </div>
+
+                <div>
+                  <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellido:</label>
+                  <input type="text" id="lastName"
+                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                         name="lastName" placeholder="Escribe el apellido" required />
+                </div>
+
+                <!-- Campo para el password -->
+                <div>
+                  <div class="flex items-center justify-between">
+                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                    <div class="text-sm flex justify-center items-center gap-1">
+                <span class="font-semibold text-green-600 hover:text-green-500 cursor-pointer"
+                      (click)="clickMostrarPassword()">{{showPassword ? "Ocultar Password" : "Ver Password"}}</span>
+                    </div>
+                  </div>
+                  <div class="mt-2">
+                    <input id="password" name="password" type="{{showPassword ? 'text' : 'password' }}"
+                           autocomplete="current-password" required
+                           class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 px-2">
+                  </div>
+                </div>
+
+                <!-- Select para los roles (Perfiles) -->
+                <div class="">
+                  <label for="roles" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Perfiles</label>
+                  <select id="roles" name="roles"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          required>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
+              </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                     <button type="submit"
@@ -110,33 +109,121 @@
                         USUARIO
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        SUCURSAL
+                        NOMBRE COMPLETO
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        EMPRESA
+                        EMAIL
                     </th>
+                  <th scope="col" class="px-6 py-3">
+                    ESTADO DE USUARIO
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    ROLES
+                  </th>
                     <th scope="col" class="px-6 py-3">
                         Acciones
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @for (data of datos; track $index) {
+                @for (data of datos; track data.id) {
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                        <img class="w-10 h-10 rounded-full" src="{{data.imagen}}" alt="Jese image">
-                        <div class="ps-3">
-                            <div class="text-base font-semibold">{{data.usuario}}</div>
-                            <div class="font-normal text-gray-500">{{data.perfiles.nombre_perfil}}</div>
-                        </div>  
+                      {{data.username}}
                     </th>
+                  <td class="px-6 py-3 font-bold">{{data.firstName + " " + data.lastName}}</td>
+                  <td class="px-6 py-3 font-bold">{{data.email}}</td>
+                    <td class="px-6 py-3 font-bold">
+                      @if (data.enabled){
+                        <span class="text-green-400
+                          dark:bg-green-600">Activo</span>
+                      }@else{
+                        <span class="text-red
+                          dark:text-red-400">Bloqueado</span>
 
-                    <td class="px-6 py-3 font-bold"> {{data.sucursales.nombre_sucursal}}</td>
-                    <td class="px-6 py-3 font-bold"> {{data.sucursales.empresas.nombre_empresa}} </td>
-                    <td class="px-6 py-3 font-bold"> ACCIONES PROCESO </td>
+                      }
+                    </td>
+                    <td class="px-6 py-3 font-bold">
+                      @if (data?.realmRoles?.length > 0){
+                        @for(roles  of  data.realmRoles; track roles ){
+                          <span class="text-green
+                            dark:text-green-400">{{roles}}</span>
+                        }
+                      }
+                    </td>
+                    <td class="px-6 py-3 font-bold">
+                      <button (click)="editarUsuario(data.id)" class="text-blue-600 hover:text-blue-800">
+                        <!-- Icono de editar (lápiz) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-7.536a2.5 2.5 0 013.536 0l3.536 3.536a2.5 2.5 0 010 3.536l-11.036 11.036a2.5 2.5 0 01-1.768.732H6.5a2.5 2.5 0 01-2.5-2.5v-3.036a2.5 2.5 0 01.732-1.768l11.036-11.036z"/>
+                        </svg>
+                      </button>
+                      <button (click)="eliminarUsuario(data.id)" class="text-red-600 hover:text-red-800 ms-4">
+                        <!-- Icono de eliminar (bote de basura) -->
+                        <svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="XMLID_6_"> <g id="XMLID_11_"> <path d="M240,121.076H30V275c0,8.284,6.716,15,15,15h60h37.596c19.246,24.348,49.031,40,82.404,40c57.897,0,105-47.103,105-105 C330,172.195,290.816,128.377,240,121.076z M225,300c-41.355,0-75-33.645-75-75s33.645-75,75-75s75,33.645,75,75 S266.355,300,225,300z"></path> </g> <g id="XMLID_18_"> <path d="M240,90h15c8.284,0,15-6.716,15-15s-6.716-15-15-15h-30h-15V15c0-8.284-6.716-15-15-15H75c-8.284,0-15,6.716-15,15v45H45 H15C6.716,60,0,66.716,0,75s6.716,15,15,15h15H240z M90,30h90v30h-15h-60H90V30z"></path> </g> <g id="XMLID_23_"> <path d="M256.819,193.181c-5.857-5.858-15.355-5.858-21.213,0L225,203.787l-10.606-10.606c-5.857-5.858-15.355-5.858-21.213,0 c-5.858,5.858-5.858,15.355,0,21.213L203.787,225l-10.606,10.606c-5.858,5.858-5.858,15.355,0,21.213 c2.929,2.929,6.768,4.394,10.606,4.394c3.839,0,7.678-1.465,10.607-4.394L225,246.213l10.606,10.606 c2.929,2.929,6.768,4.394,10.607,4.394c3.839,0,7.678-1.465,10.606-4.394c5.858-5.858,5.858-15.355,0-21.213L246.213,225 l10.606-10.606C262.678,208.535,262.678,199.039,256.819,193.181z"></path> </g> </g> </g></svg>                      </button>
+                    </td>
                 </tr>
                 }
             </tbody>
         </table>
     </div>
+
+
+  <!-- Modal -->
+  @if (modalupdate){
+    <div id="update-user-modal" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
+      <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <form class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Modal header -->
+          <div class="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Actualizar Usuario</h3>
+            <button (click)="cerrarUpdate()" type="button" class="text-gray-400 hover:bg-gray-200 rounded-lg">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+              </svg>
+              <span  class="sr-only">Cerrar modal</span>
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="p-4 space-y-4">
+            <div>
+              <label for="username-input" class="block mb-2">Usuario:</label>
+              <input type="text" id="username-input" placeholder="Escribe el nombre de usuario" required />
+            </div>
+            <div>
+              <label for="email-input" class="block mb-2">Email:</label>
+              <input type="email" id="email-input" placeholder="Escribe el email" required />
+            </div>
+            <div>
+              <label for="first-name-input" class="block mb-2">Nombre:</label>
+              <input type="text" id="first-name-input" placeholder="Escribe el nombre" required />
+            </div>
+            <div>
+              <label for="last-name-input" class="block mb-2">Apellido:</label>
+              <input type="text" id="last-name-input" placeholder="Escribe el apellido" required />
+            </div>
+            <div>
+              <label for="password-input" class="block mb-2">Contraseña:</label>
+              <input type="password" id="password-input" placeholder="Escribe la contraseña" required />
+            </div>
+            <div>
+              <label for="roles-select" class="block mb-2">Perfiles:</label>
+              <select id="roles-select" required>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="flex items-center p-4 border-t">
+            <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded">Actualizar</button>
+            <button type="button" class="ml-3 border border-gray-300 px-4 py-2 rounded" (click)="cerrarUpdate()">Cerrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
 </div>

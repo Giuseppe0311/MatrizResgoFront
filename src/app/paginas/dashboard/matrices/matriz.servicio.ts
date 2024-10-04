@@ -18,7 +18,6 @@ export class MatrizServicio {
     // Método para establecer el valor de la propiedad privada
     setData(value: any): void {
         this.data = value;
-        console.log(value)
     }
 
 

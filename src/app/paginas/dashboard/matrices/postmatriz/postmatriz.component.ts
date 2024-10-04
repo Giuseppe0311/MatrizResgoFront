@@ -27,6 +27,7 @@ export class PostmatrizComponent {
   idMatrizCreada: number = 0;
   datosEvento: any[] = [];
   ngOnInit(): void {
+    initFlowbite();
     // const token = localStorage.getItem('token');
     // if (token) {
     //   const decodedToken = jwt.jwtDecode(token) as any
@@ -127,7 +128,6 @@ export class PostmatrizComponent {
 
     /* resultadosminima */
     this.restuladoMinimayMuyAlta = this.valor_minima * this.valor_muy_alta;
-    console.log('Resultado Minima y muy alta', this.restuladoMinimayMuyAlta);
     this.resultadoMinimayAlta = this.valor_minima * this.valor_alta;
     this.resultadoMinimayMedia = this.valor_minima * this.valor_media;
     this.resultadoMinimayBaja = this.valor_minima * this.valor_baja;
@@ -232,7 +232,6 @@ export class PostmatrizComponent {
         this.valor_aceptable_de,
         this.valor_aceptable_a,
       ];
-      console.log('Intervalo COlor Verde', this.intervalor_color_verde);
     } else {
       this.intervalor_color_verde = []; // Limpiar el intervalo si falta algún valor
     }
@@ -241,13 +240,11 @@ export class PostmatrizComponent {
         this.valor_tolerable_de,
         this.valor_tolerable_a,
       ];
-      console.log('Intervalor Color amarillo', this.intervalor_color_amarillo);
     } else {
       this.intervalor_color_amarillo = []; // Limpiar el intervalo si falta algún valor
     }
     if (this.valor_alto_de && this.valor_alto_a) {
       this.intervalor_color_naranja = [this.valor_alto_de, this.valor_alto_a];
-      console.log('Intervalor Color Naranja', this.intervalor_color_naranja);
     } else {
       this.intervalor_color_naranja = []; // Limpiar el intervalo si falta algún valor
     }
@@ -256,7 +253,6 @@ export class PostmatrizComponent {
         this.valor_extremo_de,
         this.valor_extremo_a,
       ];
-      console.log('Intervalor Color Rojo', this.intervalor_color_rojo);
     } else {
       this.intervalor_color_rojo = []; // Limpiar el intervalo si falta algún valor
     }
@@ -291,7 +287,6 @@ export class PostmatrizComponent {
    */
 
   calcularIntervaloVerde(valor: number): boolean {
-    console.log('Valorverde', valor);
     return (
       valor >= this.intervalor_color_verde[0] &&
       valor <= this.intervalor_color_verde[1]
@@ -299,7 +294,6 @@ export class PostmatrizComponent {
   }
 
   calcularIntervaloAmarrillo(valor: number): boolean {
-    console.log('ValorAmarillo', valor);
     return (
       valor >= this.intervalor_color_amarillo[0] &&
       valor <= this.intervalor_color_amarillo[1]
@@ -307,7 +301,6 @@ export class PostmatrizComponent {
   }
 
   calcularIntervaloNaranja(valor: number): boolean {
-    console.log('ValorNaranja', valor);
     return (
       valor >= this.intervalor_color_naranja[0] &&
       valor <= this.intervalor_color_naranja[1]
@@ -315,7 +308,6 @@ export class PostmatrizComponent {
   }
 
   calcularIntervaloRojo(valor: number): boolean {
-    console.log('ValorRojo', valor);
     return (
       valor >= this.intervalor_color_rojo[0] &&
       valor <= this.intervalor_color_rojo[1]
@@ -529,7 +521,6 @@ export class PostmatrizComponent {
         idUsuario: this.idusuario,
       };
 
-      console.log(datos);
 
       const url = import.meta.env.NG_APP_API + '/matrices';
       this.api.postApi(url, datos).subscribe({
@@ -551,7 +542,6 @@ export class PostmatrizComponent {
                 idMatriz: this.idMatrizCreada,
                 idusuario: this.idusuario,
               };
-              console.log("datos para el evento",datos);
               const url = import.meta.env.NG_APP_API + '/eventos';
               this.api.postApi(url, datos).subscribe({
                 next: (data) => {
