@@ -10,21 +10,31 @@
 
       <!-- Menú -->
       <ul class="space-y-1">
-        <li>
-          <a href="/dashboard/matrices" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
-            Matrices
-          </a>
-        </li>
-
+        @if (hasRole('superadmin_client')){
+          <li>
+            <a href="/dashboard/empresas" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
+              Empresas
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard/usuarios" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
+              Usuarios
+            </a>
+          </li>
+        } @else if (hasRole('admin_client')){
+          <li>
+            <a href="/dashboard/matrices" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
+              Matrices
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard/asignar-usuarios" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
+              Asignar Usuarios
+            </a>
+          </li>
+        }
       </ul>
-      <ul class="space-y-1">
-        <li>
-          <a href="/dashboard/usuarios" class="block px-4 py-2 text-sm font-medium text-white hover:text-black hover:bg-white">
-            Usuarios
-          </a>
-        </li>
 
-      </ul>
       <div class="absolute inset-x-0 bottom-0 border-t border-black overflow-hidden">
         <span href="#" class="flex items-center gap-2 bg-black p-4 ">
           <div>

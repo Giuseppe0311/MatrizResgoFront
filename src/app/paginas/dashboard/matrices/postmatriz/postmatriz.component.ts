@@ -7,9 +7,9 @@ import {
 } from '@angular/core';
 import { PeticionesapiService } from '../../../../services/peticionesapi.service';
 import Swal from 'sweetalert2';
-import * as jwt from 'jwt-decode';
 import { initFlowbite } from 'flowbite';
 import { CommonModule } from '@angular/common';
+import {AuthService} from "../../../../auth/auth.service";
 @Component({
   selector: 'app-postmatriz',
   standalone: true,
@@ -20,22 +20,25 @@ import { CommonModule } from '@angular/common';
 export class PostmatrizComponent {
   @Output() Completado = new EventEmitter<boolean>();
   @ViewChild('cerrarBoton') cerrarBotonRef!: ElementRef;
-  constructor(private api: PeticionesapiService) {}
+  constructor(private api: PeticionesapiService,private token:AuthService) {}
 
-  idusuario: number = 0;
   showModalCreateEvent: boolean = false;
+  idEmpresa: number = 0;
   idMatrizCreada: number = 0;
   datosEvento: any[] = [];
   ngOnInit(): void {
     initFlowbite();
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   const decodedToken = jwt.jwtDecode(token) as any
-    //   this.idusuario = decodedToken.sub;
-    // }
-    // else{
-    //   window.location.href = "/";
-    // }
+      if (this.token.getEmpresaId()!==null){
+        this.idEmpresa  = this.token.getEmpresaId();
+      }else{
+        this.token.removeToken();
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo obtener el id de la empresa',
+        });
+        window.location.href = "/";
+      }
   }
 
   /* VALORES DE RIESGO */
@@ -201,7 +204,7 @@ export class PostmatrizComponent {
     const valor = parseFloat(e.target.value);
     /*  // Verificar si el valor ya está presente en algún intervalo
      const valorExiste = this.verificarValorEnIntervalo(valor);
- 
+
      if (valorExiste) {
        alert('Este número ya está en un intervalo.');
        e.target.value = ''; // Limpiar el valor de la celda
@@ -263,7 +266,7 @@ export class PostmatrizComponent {
     // console.log(this.intervalor_color_rojo);
   }
 
-  /* 
+  /*
     verificarValorEnIntervalo(valor: number): boolean {
       // Verificar si el valor está dentro de algún intervalo existente
       const intervalos = [
@@ -272,18 +275,18 @@ export class PostmatrizComponent {
         this.intervalor_color_naranja,
         this.intervalor_color_rojo,
       ];
-    
+
       for (const intervalo of intervalos) {
         const inicio = intervalo[0];
         const fin = intervalo[1];
-    
+
         if (valor > inicio && valor < fin) { // Excluir los casos donde valor es igual al inicio o al final
           return true; // El valor está dentro de un intervalo existente
         }
       }
-    
+
       return false; // El valor no está dentro de ningún intervalo existente
-    } 
+    }
    */
 
   calcularIntervaloVerde(valor: number): boolean {
@@ -378,13 +381,13 @@ export class PostmatrizComponent {
 
   abrirCrearEvento() {
     this.showModalCreateEvent = !this.showModalCreateEvent;
-  }  
+  }
   enviarDatosEvento(e: any) {
     e.preventDefault();
     const formdata = new FormData(e.target);
     this.probabilidad = formdata.get('probabilidad') as string;
     this.impacto = formdata.get('impacto') as string;
-    
+
     if (this.probabilidad && this.impacto) {
       // Cálculo del valor basado en probabilidad e impacto del evento
       if (this.probabilidad === "0" && this.impacto === "0") { // Muy alta, Mínima
@@ -438,7 +441,7 @@ export class PostmatrizComponent {
       } else if (this.probabilidad === "4" && this.impacto === "4") { // Muy baja, Máxima
           this.valor = this.valor_muy_baja * this.valor_maxima;
       }
-  
+
       // Determinación del nivel de riesgo
       if (this.calcularIntervaloVerde(this.valor)) {
           this.nivel_de_riesgo = 'Riesgo Aceptable';
@@ -518,7 +521,7 @@ export class PostmatrizComponent {
         aNaranja: this.intervalor_color_naranja[1],
         deRojo: this.intervalor_color_rojo[0],
         aRojo: this.intervalor_color_rojo[1],
-        idUsuario: this.idusuario,
+        idEmpresa: this.idEmpresa,
       };
 
 
@@ -540,7 +543,6 @@ export class PostmatrizComponent {
                 valor: evento.valor,
                 nivelRiesgo: evento.nivelRiesgo,
                 idMatriz: this.idMatrizCreada,
-                idusuario: this.idusuario,
               };
               const url = import.meta.env.NG_APP_API + '/eventos';
               this.api.postApi(url, datos).subscribe({
@@ -577,7 +579,7 @@ export class PostmatrizComponent {
         },
       });
     }
-    
+
   }
   probabilidadLabels: { [key: string]: string } = {
     "0": "Muy Alta",

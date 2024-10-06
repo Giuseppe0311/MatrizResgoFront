@@ -14,6 +14,7 @@ export class UsuariosComponent {
 
   constructor(private api:PeticionesapiService) { }
   modalupdate: boolean = false;
+  showModalDeRegistro: boolean = false;
   idUsuario:string = "";
 
   //datos del formulario :
@@ -29,12 +30,24 @@ export class UsuariosComponent {
   }
 
   datos: any[] = [];
+  datosEmpresa: any[] = [];
+  isAdmin = false;
   getDatos() {
     const url = import.meta.env.NG_APP_API + '/keycloak/user/search';
     this.api.getApi(url).subscribe({
       next: data => {
         this.datos  = data;
-        console.log(data)
+        },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
+  }
+  getDatosEmpresa() {
+    const url = import.meta.env.NG_APP_API + '/empresas';
+    this.api.getApi(url).subscribe({
+      next: data => {
+        this.datosEmpresa = data;
       },
       error: error => {
         console.error('There was an error!', error);
@@ -95,11 +108,12 @@ export class UsuariosComponent {
       password: formdata.get('password')?.toString(),
       firstName: formdata.get('firstName')?.toString(),
       lastName: formdata.get('lastName')?.toString(),
-      roles: [formdata.get('roles')?.toString()]
+      roles: [formdata.get('roles')?.toString()],
+      // envialo como un long
+      idEmpresa: formdata.get('empresa') ? parseInt(formdata.get('empresa')!.toString(), 10) : null
     }
 
     const url = import.meta.env.NG_APP_API + '/keycloak/user/create';
-
     this.api.postApi(url, datos).subscribe({
       next: data => {
         Swal.fire({
@@ -130,6 +144,25 @@ export class UsuariosComponent {
   openmodal(id:String){
     this.modalupdate = true
   }
+
+  abrirModalRegistro() {
+    this.showModalDeRegistro = true;
+  }
+  closeModalRegistro() {
+    this.showModalDeRegistro = false;
+  }
+
+  onPerfilChange($event: any) {
+    const perfilSeleccionado = $event.target.value;
+    console.log('Selected value:', perfilSeleccionado);
+    if (perfilSeleccionado == 'admin') {
+      this.isAdmin = true;
+      this.getDatosEmpresa();
+    } else {
+      this.isAdmin = false;
+    }
+  }
+
 }
 
 

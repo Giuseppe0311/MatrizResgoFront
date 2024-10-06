@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import * as jwt from 'jwt-decode';
+import {AuthService} from "../auth/auth.service";
 @Component({
   selector: 'app-layout',
   standalone: true,
@@ -9,8 +9,11 @@ import * as jwt from 'jwt-decode';
   styleUrl: './layout.component.css'
 })
 export class LayoutComponent implements OnInit {
-
-
+  userRole: string[] | null = null;
+  constructor(
+    private token: AuthService
+  ) {
+  }
   menu : boolean = false;
 
   async  clickSalir(){
@@ -28,29 +31,11 @@ export class LayoutComponent implements OnInit {
     this.menu = !this.menu;
   }
   ngOnInit(): void {
-    var isMobile =
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
-    if (isMobile) {
-      this.menu = true;
-    } else {
-      this.menu = false;
-    }
+    this.userRole = this.token.getUserRole();
+  }
 
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   const decodedToken = jwt.jwtDecode(token) as any
-    //  this.usuario = decodedToken['username'];
-    //   this.sucrusal = decodedToken['sucursal'];
-    //   this.empresa = decodedToken['empresa'];
-    //   this.imagen = decodedToken['imagen'];
-    //   this.perfil = decodedToken['role'];
-    // }
-    // else{
-    //   window.location.href = "/";
-    // }
-
+  hasRole(role: string): boolean {
+    return this.userRole ? this.userRole.includes(role) : false;
   }
 
 }

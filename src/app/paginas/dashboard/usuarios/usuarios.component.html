@@ -1,106 +1,63 @@
 <div>
-    <div>
     <!-- Modal toggle -->
-    <button data-modal-target="static-modal" data-modal-toggle="static-modal"
-        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button">
+    <button
+      (click)="abrirModalRegistro()"
+        class=" mb-2 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type=button>
         Registrar Usuario
     </button>
 
-    <!-- Main modal -->
-    <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative p-4 w-full max-w-2xl max-h-full">
-            <!-- Modal content -->
-            <form class="relative bg-white rounded-lg shadow dark:bg-gray-700" (submit)="submit($event)">
-                <!-- Modal header -->
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                     Agregar Usuario
-                    </h3>
-                    <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        data-modal-hide="static-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                </div>
-                <!-- Modal body -->
-              <div class="p-4 md:p-5 space-y-4">
-                <!-- Campo para el nombre de usuario -->
-                <div>
-                  <label for="username"
-                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuario:</label>
-                  <input type="text" id="username"
-                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                         name="username" placeholder="Escribe el nombre de usuario" required />
-                </div>
+  <!-- Modal -->
+  @if (showModalDeRegistro){
+  <div id="modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full  z-50">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+      <div class="mt-3 text-center">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">Formulario de Registro</h3>
+        <div class="mt-2 px-7 py-3">
+          <form id="registroForm" class="space-y-4" (submit)="submit($event)">
+            <input type="text" name="username" placeholder="Usuario" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
 
-                <!-- Campo para el email -->
-                <div>
-                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email:</label>
-                  <input type="email" id="email"
-                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                         name="email" placeholder="Escribe el email" required />
-                </div>
+            <input type="email" name="email" placeholder="Email" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
 
-                <!-- Campo para el nombre y apellido -->
-                <div>
-                  <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre:</label>
-                  <input type="text" id="firstName"
-                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                         name="firstName" placeholder="Escribe el nombre" required />
-                </div>
+            <input type="text" name="firstName" placeholder="Nombre" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
 
-                <div>
-                  <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Apellido:</label>
-                  <input type="text" id="lastName"
-                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                         name="lastName" placeholder="Escribe el apellido" required />
-                </div>
+            <input type="text" name="lastName" placeholder="Apellido" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
 
-                <!-- Campo para el password -->
-                <div>
-                  <div class="flex items-center justify-between">
-                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                    <div class="text-sm flex justify-center items-center gap-1">
-                <span class="font-semibold text-green-600 hover:text-green-500 cursor-pointer"
-                      (click)="clickMostrarPassword()">{{showPassword ? "Ocultar Password" : "Ver Password"}}</span>
-                    </div>
-                  </div>
-                  <div class="mt-2">
-                    <input id="password" name="password" type="{{showPassword ? 'text' : 'password' }}"
-                           autocomplete="current-password" required
-                           class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6 px-2">
-                  </div>
-                </div>
+            <input type="password" name="password" placeholder="Contraseña" required
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
 
-                <!-- Select para los roles (Perfiles) -->
-                <div class="">
-                  <label for="roles" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Perfiles</label>
-                  <select id="roles" name="roles"
-                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          required>
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
-              </div>
-                <!-- Modal footer -->
-                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button type="submit"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrar</button>
-                    <button data-modal-hide="static-modal" type="button"
-                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cerrar</button>
-                </div>
-            </form>
+            <select name="roles" id="roles" required
+                    (change)="onPerfilChange($event)"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+              <option value="">Seleccione un perfil</option>
+              <option value="user">Usuario</option>
+              <option value="admin">Administrador</option>
+            </select>
+
+            <select name="empresa" id="empresa" [hidden]="!isAdmin"  [required]="isAdmin"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+              @for (empresa of datosEmpresa; track empresa.id) {
+              <option value="{{empresa.id}}">{{empresa.nombre}}</option>
+              }
+            </select>
+
+            <button type="submit"
+                    class="w-full px-3 py-2 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+              Registrar
+            </button>
+          </form>
         </div>
+        <button (click)="closeModalRegistro()" id="closeModal" class="mt-3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          Cerrar
+        </button>
+      </div>
     </div>
-    </div>
+  </div>
+  }
     <div class="relative overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

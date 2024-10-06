@@ -60,7 +60,6 @@ export class LoginComponent {
       return;
     }
 
-    console.log(this.formulario.get('usuario')?.value, this.formulario.get('password')?.value);
     this.serviceLogin.getToken(
       this.formulario.get('usuario')?.value,
       this.formulario.get('password')?.value
@@ -86,7 +85,6 @@ export class LoginComponent {
       if (response) {
         this.toastr.success('Bienvenido');
         localStorage.setItem("token", response.access_token);
-        console.log(response);
         this.router.navigate(['/dashboard']);
       }
     });

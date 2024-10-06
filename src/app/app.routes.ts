@@ -6,6 +6,7 @@ import { UsuariosComponent } from './paginas/dashboard/usuarios/usuarios.compone
 import { MatricesComponent } from './paginas/dashboard/matrices/matrices.component';
 import {LoginComponent} from "./paginas/login/login.component";
 import {authGuard} from "./guard/auth.guard";
+import {AssignUsersComponent} from "./paginas/dashboard/assign-users/assign-users.component";
 export const routes: Routes = [
   {
     path: '',
@@ -32,6 +33,10 @@ export const routes: Routes = [
       {
         path: 'matrices',
         component: MatricesComponent
+      },
+      {
+        path: 'asignar-usuarios',
+        component: AssignUsersComponent
       },
     ],
   },
