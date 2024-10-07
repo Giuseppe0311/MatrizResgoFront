@@ -1,0 +1,133 @@
+<div class="flex flex-col bg-gray-100 h-screen">
+  <!-- Header Estático -->
+  <div class="bg-white shadow-md p-4 z-10">
+    <h1 class="text-3xl font-bold text-gray-800 text-center">Matrices de Riesgos por Empresa</h1>
+    <p class="text-xl text-gray-600 mt-2 text-center">Análisis de Riesgos Corporativos</p>
+  </div>
+
+  <!-- Contenedor de contenido desplazable -->
+  <div class="flex-grow p-4 overflow-y-auto">
+    <div class="max-w-6xl mx-auto">
+      <div class="bg-white shadow-lg rounded-lg p-6 h-full flex flex-col">
+        <div class="max-h-[70vh] overflow-y-auto border border-gray-200 rounded-lg shadow bg-white">
+          <!-- Contenido desplazable aquí -->
+          @for (data of datos ;track data.id){
+          <div class="mb-8">
+            <h2 class="text-3xl pl-4 font-bold mb-6 text-blue-600 border-b pb-2">{{data.nombreEmpresa}}</h2>
+            <div class="space-y-6">
+              <!-- Matriz de Riesgos Operacionales -->
+              @for ( matriz of data.matrices ;track matriz){
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800">{{matriz.nombreMatriz}}</h3>
+                <div class="space-y-4">
+                  @for ( eventos of matriz.eventos ;track eventos){
+                  <div class="bg-white p-4 rounded shadow">
+                    <h4 class="text-lg font-medium mb-2 text-gray-700">{{eventos.nombre}}</h4>
+                    <div class="grid grid-cols-2 gap-2 text-sm mb-2">
+                      <p><span class="font-semibold">Nivel de riesgo:</span>
+                        <span [ngClass]="{
+        'bg-green-500': eventos.nivelRiesgo === 'Riesgo Aceptable',
+        'bg-yellow-300': eventos.nivelRiesgo === 'Riesgo Tolerable',
+        'bg-orange-500': eventos.nivelRiesgo === 'Riesgo Alto',
+        'bg-red-500': eventos.nivelRiesgo === 'Riesgo Extremo'
+    }">
+                      {{eventos.nivelRiesgo}}
+                    </span>
+
+                      </p>
+                      <p><span class="font-semibold">Probabilidad:</span> {{ probabilidadLabels[eventos.probabilidad] || "No asignado"}}</p>
+                      <p><span class="font-semibold">Impacto:</span>  {{ impactoLabels[eventos.probabilidad] || "No asignado"}}</p>
+                      <p><span class="font-semibold">Valor:</span> {{eventos.valor}}</p>
+                    </div>
+                    <button
+                      [disabled]="eventos.iaIsLoading || eventos.analisisGenerado"
+                      [ngClass]="{
+          'bg-blue-500 hover:bg-blue-600': !eventos.analisisGenerado && !eventos.iaIsLoading,
+          'bg-green-500': eventos.analisisGenerado,
+          'opacity-50 cursor-not-allowed': eventos.iaIsLoading || eventos.analisisGenerado
+        }"
+                            (click)="generarAnalisisIA(eventos)" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition duration-300">
+                      <i class="fas fa-robot mr-1"></i>{{eventos.labelButtonIa}}
+                    </button>
+                    @if (eventos.analisisGenerado) {
+                      <button
+                        [disabled]="eventos.iaIsLoading"
+                        (click)="regenerarAnalisisIA(eventos)"
+                        class="ml-2 pl-2.5 text-gray-500 hover:text-gray-700 transition duration-300 inline-flex items-center"
+                      >
+                        <!-- Ícono SVG de refrescar -->
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-5 w-5"
+                        >
+                          <!-- Contenido del SVG -->
+                          <g id="SVGRepo_iconCarrier">
+                            <g clip-path="url(#clip0_1276_7761)">
+                              <path
+                                d="M19.7285 10.9288C20.4413 13.5978 19.7507 16.5635 17.6569 18.6573C15.1798 21.1344 11.4826 21.6475 8.5 20.1966M18.364 8.05071L17.6569 7.3436C14.5327 4.21941 9.46736 4.21941 6.34316 7.3436C3.42964 10.2571 3.23318 14.8588 5.75376 18M18.364 8.05071H14.1213M18.364 8.05071V3.80807"
+                                stroke="#d41633"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              ></path>
+                            </g>
+                            <defs>
+                              <clipPath id="clip0_1276_7761">
+                                <rect width="24" height="24" fill="white"></rect>
+                              </clipPath>
+                            </defs>
+                          </g>
+                        </svg>
+                        <span class="ml-1 text-sm">Regenerar análisis</span>
+                      </button>
+                    }
+                    @if(eventos.mostrarAnalisisIA){
+                      @if (eventos.iaIsLoading){
+                        <div class="mt-4 bg-gray-100 p-4 rounded-lg  skeleton-loader">
+                          <div class="animate-pulse flex space-x-4">
+                            <div class="flex-1 space-y-4 py-1">
+                              <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                              <div class="space-y-2">
+                                <div class="h-4 bg-gray-300 rounded"></div>
+                                <div class="h-4 bg-gray-300 rounded w-5/6"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <p class="text-center mt-4 text-gray-600">Analizando...</p>
+                        </div>
+                      } @else {
+                        <div class="mt-4 bg-gray-100 p-4 rounded-lg">
+                          <h5 class="font-semibold mb-2">Análisis de IA</h5>
+                          <p class="mb-2">{{eventos.analisisIA.analisis || 'Sin análisis disponible'}}</p>
+                          <div class="grid grid-cols-3 gap-4">
+                            <div class="flex items-center">
+                              <i class="fas fa-globe text-blue-500 mr-2"></i>
+                              <p><span class="font-semibold">Dominio:</span> {{eventos.analisisIA.dominio || 'No asignado'}}</p>
+                            </div>
+                            <div class="flex items-center">
+                              <i class="fas fa-bullseye text-green-500 mr-2"></i>
+                              <p><span class="font-semibold">Objetivo:</span> {{eventos.analisisIA.objetivo || 'No asignado'}}</p>
+                            </div>
+                            <div class="flex items-center">
+                              <i class="fas fa-shield-alt text-red-500 mr-2"></i>
+                              <p><span class="font-semibold">Control:</span> {{eventos.analisisIA.control || 'No asignado'}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      }
+                    }
+                  </div>
+                  }
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
