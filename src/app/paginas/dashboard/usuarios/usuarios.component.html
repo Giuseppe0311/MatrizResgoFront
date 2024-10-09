@@ -75,6 +75,9 @@
                     ESTADO DE USUARIO
                   </th>
                   <th scope="col" class="px-6 py-3">
+                    EMPRESA ASIGNADA
+                  </th>
+                  <th scope="col" class="px-6 py-3">
                     ROLES
                   </th>
                     <th scope="col" class="px-6 py-3">
@@ -101,6 +104,9 @@
                       }
                     </td>
                     <td class="px-6 py-3 font-bold">
+                      {{data.nombreEmpresa}}
+                    </td>
+                    <td class="px-6 py-3 font-bold">
                       @if (data?.realmRoles?.length > 0){
                         @for(roles  of  data.realmRoles; track roles ){
                           <span class="text-green
@@ -109,7 +115,7 @@
                       }
                     </td>
                     <td class="px-6 py-3 font-bold">
-                      <button (click)="editarUsuario(data.id)" class="text-blue-600 hover:text-blue-800">
+                      <button (click)="editarUsuario(data.username)" class="text-blue-600 hover:text-blue-800">
                         <!-- Icono de editar (lápiz) -->
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-7.536a2.5 2.5 0 013.536 0l3.536 3.536a2.5 2.5 0 010 3.536l-11.036 11.036a2.5 2.5 0 01-1.768.732H6.5a2.5 2.5 0 01-2.5-2.5v-3.036a2.5 2.5 0 01.732-1.768l11.036-11.036z"/>
@@ -128,57 +134,56 @@
 
   <!-- Modal -->
   @if (modalupdate){
-    <div id="update-user-modal" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div class="relative p-4 w-full max-w-2xl max-h-full">
-        <form class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <!-- Modal header -->
-          <div class="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Actualizar Usuario</h3>
-            <button (click)="cerrarUpdate()" type="button" class="text-gray-400 hover:bg-gray-200 rounded-lg">
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span  class="sr-only">Cerrar modal</span>
-            </button>
-          </div>
+    <div id="modal2" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full  z-50">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Formulario de Actualización</h3>
+          <div class="mt-2 px-7 py-3">
+            <form id="registroForm2" class="space-y-4" (submit)="update($event)">
 
-          <!-- Modal body -->
-          <div class="p-4 space-y-4">
-            <div>
-              <label for="username-input" class="block mb-2">Usuario:</label>
-              <input type="text" id="username-input" placeholder="Escribe el nombre de usuario" required />
-            </div>
-            <div>
-              <label for="email-input" class="block mb-2">Email:</label>
-              <input type="email" id="email-input" placeholder="Escribe el email" required />
-            </div>
-            <div>
-              <label for="first-name-input" class="block mb-2">Nombre:</label>
-              <input type="text" id="first-name-input" placeholder="Escribe el nombre" required />
-            </div>
-            <div>
-              <label for="last-name-input" class="block mb-2">Apellido:</label>
-              <input type="text" id="last-name-input" placeholder="Escribe el apellido" required />
-            </div>
-            <div>
-              <label for="password-input" class="block mb-2">Contraseña:</label>
-              <input type="password" id="password-input" placeholder="Escribe la contraseña" required />
-            </div>
-            <div>
-              <label for="roles-select" class="block mb-2">Perfiles:</label>
-              <select id="roles-select" required>
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
+              <input [(ngModel)]="datosupdate.id"  type="text" name="id"  required
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 hidden">
+
+              <input type="text" [(ngModel)]="datosupdate.username" name="username" placeholder="Usuario"  readonly required
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+
+              <input type="email" [(ngModel)]="datosupdate.email"  name="email" placeholder="Email" required
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+
+              <input type="text" [(ngModel)]="datosupdate.firstName" name="firstName" placeholder="Nombre" required
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+
+              <input type="text" [(ngModel)]="datosupdate.lastName" name="lastName" placeholder="Apellido" required
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+
+              <input type="password" name="password" placeholder="Contraseña"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+
+              <select  disabled name="roles" id="roles2" [(ngModel)]="datosupdate.realmRoles" required
+                      (change)="onperfilUpdateChange($event)"
+                      class="w-full  px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="">Seleccione un perfil</option>
+                <option value="user">Usuario</option>
+                <option value="admin">Administrador</option>
               </select>
-            </div>
-          </div>
 
-          <!-- Modal footer -->
-          <div class="flex items-center p-4 border-t">
-            <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded">Actualizar</button>
-            <button type="button" class="ml-3 border border-gray-300 px-4 py-2 rounded" (click)="cerrarUpdate()">Cerrar</button>
+              <select  disabled [(ngModel)]="datosupdate.attributes.idEmpresa[0]" name="empresa" id="empresa2" [hidden]="!isAdmin" [required]="isAdmin"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                @for (empresa of datosEmpresa; track empresa.id) {
+                  <option  [value]="empresa.id" >{{empresa.nombre}}</option>
+                }
+              </select>
+
+              <button type="submit"
+                      class="w-full px-3 py-2 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+                Actualizar
+              </button>
+            </form>
           </div>
-        </form>
+          <button (click)="closeModalUpdate()" id="closeModal2" class="mt-3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Cerrar
+          </button>
+        </div>
       </div>
     </div>
   }

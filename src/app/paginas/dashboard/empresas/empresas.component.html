@@ -1,1 +1,71 @@
-<p>empresas works!</p>
+<div class="bg-gray-100">
+  <div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4">Gestión de Empresas</h1>
+
+    <button (click)="openModalRegister()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
+      Registrar Empresa
+    </button>
+
+    <table class="min-w-full bg-white shadow-md rounded">
+      <thead>
+      <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+        <th class="py-3 px-6 text-left">Nombre</th>
+        <th class="py-3 px-6 text-left">Acciones</th>
+      </tr>
+      </thead>
+      <tbody id="empresasTableBody" class="text-gray-600 text-sm font-light">
+      <!-- Las empresas se cargarán aquí dinámicamente -->
+        @for (data of datos ; track data.id){
+          <tr class="border-b border-gray-200 hover:bg-gray-100">
+            <td class="py-3 px-6 text-left whitespace-nowrap">{{ data.nombre }}</td>
+            <td class="py-3 px-6 text-left">
+              <button (click)="openModalEdit(data.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Editar
+              </button>
+              <button (click)="delete(data.id)" class="bg-red-500
+              hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2">
+                Eliminar
+              </button>
+        }
+      </tbody>
+    </table>
+
+    <!-- Modal de Registro -->
+    @if(showModalRegister){
+    <div id="registerModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <h3 class="text-lg font-bold mb-4">Registrar Empresa</h3>
+        <form (submit)="save($event)">
+          <input type="text" id="registerNombre" name="nombre" placeholder="Nombre de la empresa" class="w-full p-2 mb-4 border rounded" required>
+          <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Guardar
+          </button>
+          <button type="button" (click)="closeModalRegister()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2">
+            Cancelar
+          </button>
+        </form>
+      </div>
+    </div>
+    }
+    <!-- Modal de Edición -->
+
+    @if (showModalEdit){
+    <div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <h3 class="text-lg font-bold mb-4">Editar Empresa</h3>
+        <form (submit)="edit($event)">
+          <input [(ngModel)]="dataEdit.id" type="hidden" id="editId" name="id">
+          <input type="text" [(ngModel)]="dataEdit.nombre" id="editNombre" name="nombre" placeholder="Nombre de la empresa" class="w-full p-2 mb-4 border rounded" required>
+          <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Actualizar
+          </button>
+          <button type="button" (click)="closeModalEdit()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2">
+            Cancelar
+          </button>
+        </form>
+      </div>
+    </div>
+    }
+
+  </div>
+</div>

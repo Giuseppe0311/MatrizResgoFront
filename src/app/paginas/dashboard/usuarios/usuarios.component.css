@@ -1,0 +1,4 @@
+.select-readonly {
+  pointer-events: none;
+  background-color: #f3f3f3;
+}
