@@ -54,5 +54,12 @@ export class AuthService {
     }
     return null;
   }
+  getSubject(): string | null {
+    const decodedToken = this.getDecodedToken();
+    if (decodedToken && decodedToken['sub']) {
+      return decodedToken['sub']; // El 'sub' en JWT usualmente representa el subject o ID del usuario
+    }
+    return null;
+  }
 
 }

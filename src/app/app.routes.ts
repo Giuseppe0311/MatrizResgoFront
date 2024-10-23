@@ -7,6 +7,8 @@ import { MatricesComponent } from './paginas/dashboard/matrices/matrices.compone
 import {LoginComponent} from "./paginas/login/login.component";
 import {authGuard} from "./guard/auth.guard";
 import {AssignUsersComponent} from "./paginas/dashboard/assign-users/assign-users.component";
+import {EmpresasComponent} from "./paginas/dashboard/empresas/empresas.component";
+import {EventsAssignedComponent} from "./paginas/dashboard/events-assigned/events-assigned.component";
 export const routes: Routes = [
   {
     path: '',
@@ -38,6 +40,13 @@ export const routes: Routes = [
         path: 'asignar-usuarios',
         component: AssignUsersComponent
       },
+      {
+        path: 'empresas',
+        component: EmpresasComponent
+      },{
+      path: 'eventos-asignados',
+        component: EventsAssignedComponent
+      }
     ],
   },
   { path: '**', component: NotfoundComponent },

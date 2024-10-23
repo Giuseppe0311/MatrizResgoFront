@@ -13,8 +13,8 @@ export class PeticionesapiService {
 
   // Métodos para realizar la consulta a la API
 
-  public getApi(url: string): Observable<any> {
-    return this.http.get(url);
+  public getApi(url: string, params?: any): Observable<any> {
+    return this.http.get(url, { params });
   }
 
   public postApi(url: string, datos: any): Observable<any> {
