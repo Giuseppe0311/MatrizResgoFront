@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PeticionesapiService {
 
-  private tokenUrl = 'http://localhost:8080/realms/matriz/protocol/openid-connect/token';
+  private tokenUrl = 'http://matriz-keycloak:8080/realms/matriz/protocol/openid-connect/token';
 
   constructor(private http: HttpClient ) { }
 
